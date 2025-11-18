@@ -299,6 +299,10 @@ int32_t C_Chat::ProcessMessage(wxString msg, int chat_id)
         response="Channel #1 is disabled";
       else if (st==1)
         response="Channel #1 is offline";
+      else {
+        if (wxGetApp().ModbusCh1->from_dc(msg,chat_id)==true)
+          msg[1]=0;
+      }
     }
     else if (msg[1]=='2') {
       st=wxGetApp().ModbusCh2->GetStatus();
@@ -306,6 +310,10 @@ int32_t C_Chat::ProcessMessage(wxString msg, int chat_id)
         response="Channel #2 is disabled";
       else if (st==1)
         response="Channel #2 is offline";
+      else {
+        if (wxGetApp().ModbusCh2->from_dc(msg,chat_id)==true)
+          msg[1]=0;
+      }
     }
     else if (msg[1]=='3') {
       st=wxGetApp().ModbusCh2->GetStatus();
@@ -313,6 +321,10 @@ int32_t C_Chat::ProcessMessage(wxString msg, int chat_id)
         response="Channel #3 is disabled";
       else if (st==1)
         response="Channel #3 is offline";
+      else {
+        if (wxGetApp().ModbusCh3->from_dc(msg,chat_id)==true)
+          msg[1]=0;
+      }
     }
     else
       response=wxString::Format(wxT("Wrong channel number (%c)"), msg[1]);
@@ -323,7 +335,8 @@ int32_t C_Chat::ProcessMessage(wxString msg, int chat_id)
       return 0;
     }
 
-    //if I'm here something must sent to channel
+    //if I'm here something can sent to channel
+
   }
 
 return err;

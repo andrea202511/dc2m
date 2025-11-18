@@ -36,6 +36,8 @@ class mDriver
         uint16_t recvcod;
         bool to_dc();
         bool init;
+     //   bool rx_free(){return buffer_rx[0]==0;}
+        bool from_dc(wxString msg, int chat_id);
 
     protected:
 
@@ -55,6 +57,7 @@ class mDriver
         uint16_t* buffer_tx;  //from dc2m to device
         uint16_t* buffer_rx;  //from device to dc2m
 
+        int32_t msg_par[10];
 
 };
 
@@ -66,8 +69,8 @@ ABCDEF generic message
 
 RX
 
-0001 Code 16 bit unsigned 0=message
-0002 Sender ID
+0001 Sender ID
+0002 Code 16 bit unsigned 0=message
 0003 AB or first parameter
 0004 CD or second parameter
 0005 EF ...
@@ -75,12 +78,12 @@ RX
 ...
 
 TX
+0001 Recipient ID
 0002 Code 16 bit unsigned
-0003 Recipient ID
-0004 AB
-0005 CD
-0006 EF
-0007 GH
+0003 AB
+0004 CD
+0005 EF
+0006 GH
 ...
 */
 

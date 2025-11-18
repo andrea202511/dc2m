@@ -1,5 +1,7 @@
 #include "mDriver.h"
 #include "dc2mApp.h"
+#include <wx/tokenzr.h>
+
 DECLARE_APP(dc2mApp)
 
 extern C_Chat* deltac;
@@ -54,7 +56,8 @@ void mDriver::Connect()
     buffer_tx=new uint16_t[cs.lengthtx+1];
     buffer_rx=new uint16_t[cs.lengthrx+1];
 
-buffer_tx[0]=0;
+buffer_tx[1]=0;
+buffer_rx[1]=0;
 
     tick=0;
     last_cod_tx=0;
@@ -109,19 +112,17 @@ bool mDriver::to_dc()
     return false;
 
 
-  //manage code
-  if(cs.byteord==0)
-    data_code=buffer_tx[0];
-  else
-    data_code=wxUINT16_SWAP_ALWAYS(buffer_tx[0]);
-
-
   //manage receip
   if(cs.byteord==0)
-    data_recipient=buffer_tx[1];
+    data_recipient=buffer_tx[0];
   else
-    data_recipient=wxUINT16_SWAP_ALWAYS(buffer_tx[1]);
+    data_recipient=wxUINT16_SWAP_ALWAYS(buffer_tx[0]);
 
+  //manage code
+  if(cs.byteord==0)
+    data_code=buffer_tx[1];
+  else
+    data_code=wxUINT16_SWAP_ALWAYS(buffer_tx[1]);
 
   //manage data
   for(int i=2; cs.lengthtx; i++) {
@@ -161,6 +162,90 @@ bool mDriver::to_dc()
   return true;
 
 }
+
+
+bool mDriver::from_dc(wxString msg,int chat_id)
+{
+  uint16_t ch1,ch2;
+
+  //if rx busy return and retry
+  if (buffer_rx[1]!=0)
+    return false;
+
+  for (int i=0; i<cs.lengthrx; i++) {
+    buffer_rx[i]=0;
+  }
+
+  //manage code  // #1:x
+  if (msg[2]==':') {
+    wxStringTokenizer tok;
+    tok.SetString(msg,":");
+    int ii=0;
+    while ( tok.HasMoreTokens() )
+    {
+      wxString token = tok.GetNextToken();
+      token.ToInt(&msg_par[ii]);
+      ii++;
+      if (ii>9)
+        break;
+    }
+    if(cs.byteord==0){
+      buffer_rx[0]=(uint16_t) chat_id;
+      buffer_rx[1]=msg_par[1];
+    }
+    else {
+      buffer_rx[0]=wxUINT16_SWAP_ALWAYS(chat_id);
+      buffer_rx[1]=wxUINT16_SWAP_ALWAYS(msg_par[1]);
+    }
+    for (int i=2; i<ii; i++) {
+      if(cs.byteord==0)
+        buffer_rx[i]=msg_par[i];
+      else
+        buffer_rx[i]=wxUINT16_SWAP_ALWAYS(msg_par[i]);
+    }
+  }
+  else {
+    //it is text message
+   if(cs.byteord==0){
+      buffer_rx[0]=(uint16_t) chat_id;
+      buffer_rx[1]=0x0001;
+    }
+    else {
+      buffer_rx[0]=wxUINT16_SWAP_ALWAYS(chat_id);
+      buffer_rx[1]=wxUINT16_SWAP_ALWAYS(0x0001);
+    }
+
+    int a=2;
+    for (int i=2; i<(cs.lengthrx-2); i+=2) {
+      ch1=msg[i];
+      ch2=msg[i+1];
+
+
+      if (cs.charord==0) {
+        buffer_rx[a]=ch1;
+        a++;
+        buffer_rx[a]=ch2;
+        a++;
+      }
+      else if (cs.charord==1) {
+        buffer_rx[a]=ch1*256+ch2;
+        a++;
+      }
+      else if (cs.charord==2) {
+        buffer_rx[a]=ch2*256+ch1;
+        a++;
+      }
+
+    }
+
+  }
+  WriteRegisters(cs.startrx,20,buffer_rx); //cs.lengthrx ?
+  buffer_rx[1]=0;
+
+  return true;
+
+}
+
 int mDriver::GetStatus() {
   if (connected)
     return 2;
@@ -207,7 +292,7 @@ int32_t mDriver::Refresh()
       tick=0;
       ReadRegisters(cs.starttx,2,&buffer_tx[0]);
       //if there is samething...
-      if (buffer_tx[0]!=0) {
+      if (buffer_tx[1]!=0) {
         ReadRegisters(cs.starttx,cs.lengthtx,&buffer_tx[0]);
       }
     }
@@ -219,12 +304,12 @@ int32_t mDriver::Refresh()
   if (connected && init && buffer_tx[0]!=0 && error==0) {
     if (to_dc()==1) {
       WriteRegisters(cs.starttx,1,&zero); //reset message over modbus
-      buffer_tx[0]=0;
+      buffer_tx[1]=0;
     }
   }
   else {
     if (init)
-      buffer_tx[0]=0;
+      buffer_tx[1]=0;
   }
 
 
