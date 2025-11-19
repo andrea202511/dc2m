@@ -47,6 +47,8 @@
 		<Unit filename="QrcodeDialog.h" />
 		<Unit filename="Set_channel.cpp" />
 		<Unit filename="Set_channel.h" />
+		<Unit filename="Set_station.cpp" />
+		<Unit filename="Set_station.h" />
 		<Unit filename="cSettings.cpp" />
 		<Unit filename="cSettings.h" />
 		<Unit filename="dc2.cpp" />
@@ -60,6 +62,7 @@
 		<Unit filename="modbus.h" />
 		<Unit filename="wxsmith/QrcodeDialog.wxs" />
 		<Unit filename="wxsmith/Set_channel.wxs" />
+		<Unit filename="wxsmith/Set_station.wxs" />
 		<Unit filename="wxsmith/dc2mframe.wxs" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
@@ -69,6 +72,7 @@
 					<wxFrame wxs="wxsmith/dc2mframe.wxs" src="dc2mMain.cpp" hdr="dc2mMain.h" fwddecl="0" i18n="1" name="dc2mFrame" language="CPP" />
 					<wxDialog wxs="wxsmith/Set_channel.wxs" src="Set_channel.cpp" hdr="Set_channel.h" fwddecl="0" i18n="1" name="Set_channel" language="CPP" />
 					<wxDialog wxs="wxsmith/QrcodeDialog.wxs" src="QrcodeDialog.cpp" hdr="QrcodeDialog.h" fwddecl="0" i18n="1" name="QrcodeDialog" language="CPP" />
+					<wxDialog wxs="wxsmith/Set_station.wxs" src="Set_station.cpp" hdr="Set_station.h" fwddecl="0" i18n="1" name="Set_station" language="CPP" />
 				</resources>
 			</wxsmith>
 		</Extensions>

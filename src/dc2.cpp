@@ -228,7 +228,7 @@ int32_t C_Chat::Refresh()
   if (tx_code==0)
      return 0;
   if (tx_code==1) {
-    dc_send_text_msg(ccontext,solo_per_test,tx_message);
+    dc_send_text_msg(ccontext,tx_receipe,tx_message);
   }
   tx_code=0;
   return 1;
