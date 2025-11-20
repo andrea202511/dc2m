@@ -21,11 +21,13 @@
 #include <wx/timer.h>
 //*)
 
-#include "dc2.h"
+#include "cDriver.h"
 #include "Set_channel.h"
+#include "Set_station.h"
 #include "cSettings.h"
 #include "QrcodeDialog.h"
 #include "mDriver.h"
+#include "About.h"
 
 extern C_Settings settings;
 
@@ -49,6 +51,7 @@ class dc2mFrame: public wxFrame
         void OnMenuItemChannel2(wxCommandEvent& event);
         void OnMenuItemChannel3(wxCommandEvent& event);
         void OnTimer1Trigger(wxTimerEvent& event);
+        void OnMenuItem4Selected(wxCommandEvent& event);
         //*)
 
         //(*Identifiers(dc2mFrame)
@@ -79,15 +82,9 @@ class dc2mFrame: public wxFrame
 
         void DoMyEvent(C_ChatEvent &event);
         Set_channel* ChannelSettingDialog;
+        Set_station* StationSettingDialog;
+        About* AboutDialog;
         QrcodeDialog* QRDialog;
-//        mDriver* ModbusCh1;
- //       mDriver* ModbusCh2;
-//        mDriver* ModbusCh3;
-
-//        int32_t p_status_ch1;
- //       int32_t p_status_ch2;
- //       int32_t p_status_ch3;
-
 
 
         DECLARE_EVENT_TABLE()

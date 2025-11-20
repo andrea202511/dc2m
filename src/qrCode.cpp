@@ -1,4 +1,4 @@
-#include "QrcodeDialog.h"
+#include "qrCode.h"
 
 //(*InternalHeaders(QrcodeDialog)
 #include <wx/intl.h>

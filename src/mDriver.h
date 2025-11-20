@@ -3,7 +3,7 @@
 
 #include <wx/string.h>
 
-#include "dc2.h"
+#include "cDriver.h"
 #include "modbus.h"
 #include "cSettings.h"
 

@@ -1,6 +1,7 @@
-#include "dc2.h"
+#include "cDriver.h"
 #include <wx/tokenzr.h>
 #include "dc2mApp.h"
+
 DECLARE_APP(dc2mApp)
 
 C_ChatEventThread::C_ChatEventThread(wxEvtHandler *evhan ,dc_context_t* ctxt)
@@ -133,18 +134,18 @@ void *C_ChatEventThread::Entry()
 
 }
 
-C_Chat::C_Chat(wxEvtHandler *evhan)
+cDriver::cDriver(wxEvtHandler *evhan)
 {
   EHc=evhan;
 }
 
-C_Chat::~C_Chat()
+cDriver::~cDriver()
 {
   //dtor
 }
 
 
-void C_Chat::init(void)
+void cDriver::init(void)
 {
 //  settings.ToLog(1,"Init\n");
 
@@ -192,7 +193,7 @@ ccontext=context;
 
 }
 
-void C_Chat::stop_context(dc_context_t* context)
+void cDriver::stop_context(dc_context_t* context)
 {
   dc_stop_io(context);
   dc_stop_ongoing_process(context);
@@ -212,7 +213,7 @@ void event_handler(dc_context_t* dc2::context)
 }
 */
 
-wxString C_Chat::generate_qrcode(void)
+wxString cDriver::generate_qrcode(void)
 {
 char* aaa=dc_get_securejoin_qr(ccontext,0);
 char* bbb=dc_create_qr_svg(aaa);
@@ -223,7 +224,7 @@ return qc;
 }
 
 //check if anything to send
-int32_t C_Chat::Refresh()
+int32_t cDriver::Refresh()
 {
   if (tx_code==0)
      return 0;
@@ -235,7 +236,7 @@ int32_t C_Chat::Refresh()
 }
 
 
-int32_t C_Chat::ProcessMessage(wxString msg, int chat_id)
+int32_t cDriver::ProcessMessage(wxString msg, int chat_id)
 {
   int32_t err=0;
   wxString response="";

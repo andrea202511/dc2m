@@ -30,8 +30,8 @@ bool dc2mApp::OnInit()
     }
     //*)
 
-    deltac=new C_Chat(Frame->GetEventHandler());
-    deltac->init();
+    Deltac=new cDriver(Frame->GetEventHandler());
+    Deltac->init();
 
     ModbusCh1=new mDriver(1);
     ModbusCh2=new mDriver(2);;
@@ -66,6 +66,6 @@ void dc2mApp::Refresh(void)
     Frame->DisplayStatus(3,sc);
   }
 
-  sc=deltac->Refresh();
+  sc=Deltac->Refresh();
 
 }

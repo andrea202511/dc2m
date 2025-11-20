@@ -1,10 +1,16 @@
 #ifndef SET_STATION_H
 #define SET_STATION_H
 
+#include "cSettings.h"
+
+extern C_Settings settings;
+
+
 //(*Headers(Set_station)
 #include <wx/button.h>
 #include <wx/dialog.h>
 #include <wx/sizer.h>
+#include <wx/statline.h>
 #include <wx/stattext.h>
 #include <wx/textctrl.h>
 //*)
@@ -20,8 +26,11 @@ class Set_station: public wxDialog
         wxButton* Button1;
         wxButton* Button2;
         wxButton* Button3;
+        wxStaticLine* StaticLine1;
         wxStaticText* StaticText1;
+        wxStaticText* StaticText2;
         wxTextCtrl* TextCtrl1;
+        wxTextCtrl* TextCtrl2;
         //*)
 
     protected:
@@ -29,9 +38,11 @@ class Set_station: public wxDialog
         //(*Identifiers(Set_station)
         static const wxWindowID ID_STATICTEXT1;
         static const wxWindowID ID_TEXTCTRL1;
+        static const wxWindowID ID_STATICTEXT2;
+        static const wxWindowID ID_TEXTCTRL2;
+        static const wxWindowID ID_STATICLINE1;
         static const wxWindowID ID_BUTTON1;
-        static const wxWindowID ID_BUTTON2;
-        static const wxWindowID ID_BUTTON3;
+        static const wxWindowID ID_CANCEL;
         //*)
 
     private:

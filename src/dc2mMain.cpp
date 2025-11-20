@@ -83,7 +83,7 @@ dc2mFrame::dc2mFrame(wxWindow* parent,wxWindowID id)
     SetSizer(BoxSizer1);
     MenuBar1 = new wxMenuBar();
     Menu1 = new wxMenu();
-    MenuItem4 = new wxMenuItem(Menu1, ID_MENUITEM2, _("Chat setting"), wxEmptyString, wxITEM_NORMAL);
+    MenuItem4 = new wxMenuItem(Menu1, ID_MENUITEM2, _("Station setting"), wxEmptyString, wxITEM_NORMAL);
     Menu1->Append(MenuItem4);
     MenuItem3 = new wxMenuItem(Menu1, ID_MENUITEM1, _("QRCode"), _("Show QRCode to join"), wxITEM_NORMAL);
     Menu1->Append(MenuItem3);
@@ -113,6 +113,7 @@ dc2mFrame::dc2mFrame(wxWindow* parent,wxWindowID id)
     Timer1.Start(500, false);
     Layout();
 
+    Connect(ID_MENUITEM2, wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&dc2mFrame::OnMenuItem4Selected);
     Connect(ID_MENUITEM1, wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&dc2mFrame::OnMenuQrcodeShow);
     Connect(ID_MENUITEM3, wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&dc2mFrame::OnMenuItemChannel1);
     Connect(ID_MENUITEM4, wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&dc2mFrame::OnMenuItemChannel2);
@@ -125,7 +126,9 @@ dc2mFrame::dc2mFrame(wxWindow* parent,wxWindowID id)
     Connect(wxID_ANY,E_ChatEvent,MyChatEventHandler(dc2mFrame::DoMyEvent),NULL,this);
 
     ChannelSettingDialog=new Set_channel(this);
+    StationSettingDialog=new Set_station(this);
     QRDialog=new QrcodeDialog(this);
+    AboutDialog=new About(this);
 
     settings.LoadValue();
 
@@ -146,8 +149,7 @@ void dc2mFrame::OnQuit(wxCommandEvent& event)
 
 void dc2mFrame::OnAbout(wxCommandEvent& event)
 {
-    wxString msg = wxbuildinfo(long_f);
-    wxMessageBox(msg, _("Welcome to..."));
+    AboutDialog->ShowModal();
 }
 
 void dc2mFrame::DoMyEvent(C_ChatEvent &event)
@@ -156,7 +158,7 @@ void dc2mFrame::DoMyEvent(C_ChatEvent &event)
   wxString str1=event.GetText()+"\n";
   int type=event.GetInt();
   if (type>=30000)
-    int32_t pr=wxGetApp().deltac->ProcessMessage(str1,type-30000);
+    int32_t pr=wxGetApp().Deltac->ProcessMessage(str1,type-30000);
 
   if ((type<=THFAILURE) || (settings.LogLevel>=0)) { //type)) {
     LogText->SetDefaultStyle(wxTextAttr(*wxBLACK));
@@ -173,7 +175,7 @@ void dc2mFrame::OnMenuQrcodeShow(wxCommandEvent& event)
 {
 
   wxString qc;
-  qc=wxGetApp().deltac->generate_qrcode();
+  qc=wxGetApp().Deltac->generate_qrcode();
   wxSize sz;
   sz.x=200;
   sz.y=200;
@@ -230,4 +232,9 @@ void dc2mFrame::DisplayStatus(uint16_t field,int32_t status)
       StatusBar1->SetStatusText(wxString::Format(wxT("#%i On line "), field),field);
     else
       StatusBar1->SetStatusText(wxString::Format(wxT("#%i - - - "), field),field);
+}
+
+void dc2mFrame::OnMenuItem4Selected(wxCommandEvent& event)
+{
+  StationSettingDialog->ShowModal();
 }

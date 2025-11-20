@@ -48,6 +48,7 @@ class C_Settings
 
     wxString chat_server;
     wxString station_name;
+    wxString station_loc;
 
     channel_set chx;
     channel_set ch1;

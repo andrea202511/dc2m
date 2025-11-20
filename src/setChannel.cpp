@@ -1,4 +1,4 @@
-#include "Set_channel.h"
+#include "setChannel.h"
 
 //(*InternalHeaders(Set_channel)
 #include <wx/intl.h>
@@ -167,9 +167,9 @@ Set_channel::Set_channel(wxWindow* parent,wxWindowID id,const wxPoint& pos,const
   BoxSizer4 = new wxBoxSizer(wxVERTICAL);
   wxString __wxRadioBoxChoices_1[3] =
   {
-      _("slow"),
-      _("medium"),
-      _("fast")
+    _("slow"),
+    _("medium"),
+    _("fast")
   };
   RadioBox1 = new wxRadioBox(this, ID_RADIOBOX1, _("Pollig rate"), wxDefaultPosition, wxDefaultSize, 3, __wxRadioBoxChoices_1, 1, wxRA_SPECIFY_COLS, wxGenericValidator(&settings.chx.trefresh), _T("ID_RADIOBOX1"));
   BoxSizer4->Add(RadioBox1, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
@@ -177,17 +177,17 @@ Set_channel::Set_channel(wxWindow* parent,wxWindowID id,const wxPoint& pos,const
   BoxSizer6 = new wxBoxSizer(wxVERTICAL);
   wxString __wxRadioBoxChoices_2[2] =
   {
-      _("Big endian"),
-      _("Little endian")
+    _("Big endian"),
+    _("Little endian")
   };
   RadioBox2 = new wxRadioBox(this, ID_RADIOBOX2, _("Byte order"), wxDefaultPosition, wxDefaultSize, 2, __wxRadioBoxChoices_2, 1, wxRA_SPECIFY_COLS, wxGenericValidator(&settings.chx.byteord), _T("ID_RADIOBOX2"));
   BoxSizer6->Add(RadioBox2, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
   BoxSizer7->Add(BoxSizer6, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
   wxString __wxRadioBoxChoices_3[3] =
   {
-      _("-A -B -C -D -E -0 ..."),
-      _("AB CD E0 ..."),
-      _("BA DC 0E ...")
+    _("-A -B -C -D -E -0 ..."),
+    _("AB CD E0 ..."),
+    _("BA DC 0E ...")
   };
   RadioBox3 = new wxRadioBox(this, ID_RADIOBOX3, _("Character order"), wxDefaultPosition, wxDefaultSize, 3, __wxRadioBoxChoices_3, 1, wxRA_SPECIFY_COLS, wxGenericValidator(&settings.chx.charord), _T("ID_RADIOBOX3"));
   BoxSizer7->Add(RadioBox3, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);

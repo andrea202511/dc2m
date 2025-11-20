@@ -4,7 +4,7 @@
 
 DECLARE_APP(dc2mApp)
 
-extern C_Chat* deltac;
+extern cDriver* Deltac;
 
 
 mDriver::mDriver(int32_t ch)
@@ -108,7 +108,7 @@ bool mDriver::to_dc()
   char str_c[] = { ' ', '\0' };
 
   //if dc busy return and retry
-  if (wxGetApp().deltac->tx_free()==false)
+  if (wxGetApp().Deltac->tx_free()==false)
     return false;
 
 
@@ -157,7 +157,7 @@ bool mDriver::to_dc()
       }
     }
   }
-  wxGetApp().deltac->tx_preset(data_code,data_recipient,msg);
+  wxGetApp().Deltac->tx_preset(data_code,data_recipient,msg);
 
   return true;
 

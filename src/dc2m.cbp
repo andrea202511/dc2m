@@ -43,16 +43,12 @@
 		<Linker>
 			<Add option="`wx-config --libs`" />
 		</Linker>
-		<Unit filename="QrcodeDialog.cpp" />
-		<Unit filename="QrcodeDialog.h" />
-		<Unit filename="Set_channel.cpp" />
-		<Unit filename="Set_channel.h" />
-		<Unit filename="Set_station.cpp" />
-		<Unit filename="Set_station.h" />
+		<Unit filename="about.cpp" />
+		<Unit filename="about.h" />
+		<Unit filename="cDriver.cpp" />
+		<Unit filename="cDriver.h" />
 		<Unit filename="cSettings.cpp" />
 		<Unit filename="cSettings.h" />
-		<Unit filename="dc2.cpp" />
-		<Unit filename="dc2.h" />
 		<Unit filename="dc2mApp.cpp" />
 		<Unit filename="dc2mApp.h" />
 		<Unit filename="dc2mMain.cpp" />
@@ -60,19 +56,34 @@
 		<Unit filename="mDriver.cpp" />
 		<Unit filename="mDriver.h" />
 		<Unit filename="modbus.h" />
-		<Unit filename="wxsmith/QrcodeDialog.wxs" />
-		<Unit filename="wxsmith/Set_channel.wxs" />
-		<Unit filename="wxsmith/Set_station.wxs" />
+		<Unit filename="qrCode.cpp" />
+		<Unit filename="qrCode.h" />
+		<Unit filename="setChannel.cpp" />
+		<Unit filename="setChannel.h" />
+		<Unit filename="setStation.cpp" />
+		<Unit filename="setStation.h" />
+		<Unit filename="version.h" />
+		<Unit filename="wxsmith/About.wxs" />
 		<Unit filename="wxsmith/dc2mframe.wxs" />
+		<Unit filename="wxsmith/qrCode.wxs" />
+		<Unit filename="wxsmith/setChannel.wxs" />
+		<Unit filename="wxsmith/setStation.wxs" />
 		<Extensions>
+			<AutoVersioning>
+				<Scheme minor_max="1000" build_max="0" rev_max="0" rev_rand_max="10" build_times_to_increment_minor="1000" />
+				<Settings autoincrement="0" date_declarations="1" use_define="0" update_manifest="1" do_auto_increment="0" ask_to_increment="0" language="C++" svn="0" svn_directory="" header_path="version.h" />
+				<Changes_Log show_changes_editor="0" app_title="released version %M.%m.%b of %p" changeslog_path="ChangesLog.txt" />
+				<Code header_guard="VERSION_H" namespace="AutoVersion" prefix="" />
+			</AutoVersioning>
 			<lib_finder disable_auto="1" />
 			<wxsmith version="1">
 				<gui name="wxWidgets" src="dc2mApp.cpp" main="dc2mFrame" init_handlers="necessary" language="CPP" />
 				<resources>
 					<wxFrame wxs="wxsmith/dc2mframe.wxs" src="dc2mMain.cpp" hdr="dc2mMain.h" fwddecl="0" i18n="1" name="dc2mFrame" language="CPP" />
-					<wxDialog wxs="wxsmith/Set_channel.wxs" src="Set_channel.cpp" hdr="Set_channel.h" fwddecl="0" i18n="1" name="Set_channel" language="CPP" />
-					<wxDialog wxs="wxsmith/QrcodeDialog.wxs" src="QrcodeDialog.cpp" hdr="QrcodeDialog.h" fwddecl="0" i18n="1" name="QrcodeDialog" language="CPP" />
-					<wxDialog wxs="wxsmith/Set_station.wxs" src="Set_station.cpp" hdr="Set_station.h" fwddecl="0" i18n="1" name="Set_station" language="CPP" />
+					<wxDialog wxs="wxsmith/setChannel.wxs" src="setChannel.cpp" hdr="setChannel.h" fwddecl="0" i18n="1" name="Set_channel" language="CPP" />
+					<wxDialog wxs="wxsmith/qrCode.wxs" src="qrCode.cpp" hdr="qrCode.h" fwddecl="0" i18n="1" name="QrcodeDialog" language="CPP" />
+					<wxDialog wxs="wxsmith/setStation.wxs" src="setStation.cpp" hdr="setStation.h" fwddecl="0" i18n="1" name="Set_station" language="CPP" />
+					<wxDialog wxs="wxsmith/About.wxs" src="about.cpp" hdr="about.h" fwddecl="0" i18n="1" name="About" language="CPP" />
 				</resources>
 			</wxsmith>
 		</Extensions>

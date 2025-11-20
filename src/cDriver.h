@@ -1,5 +1,5 @@
-#ifndef CHAT_H
-#define CHAT_H
+#ifndef CDRIVER_H
+#define CDRIVER_H
 
 #include "deltachat.h"
 #include "cSettings.h"
@@ -37,34 +37,7 @@ typedef void(wxEvtHandler::*MyChatEventFunction)(C_ChatEvent &);
 #define THRECEIVEMESSAGEBASE 30000
 
 
-/*
-//++++++++++++++
-DECLARE_EVENT_TYPE( E_MyEvent, -1 )
 
-class C_MyEvent: public wxCommandEvent
-{
-public:
-    C_MyEvent( wxEventType commandType = E_MyEvent, int id = 0 ) : wxCommandEvent(commandType, id) { }
-    wxEvent* Clone() const { return new C_MyEvent(*this); }
-
-    wxString GetText() const { return m_Text; }
-    void SetText( const wxString& text ) { m_Text = text;}
-
-private:
-    wxString m_Text;
-};
-
-typedef void (wxEvtHandler::*MyEventFunction)(C_MyEvent &);
-#define MyEventHandler(func) (wxObjectEventFunction)(wxEventFunction)(wxCommandEventFunction) wxStaticCastEvent(MyEventFunction, &func)
-
-enum
-{
-   ThreadError=1, ThreadFailure, ThreadReveivedMessage,  ThreadDebug, ThreadVerbose,
-};
-
-//+++++++++
-
-*/
 
 /* -----------------------------
   Thread to capture chat events
@@ -85,11 +58,11 @@ private:
 /* --------------------------------
   Interface class with chat library
   ---------------------------------*/
-class C_Chat
+class cDriver
 {
   public:
-    C_Chat(wxEvtHandler*);
-    virtual ~C_Chat();
+    cDriver(wxEvtHandler*);
+    virtual ~cDriver();
 
     void init(void);
 
@@ -118,7 +91,7 @@ class C_Chat
 };
 
 
-#endif // CHAT_H
+#endif // CDRIVER_H
 
 
 

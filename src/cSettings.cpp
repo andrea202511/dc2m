@@ -14,6 +14,7 @@ void C_Settings::LoadValue() {
   dconfig=new wxConfig("dc2m","AndreaF");
 
   dconfig->Read(wxT("/StationName"),&station_name);
+  dconfig->Read(wxT("/StationLoc"),&station_loc);
 	dconfig->Read(wxT("/CH1_alias"),&ch1.name);
 	dconfig->Read(wxT("/CH1_enabled"),&ch1.enable);
 	dconfig->Read(wxT("/CH1_address_p1"),&ch1.ipp1);
@@ -71,6 +72,8 @@ C_Settings::~C_Settings()
 
 void C_Settings::SaveValue() {
 
+  dconfig->Write(wxT("/StationName"),station_name);
+  dconfig->Write(wxT("/StationLoc"),station_loc);
 
 	dconfig->Write(wxT("/CH1_alias"),ch1.name);
 	dconfig->Write(wxT("/CH1_enabled"),ch1.enable);

@@ -12,7 +12,7 @@
 
 #include <wx/app.h>
 #include "mDriver.h"
-#include "dc2.h"
+#include "cDriver.h"
 
 class dc2mApp : public wxApp
 {
@@ -20,7 +20,7 @@ class dc2mApp : public wxApp
     virtual bool OnInit();
     void Refresh();
 
-    C_Chat* deltac;
+    cDriver* Deltac;
     mDriver* ModbusCh1;
     mDriver* ModbusCh2;
     mDriver* ModbusCh3;
