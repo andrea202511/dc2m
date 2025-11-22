@@ -54,8 +54,8 @@ class mDriver
         uint16_t last_cod_rx;
 
 
-        uint16_t* buffer_tx;  //from dc2m to device
-        uint16_t* buffer_rx;  //from device to dc2m
+        uint16_t buffer_tx[513];  //from dc2m to device
+        uint16_t buffer_rx[513];  //from device to dc2m
 
         int32_t msg_par[10];
 

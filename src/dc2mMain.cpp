@@ -194,6 +194,7 @@ void dc2mFrame::OnMenuQrcodeShow(wxCommandEvent& event)
 
 }
 
+
 void dc2mFrame::OnMenuItemChannel1(wxCommandEvent& event)
 {
    settings.lastCh=1;

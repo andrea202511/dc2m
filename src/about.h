@@ -31,7 +31,6 @@ class About: public wxDialog
     static const wxWindowID ID_TEXTCTRL3;
     static const wxWindowID ID_TEXTCTRL2;
     static const wxWindowID ID_TEXTCTRL1;
-    static const wxWindowID ID_CANCEL;
     //*)
 
   private:

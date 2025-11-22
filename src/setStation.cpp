@@ -55,6 +55,8 @@ Set_station::Set_station(wxWindow* parent,wxWindowID id)
     BoxSizer1->Add(BoxSizer4, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     SetSizer(BoxSizer1);
     BoxSizer1->SetSizeHints(this);
+
+    Connect(wxID_OK, wxEVT_COMMAND_BUTTON_CLICKED, (wxObjectEventFunction)&Set_station::OnButton3Click);
     //*)
 }
 
@@ -64,3 +66,16 @@ Set_station::~Set_station()
     //*)
 }
 
+
+void Set_station::OnButton3Click(wxCommandEvent& event)
+{
+    if(Validate() && TransferDataFromWindow()) {
+    settings.SaveValue();
+    if (IsModal())
+      EndModal(wxID_OK);
+    else {
+      SetReturnCode(wxID_OK);
+      this->Show(false);
+    }
+    }
+}

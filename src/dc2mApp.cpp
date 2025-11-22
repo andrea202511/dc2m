@@ -29,6 +29,9 @@ bool dc2mApp::OnInit()
       SetTopWindow(Frame);
     }
     //*)
+    p_status_ch1=-99;
+    p_status_ch2=-99;
+    p_status_ch3=-99;
 
     Deltac=new cDriver(Frame->GetEventHandler());
     Deltac->init();

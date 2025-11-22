@@ -12,6 +12,7 @@ mDriver::mDriver(int32_t ch)
   channel=ch;
   error=0;
   init=false;
+  comm=NULL;
 
 }
 
@@ -40,6 +41,10 @@ void mDriver::Connect()
      error=-13;
 
     if(error==0) {
+      if (comm!=NULL) {
+        comm->modbus_close();
+        delete comm;
+      }
       wxString ip;
       ip=wxString::Format(wxT("%d.%d.%d.%d"), cs.ipp1, cs.ipp2, cs.ipp3, cs.ipp4);
 
@@ -53,11 +58,9 @@ void mDriver::Connect()
         error=-1;
       }
     }
-    buffer_tx=new uint16_t[cs.lengthtx+1];
-    buffer_rx=new uint16_t[cs.lengthrx+1];
 
-buffer_tx[1]=0;
-buffer_rx[1]=0;
+    buffer_tx[1]=0;
+    buffer_rx[1]=0;
 
     tick=0;
     last_cod_tx=0;
@@ -70,8 +73,6 @@ void mDriver::Disconnect()
 {
   comm->modbus_close();
   delete comm;
-  delete buffer_tx;
-  delete buffer_rx;
   comm=NULL;
   connected=false;
   init=false;

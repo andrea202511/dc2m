@@ -13,7 +13,6 @@ const wxWindowID About::ID_STATICTEXT1 = wxNewId();
 const wxWindowID About::ID_TEXTCTRL3 = wxNewId();
 const wxWindowID About::ID_TEXTCTRL2 = wxNewId();
 const wxWindowID About::ID_TEXTCTRL1 = wxNewId();
-const wxWindowID About::ID_CANCEL = wxNewId();
 //*)
 
 BEGIN_EVENT_TABLE(About,wxDialog)
@@ -31,7 +30,7 @@ About::About(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& siz
   wxBoxSizer* BoxSizer5;
 
   Create(parent, id, _("About"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE, _T("id"));
-  SetClientSize(wxSize(400,720));
+  SetClientSize(wxSize(400,400));
   Move(wxDefaultPosition);
   SetMinSize(wxSize(300,300));
   SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW));
@@ -55,10 +54,10 @@ About::About(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& siz
   TextCtrl2->SetBackgroundColour(wxColour(244,136,20));
   BoxSizer4->Add(TextCtrl2, 1, wxEXPAND, 0);
   BoxSizer1->Add(BoxSizer4, 0, wxEXPAND, 5);
-  TextCtrl1 = new wxTextCtrl(this, ID_TEXTCTRL1, _("Autore: andrea202511 (Andrea Fabbri)\n\nQuesto programma è concesso in licenza secondo i termini\ndella GNU General Public License versione 3\nhttp://www.gnu.org/licenses/gpl-3.0.html\n"), wxDefaultPosition, wxSize(400,-1), wxTE_MULTILINE|wxTE_READONLY|wxBORDER_SUNKEN|wxALWAYS_SHOW_SB, wxDefaultValidator, _T("ID_TEXTCTRL1"));
+  TextCtrl1 = new wxTextCtrl(this, ID_TEXTCTRL1, _("Author: andrea202511 (Andrea Fabbri)\n\nThis program is licensed under the terms\nof the GNU General Public License version 3\nhttp://www.gnu.org/licenses/gpl-3.0.html\n"), wxDefaultPosition, wxSize(400,-1), wxTE_MULTILINE|wxTE_READONLY|wxALWAYS_SHOW_SB, wxDefaultValidator, _T("ID_TEXTCTRL1"));
   BoxSizer1->Add(TextCtrl1, 4, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
   BoxSizer5 = new wxBoxSizer(wxHORIZONTAL);
-  Button1 = new wxButton(this, ID_CANCEL, _("Close"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CANCEL"));
+  Button1 = new wxButton(this, wxID_CANCEL, _("Close"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_CANCEL"));
   BoxSizer5->Add(Button1, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
   BoxSizer1->Add(BoxSizer5, 1, wxALIGN_CENTER_HORIZONTAL, 5);
   SetSizer(BoxSizer1);

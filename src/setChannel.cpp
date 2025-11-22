@@ -63,6 +63,12 @@ Set_channel::Set_channel(wxWindow* parent,wxWindowID id,const wxPoint& pos,const
   wxIntegerValidator<int32_t> vport(&settings.chx.port, wxNUM_VAL_THOUSANDS_SEPARATOR);
   vport.SetMin(1);
   vport.SetMax(16000);
+  wxIntegerValidator<int32_t> nreg_rx(&settings.chx.lengthrx, wxNUM_VAL_THOUSANDS_SEPARATOR);
+  nreg_rx.SetMin(5);
+  nreg_rx.SetMax(512);
+  wxIntegerValidator<int32_t> nreg_tx(&settings.chx.lengthtx, wxNUM_VAL_THOUSANDS_SEPARATOR);
+  nreg_tx.SetMin(5);
+  nreg_tx.SetMax(512);
 
   //(*Initialize(Set_channel)
   wxBoxSizer* BoxSizer10;
@@ -138,7 +144,7 @@ Set_channel::Set_channel(wxWindow* parent,wxWindowID id,const wxPoint& pos,const
   BoxSizer14 = new wxBoxSizer(wxHORIZONTAL);
   StaticText8 = new wxStaticText(this, ID_STATICTEXT8, _("Nr.regs"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT8"));
   BoxSizer14->Add(StaticText8, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-  TextCtrl4 = new wxTextCtrl(this, ID_TEXTCTRL4, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxGenericValidator(&settings.chx.lengthtx), _T("ID_TEXTCTRL4"));
+  TextCtrl4 = new wxTextCtrl(this, ID_TEXTCTRL4, _T("0"), wxDefaultPosition, wxDefaultSize, 0, nreg_tx, _T("ID_TEXTCTRL4"));
   BoxSizer14->Add(TextCtrl4, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
   BoxSizer9->Add(BoxSizer14, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
   BoxSizer8->Add(BoxSizer9, 1, wxLEFT|wxRIGHT|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
@@ -156,7 +162,7 @@ Set_channel::Set_channel(wxWindow* parent,wxWindowID id,const wxPoint& pos,const
   BoxSizer13 = new wxBoxSizer(wxHORIZONTAL);
   StaticText10 = new wxStaticText(this, ID_STATICTEXT10, _("Nr.regs"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT10"));
   BoxSizer13->Add(StaticText10, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-  TextCtrl6 = new wxTextCtrl(this, ID_TEXTCTRL6, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxGenericValidator(&settings.chx.lengthrx), _T("ID_TEXTCTRL6"));
+  TextCtrl6 = new wxTextCtrl(this, ID_TEXTCTRL6, _T("0"), wxDefaultPosition, wxDefaultSize, 0, nreg_rx, _T("ID_TEXTCTRL6"));
   BoxSizer13->Add(TextCtrl6, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
   BoxSizer10->Add(BoxSizer13, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
   BoxSizer8->Add(BoxSizer10, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
@@ -231,6 +237,7 @@ void Set_channel::OnClose(wxCloseEvent& event)
 
 
 }
+
 
 
 

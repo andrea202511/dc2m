@@ -22,12 +22,12 @@
 //*)
 
 #include "cDriver.h"
-#include "Set_channel.h"
-#include "Set_station.h"
+#include "setChannel.h"
+#include "setStation.h"
 #include "cSettings.h"
-#include "QrcodeDialog.h"
+#include "qrCode.h"
 #include "mDriver.h"
-#include "About.h"
+#include "about.h"
 
 extern C_Settings settings;
 

@@ -48,6 +48,7 @@ class Set_station: public wxDialog
     private:
 
         //(*Handlers(Set_station)
+        void OnButton3Click(wxCommandEvent& event);
         //*)
 
         DECLARE_EVENT_TABLE()

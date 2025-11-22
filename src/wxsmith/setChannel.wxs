@@ -206,7 +206,7 @@
 									<object class="sizeritem">
 										<object class="wxTextCtrl" name="ID_TEXTCTRL4" variable="TextCtrl4" member="yes">
 											<value>0</value>
-											<validator>wxGenericValidator(&amp;settings.chx.lengthtx)</validator>
+											<validator>nreg__tx</validator>
 										</object>
 										<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 										<border>5</border>
@@ -277,7 +277,7 @@
 									<object class="sizeritem">
 										<object class="wxTextCtrl" name="ID_TEXTCTRL6" variable="TextCtrl6" member="yes">
 											<value>0</value>
-											<validator>wxGenericValidator(&amp;settings.chx.lengthrx)</validator>
+											<validator>nreg__rx</validator>
 										</object>
 										<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 										<border>5</border>
