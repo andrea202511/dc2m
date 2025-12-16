@@ -17,7 +17,6 @@
 					<Add directory="./" />
 				</Compiler>
 				<Linker>
-					<Add library="lib/libdeltachat.a" />
 					<Add directory="./lib" />
 				</Linker>
 			</Target>
