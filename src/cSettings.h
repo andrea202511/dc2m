@@ -9,7 +9,7 @@
 #include <wx/valgen.h>
 #include <wx/config.h>
 #include <wx/valnum.h>
-
+#include <stdint.h>
 
 class dc2mFrame;
 

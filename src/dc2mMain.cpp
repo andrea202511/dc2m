@@ -13,6 +13,9 @@
 #include "dc2mApp.h"
 DECLARE_APP(dc2mApp)
 //(*InternalHeaders(dc2mFrame)
+#include <wx/bitmap.h>
+#include <wx/icon.h>
+#include <wx/image.h>
 #include <wx/intl.h>
 #include <wx/string.h>
 //*)
@@ -75,8 +78,13 @@ dc2mFrame::dc2mFrame(wxWindow* parent,wxWindowID id)
     wxMenuItem* MenuItem1;
     wxMenuItem* MenuItem2;
 
-    Create(parent, id, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, _T("id"));
+    Create(parent, id, _("dc2m"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, _T("id"));
     SetClientSize(wxSize(790,357));
+    {
+      wxIcon FrameIcon;
+      FrameIcon.CopyFromBitmap(wxBitmap(wxImage(_T("C:\\Users\\andre\\projects\\dc2m\\src\\dc2mLogo.ico"))));
+      SetIcon(FrameIcon);
+    }
     BoxSizer1 = new wxBoxSizer(wxHORIZONTAL);
     LogText = new wxTextCtrl(this, ID_TEXTCTRL1, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE|wxVSCROLL|wxHSCROLL|wxALWAYS_SHOW_SB, wxDefaultValidator, _T("ID_TEXTCTRL1"));
     BoxSizer1->Add(LogText, 1, wxALL|wxEXPAND, 5);
@@ -103,9 +111,9 @@ dc2mFrame::dc2mFrame(wxWindow* parent,wxWindowID id)
     Menu2->Append(MenuItem2);
     MenuBar1->Append(Menu2, _("Help"));
     SetMenuBar(MenuBar1);
-    StatusBar1 = new wxStatusBar(this, ID_STATUSBAR1, wxST_SIZEGRIP|wxBORDER_DOUBLE|wxBORDER_SUNKEN, _T("ID_STATUSBAR1"));
+    StatusBar1 = new wxStatusBar(this, ID_STATUSBAR1, wxST_SIZEGRIP|wxBORDER_SUNKEN, _T("ID_STATUSBAR1"));
     int __wxStatusBarWidths_1[4] = { -10, -10, -10, -10 };
-    int __wxStatusBarStyles_1[4] = { wxSB_RAISED, wxSB_RAISED, wxSB_RAISED, wxSB_RAISED };
+    int __wxStatusBarStyles_1[4] = { wxSB_NORMAL, wxSB_NORMAL, wxSB_FLAT, wxSB_NORMAL };
     StatusBar1->SetFieldsCount(4,__wxStatusBarWidths_1);
     StatusBar1->SetStatusStyles(4,__wxStatusBarStyles_1);
     SetStatusBar(StatusBar1);
@@ -183,8 +191,9 @@ void dc2mFrame::OnMenuQrcodeShow(wxCommandEvent& event)
   wxBitmapBundle bm=wxBitmapBundle::FromSVG(qc.mb_str(),sz);
   QRDialog->SetBitmap(&bm);
 
- // wxClientDC dc(Panel1);
- // dc.DrawBitmap(bm.GetBitmap(sz),1,1,false);
+  // la stampa avviene su ONPAINT
+//  wxClientDC dc(QRDialog->QRpanel);
+//  dc.DrawBitmap(bm.GetBitmap(sz),1,1,false);
  // wxClientDC dc(QRDialog->QRPanel);
  // wxInfoDC dc=new wxInfoDC(QRDialog->QRPanel);
  // dc.DrawBitmap(bm.GetBitmap(sz),1,1,false);

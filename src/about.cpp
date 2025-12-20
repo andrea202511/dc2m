@@ -2,13 +2,16 @@
 #include "version.h"
 
 //(*InternalHeaders(About)
+#include <wx/bitmap.h>
 #include <wx/font.h>
+#include <wx/image.h>
 #include <wx/intl.h>
 #include <wx/settings.h>
 #include <wx/string.h>
 //*)
 
 //(*IdInit(About)
+const wxWindowID About::ID_STATICBITMAP1 = wxNewId();
 const wxWindowID About::ID_STATICTEXT1 = wxNewId();
 const wxWindowID About::ID_TEXTCTRL3 = wxNewId();
 const wxWindowID About::ID_TEXTCTRL2 = wxNewId();
@@ -36,6 +39,8 @@ About::About(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& siz
   SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW));
   BoxSizer1 = new wxBoxSizer(wxVERTICAL);
   BoxSizer2 = new wxBoxSizer(wxHORIZONTAL);
+  StaticBitmap1 = new wxStaticBitmap(this, ID_STATICBITMAP1, wxIcon(dc2mLogo48_xpm), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICBITMAP1"));
+  BoxSizer2->Add(StaticBitmap1, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
   StaticText1 = new wxStaticText(this, ID_STATICTEXT1, _("DC2M"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE, _T("ID_STATICTEXT1"));
   StaticText1->SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW));
   wxFont StaticText1Font(20,wxFONTFAMILY_SWISS,wxFONTSTYLE_NORMAL,wxFONTWEIGHT_BOLD,false,_T("Sans"),wxFONTENCODING_DEFAULT);

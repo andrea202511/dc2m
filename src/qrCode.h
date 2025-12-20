@@ -3,8 +3,6 @@
 
 //(*Headers(QrcodeDialog)
 #include <wx/dialog.h>
-#include <wx/panel.h>
-#include <wx/sizer.h>
 //*)
 
 #include <wx/bmpbndl.h>
@@ -23,19 +21,18 @@ class QrcodeDialog: public wxDialog
     }
 
     //(*Declarations(QrcodeDialog)
-    wxPanel* QRpanel;
     //*)
 
   protected:
 
     //(*Identifiers(QrcodeDialog)
-    static const wxWindowID ID_PANEL1;
     //*)
 
   private:
 
     //(*Handlers(QrcodeDialog)
     void OnPaint(wxPaintEvent& event);
+    void OnQRpanelPaint(wxPaintEvent& event);
     //*)
     wxBitmapBundle* bm;
 

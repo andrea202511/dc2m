@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <wxsmith>
 	<object class="wxFrame" name="dc2mFrame">
+		<title>dc2m</title>
+		<icon>C:\Users\andre\projects\dc2m\src\dc2mLogo.ico</icon>
 		<size>790,357</size>
 		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
 			<object class="sizeritem">
@@ -58,8 +60,8 @@
 		<object class="wxStatusBar" name="ID_STATUSBAR1" variable="StatusBar1" member="yes">
 			<fields>4</fields>
 			<widths>-10,-10,-10,-10</widths>
-			<styles>wxSB_RAISED,wxSB_RAISED,wxSB_RAISED,wxSB_RAISED</styles>
-			<style>wxST_SIZEGRIP|wxBORDER_DOUBLE|wxBORDER_SUNKEN</style>
+			<styles>wxSB_NORMAL,wxSB_NORMAL,wxSB_FLAT,wxSB_NORMAL</styles>
+			<style>wxST_SIZEGRIP|wxBORDER_SUNKEN</style>
 		</object>
 		<object class="wxTimer" name="ID_TIMER1" variable="Timer1" member="yes">
 			<interval>500</interval>

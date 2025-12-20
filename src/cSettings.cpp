@@ -15,7 +15,7 @@ void C_Settings::LoadValue() {
 
   dconfig->Read(wxT("/StationName"),&station_name);
   dconfig->Read(wxT("/StationLoc"),&station_loc);
-	dconfig->Read(wxT("/CH1_alias"),&ch1.name);
+  dconfig->Read(wxT("/CH1_alias"),&ch1.name);
 	dconfig->Read(wxT("/CH1_enabled"),&ch1.enable);
 	dconfig->Read(wxT("/CH1_address_p1"),&ch1.ipp1);
 	dconfig->Read(wxT("/CH1_address_p2"),&ch1.ipp2);
