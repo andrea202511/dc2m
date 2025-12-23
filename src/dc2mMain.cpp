@@ -82,7 +82,7 @@ dc2mFrame::dc2mFrame(wxWindow* parent,wxWindowID id)
     SetClientSize(wxSize(790,357));
     {
       wxIcon FrameIcon;
-      FrameIcon.CopyFromBitmap(wxBitmap(wxImage(_T("C:\\Users\\andre\\projects\\dc2m\\src\\dc2mLogo.ico"))));
+      FrameIcon.CopyFromBitmap(wxBitmap(wxImage(_T("dc2mLogo.ico"))));
       SetIcon(FrameIcon);
     }
     BoxSizer1 = new wxBoxSizer(wxHORIZONTAL);

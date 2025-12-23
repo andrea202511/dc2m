@@ -1,7 +1,3 @@
-
-# Working in progress.
-# Please don't download yet...
-
 # **dc2m**
 
 **Dc2m** (Delta Chat to Machine) allows industrial devices (PLCs, PACs, CNCs, etc.) to communicate with IT to provide remote assistance, collect data, and receive alarm notifications directly on your tablet, PC, or smartphone.

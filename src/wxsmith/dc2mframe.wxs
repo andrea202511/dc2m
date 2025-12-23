@@ -2,7 +2,7 @@
 <wxsmith>
 	<object class="wxFrame" name="dc2mFrame">
 		<title>dc2m</title>
-		<icon>C:\Users\andre\projects\dc2m\src\dc2mLogo.ico</icon>
+		<icon>dc2mLogo.ico</icon>
 		<size>790,357</size>
 		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
 			<object class="sizeritem">

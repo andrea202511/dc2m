@@ -9,8 +9,11 @@ C_ChatEventThread::C_ChatEventThread(wxEvtHandler *evhan ,dc_context_t* ctxt)
   EH=evhan;
   th_context=ctxt;
 
-   // wxDynamicLibrary deltachatlib("libdeltachat");
+#ifdef _WIN32
     wxDynamicLibrary deltachatlib("deltachat");
+#else
+    wxDynamicLibrary deltachatlib("libdeltachat");
+#endif
 
  pfn_dc_get_event_emitter = (dc_get_event_emitter_type) deltachatlib.GetSymbol("dc_get_event_emitter");
  pfn_dc_get_next_event = (dc_get_next_event_type) deltachatlib.GetSymbol("dc_get_next_event");
@@ -160,8 +163,12 @@ cDriver::cDriver(wxEvtHandler *evhan)
 {
   EHc=evhan;
 
- // deltachatlib.Load("libdeltachat");
-  deltachatlib.Load("deltachat");
+#ifdef _WIN32
+    deltachatlib.Load("deltachat");
+#else
+    deltachatlib.Load("libdeltachat");
+#endif
+
 
 //pfn_dc_context_new = (dc_context_new_type) deltachatlib.GetSymbol("dc_context_new");
 //wxDynamicLibrary deltachatlib("libdeltachat");
