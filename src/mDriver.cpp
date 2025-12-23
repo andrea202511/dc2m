@@ -12,7 +12,8 @@ mDriver::mDriver(int32_t ch)
   channel=ch;
   error=0;
   init=false;
-  comm=NULL;
+//w  comm=NULL;
+  comm = new modbus();
 
 }
 
@@ -43,13 +44,13 @@ void mDriver::Connect()
     if(error==0) {
       if (comm!=NULL) {
         comm->modbus_close();
-        delete comm;
+//w        delete comm;
       }
       wxString ip;
       ip=wxString::Format(wxT("%d.%d.%d.%d"), cs.ipp1, cs.ipp2, cs.ipp3, cs.ipp4);
+      comm->set_data((std::string)ip,(uint16_t)cs.port,500);
 
-
-      comm = new modbus((std::string)ip,(uint16_t)cs.port,500);
+//w      comm = new modbus((std::string)ip,(uint16_t)cs.port,500);
       bool b=comm->modbus_connect();
       if (b==true)
         connected=true;
@@ -71,11 +72,13 @@ void mDriver::Connect()
 
 void mDriver::Disconnect()
 {
-  comm->modbus_close();
-  delete comm;
-  comm=NULL;
-  connected=false;
-  init=false;
+  if (comm!=NULL) {
+    comm->modbus_close();
+//w    delete comm;
+//w    comm=NULL;
+    connected=false;
+    init=false;
+  }
 }
 
 

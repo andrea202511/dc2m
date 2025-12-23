@@ -103,7 +103,9 @@ public:
     int err_no{};
     std::string error_msg;
 
-    modbus(std::string host, uint16_t port, uint32_t tcp_timeout_ms);
+//w    modbus(std::string host, uint16_t port, uint32_t tcp_timeout_ms);
+    modbus();
+    void set_data(std::string host, uint16_t port, uint32_t tcp_timeout_ms);
     ~modbus();
 
     bool modbus_connect();
@@ -163,7 +165,40 @@ private:
  * @param port Port for the TCP Connection
  * @return     A Modbus Connector Object
  */
+
+/*
 inline modbus::modbus(std::string host, uint16_t port = 502, uint32_t tcp_timeout_ms = 20000)
+{
+    HOST = host;
+    PORT = port;
+    _slaveid = 1;
+    _msg_id = 1;
+    _connected = false;
+    err = false;
+    err_no = 0;
+    error_msg = "";
+#ifdef WIN32
+    timeout = tcp_timeout_ms;
+#else
+    timeout.tv_sec = tcp_timeout_ms / 1000;
+    timeout.tv_usec = (tcp_timeout_ms % 1000) * 1000;
+#endif
+}
+*/
+inline modbus::modbus()
+{
+    _slaveid = 1;
+    _msg_id = 1;
+    _connected = false;
+    err = false;
+    err_no = 0;
+    error_msg = "";
+#ifdef _WIN32
+    WSAStartup(0x0202, &wsadata);
+#endif
+}
+
+inline void modbus::set_data(std::string host, uint16_t port = 502, uint32_t tcp_timeout_ms = 20000)
 {
     HOST = host;
     PORT = port;
@@ -184,7 +219,13 @@ inline modbus::modbus(std::string host, uint16_t port = 502, uint32_t tcp_timeou
 /**
  * Destructor of Modbus Connector Object
  */
-inline modbus::~modbus(void) = default;
+inline modbus::~modbus(void)
+{
+#ifdef _WIN32
+        WSACleanup();
+#endif
+
+}
 
 /**
  * Modbus Slave ID Setter
@@ -210,20 +251,20 @@ inline bool modbus::modbus_connect()
     {
         LOG("Found Proper Host %s and Port %d", HOST.c_str(), PORT);
     }
-
+/* w
 #ifdef _WIN32
     if (WSAStartup(0x0202, &wsadata))
     {
         return false;
     }
 #endif
-
+*/
     _socket = socket(AF_INET, SOCK_STREAM, 0);
     if (!X_ISVALIDSOCKET(_socket))
     {
         LOG("Error Opening Socket");
 #ifdef _WIN32
-        WSACleanup();
+//w        WSACleanup();
 #endif
         return false;
     }
@@ -242,7 +283,7 @@ inline bool modbus::modbus_connect()
     {
         LOG("Connection Error");
 #ifdef _WIN32
-        WSACleanup();
+//w        WSACleanup();
 #endif
         return false;
     }
@@ -259,7 +300,7 @@ inline void modbus::modbus_close()
 {
     X_CLOSE_SOCKET(_socket);
 #ifdef _WIN32
-    WSACleanup();
+//w    WSACleanup();
 #endif
     LOG("Socket Closed");
     _connected = false;
