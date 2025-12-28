@@ -2,6 +2,8 @@
 #include "dc2mApp.h"
 #include <wx/tokenzr.h>
 
+//std::unorder_map
+
 DECLARE_APP(dc2mApp)
 
 extern cDriver* Deltac;
@@ -25,8 +27,8 @@ mDriver::~mDriver()
 
 void mDriver::Connect()
 {
-    settings.Chn2Chx(channel);
-    cs=settings.chx;
+    settings.Chn2Chw(channel);
+    cs=settings.chw;
 
     //check setting
     if(cs.ipp1<1 || cs.ipp2<0  || cs.ipp3<0 || cs.ipp4<1)

@@ -208,18 +208,21 @@ void dc2mFrame::OnMenuItemChannel1(wxCommandEvent& event)
 {
    settings.lastCh=1;
    settings.Chn2Chx(settings.lastCh);
+   ChannelSettingDialog->Set_controls();
    ChannelSettingDialog->ShowModal();
 }
 void dc2mFrame::OnMenuItemChannel2(wxCommandEvent& event)
 {
    settings.lastCh=2;
    settings.Chn2Chx(settings.lastCh);
+   ChannelSettingDialog->Set_controls();
    ChannelSettingDialog->ShowModal();
 }
 void dc2mFrame::OnMenuItemChannel3(wxCommandEvent& event)
 {
    settings.lastCh=3;
    settings.Chn2Chx(settings.lastCh);
+   ChannelSettingDialog->Set_controls();
    ChannelSettingDialog->ShowModal();
 }
 

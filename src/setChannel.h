@@ -10,6 +10,7 @@ extern C_Settings settings;
 #include <wx/button.h>
 #include <wx/checkbox.h>
 #include <wx/dialog.h>
+#include <wx/filepicker.h>
 #include <wx/radiobox.h>
 #include <wx/sizer.h>
 #include <wx/statline.h>
@@ -23,12 +24,15 @@ class Set_channel: public wxDialog
 
     Set_channel(wxWindow* parent,wxWindowID id=wxID_ANY,const wxPoint& pos=wxDefaultPosition,const wxSize& size=wxDefaultSize);
     virtual ~Set_channel();
+    void Set_controls(void);
 
     //(*Declarations(Set_channel)
     wxButton* Button1;
     wxButton* Button2;
     wxButton* Button3;
     wxCheckBox* CheckBox1;
+    wxCheckBox* CheckBox2;
+    wxFilePickerCtrl* FilePickerCtrl1;
     wxRadioBox* RadioBox1;
     wxRadioBox* RadioBox2;
     wxRadioBox* RadioBox3;
@@ -36,6 +40,7 @@ class Set_channel: public wxDialog
     wxStaticLine* StaticLine2;
     wxStaticLine* StaticLine3;
     wxStaticLine* StaticLine4;
+    wxStaticLine* StaticLine5;
     wxStaticText* StaticText10;
     wxStaticText* StaticText11;
     wxStaticText* StaticText12;
@@ -43,6 +48,7 @@ class Set_channel: public wxDialog
     wxStaticText* StaticText14;
     wxStaticText* StaticText1;
     wxStaticText* StaticText2;
+    wxStaticText* StaticText3;
     wxStaticText* StaticText4;
     wxStaticText* StaticText5;
     wxStaticText* StaticText6;
@@ -64,6 +70,8 @@ class Set_channel: public wxDialog
   protected:
 
     //(*Identifiers(Set_channel)
+    static const wxWindowID ID_CHECKBOX2;
+    static const wxWindowID ID_STATICLINE5;
     static const wxWindowID ID_STATICTEXT1;
     static const wxWindowID ID_TEXTCTRL1;
     static const wxWindowID ID_CHECKBOX1;
@@ -92,6 +100,8 @@ class Set_channel: public wxDialog
     static const wxWindowID ID_STATICTEXT10;
     static const wxWindowID ID_TEXTCTRL6;
     static const wxWindowID ID_STATICLINE4;
+    static const wxWindowID ID_STATICTEXT3;
+    static const wxWindowID ID_FILEPICKERCTRL1;
     static const wxWindowID ID_RADIOBOX1;
     static const wxWindowID ID_RADIOBOX2;
     static const wxWindowID ID_RADIOBOX3;
@@ -103,9 +113,9 @@ class Set_channel: public wxDialog
     //(*Handlers(Set_channel)
     void OnRadioBox1Select(wxCommandEvent& event);
     void OnRadioBox1Select1(wxCommandEvent& event);
-    void OnClose(wxCloseEvent& event);
     void OnButton1Click(wxCommandEvent& event);
     void OnCheckEnableCH(wxCommandEvent& event);
+    void OnFilePickerCtrl1FileChanged(wxFileDirPickerEvent& event);
     //*)
 
     DECLARE_EVENT_TABLE()

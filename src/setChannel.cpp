@@ -6,6 +6,8 @@
 //*)
 
 //(*IdInit(Set_channel)
+const wxWindowID Set_channel::ID_CHECKBOX2 = wxNewId();
+const wxWindowID Set_channel::ID_STATICLINE5 = wxNewId();
 const wxWindowID Set_channel::ID_STATICTEXT1 = wxNewId();
 const wxWindowID Set_channel::ID_TEXTCTRL1 = wxNewId();
 const wxWindowID Set_channel::ID_CHECKBOX1 = wxNewId();
@@ -34,6 +36,8 @@ const wxWindowID Set_channel::ID_TEXTCTRL5 = wxNewId();
 const wxWindowID Set_channel::ID_STATICTEXT10 = wxNewId();
 const wxWindowID Set_channel::ID_TEXTCTRL6 = wxNewId();
 const wxWindowID Set_channel::ID_STATICLINE4 = wxNewId();
+const wxWindowID Set_channel::ID_STATICTEXT3 = wxNewId();
+const wxWindowID Set_channel::ID_FILEPICKERCTRL1 = wxNewId();
 const wxWindowID Set_channel::ID_RADIOBOX1 = wxNewId();
 const wxWindowID Set_channel::ID_RADIOBOX2 = wxNewId();
 const wxWindowID Set_channel::ID_RADIOBOX3 = wxNewId();
@@ -77,6 +81,7 @@ Set_channel::Set_channel(wxWindow* parent,wxWindowID id,const wxPoint& pos,const
   wxBoxSizer* BoxSizer13;
   wxBoxSizer* BoxSizer14;
   wxBoxSizer* BoxSizer15;
+  wxBoxSizer* BoxSizer16;
   wxBoxSizer* BoxSizer1;
   wxBoxSizer* BoxSizer2;
   wxBoxSizer* BoxSizer3;
@@ -92,13 +97,18 @@ Set_channel::Set_channel(wxWindow* parent,wxWindowID id,const wxPoint& pos,const
   Move(wxDefaultPosition);
   SetExtraStyle( GetExtraStyle() | wxWS_EX_VALIDATE_RECURSIVELY );
   BoxSizer1 = new wxBoxSizer(wxVERTICAL);
+  CheckBox2 = new wxCheckBox(this, ID_CHECKBOX2, _(" Channel enable (takes effect after restart)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOX2"));
+  CheckBox2->SetValue(false);
+  BoxSizer1->Add(CheckBox2, 0, wxALL|wxALIGN_LEFT, 5);
+  StaticLine5 = new wxStaticLine(this, ID_STATICLINE5, wxDefaultPosition, wxSize(10,-1), wxLI_HORIZONTAL, _T("ID_STATICLINE5"));
+  BoxSizer1->Add(StaticLine5, 0, wxALL|wxEXPAND, 5);
   BoxSizer2 = new wxBoxSizer(wxHORIZONTAL);
   StaticText1 = new wxStaticText(this, ID_STATICTEXT1, _("Alias"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT1"));
   BoxSizer2->Add(StaticText1, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-  TextCtrl1 = new wxTextCtrl(this, ID_TEXTCTRL1, _("Text"), wxDefaultPosition, wxDefaultSize, 0, wxGenericValidator(&settings.chx.name), _T("ID_TEXTCTRL1"));
+  TextCtrl1 = new wxTextCtrl(this, ID_TEXTCTRL1, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, wxGenericValidator(&settings.chx.name), _T("ID_TEXTCTRL1"));
   BoxSizer2->Add(TextCtrl1, 2, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
   BoxSizer1->Add(BoxSizer2, 0, wxALL|wxEXPAND, 5);
-  CheckBox1 = new wxCheckBox(this, ID_CHECKBOX1, _(" Enable"), wxDefaultPosition, wxDefaultSize, 0, wxGenericValidator(&settings.chx.enable), _T("ID_CHECKBOX1"));
+  CheckBox1 = new wxCheckBox(this, ID_CHECKBOX1, _(" Running"), wxDefaultPosition, wxDefaultSize, 0, wxGenericValidator(&settings.chx.run), _T("ID_CHECKBOX1"));
   CheckBox1->SetValue(false);
   BoxSizer1->Add(CheckBox1, 0, wxALL|wxALIGN_LEFT|wxSHAPED, 5);
   StaticLine2 = new wxStaticLine(this, ID_STATICLINE2, wxDefaultPosition, wxSize(10,-1), wxLI_HORIZONTAL, _T("ID_STATICLINE2"));
@@ -166,9 +176,15 @@ Set_channel::Set_channel(wxWindow* parent,wxWindowID id,const wxPoint& pos,const
   BoxSizer13->Add(TextCtrl6, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
   BoxSizer10->Add(BoxSizer13, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
   BoxSizer8->Add(BoxSizer10, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-  BoxSizer1->Add(BoxSizer8, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+  BoxSizer1->Add(BoxSizer8, 0, wxALL|wxEXPAND, 5);
   StaticLine4 = new wxStaticLine(this, ID_STATICLINE4, wxDefaultPosition, wxSize(10,-1), wxLI_HORIZONTAL, _T("ID_STATICLINE4"));
   BoxSizer1->Add(StaticLine4, 0, wxALL|wxEXPAND, 5);
+  BoxSizer16 = new wxBoxSizer(wxHORIZONTAL);
+  StaticText3 = new wxStaticText(this, ID_STATICTEXT3, _("Messages list"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT3"));
+  BoxSizer16->Add(StaticText3, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+  FilePickerCtrl1 = new wxFilePickerCtrl(this, ID_FILEPICKERCTRL1, wxEmptyString, wxEmptyString, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxFLP_USE_TEXTCTRL|wxFLP_SMALL, wxDefaultValidator, _T("ID_FILEPICKERCTRL1"));
+  BoxSizer16->Add(FilePickerCtrl1, 3, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+  BoxSizer1->Add(BoxSizer16, 0, wxALL|wxEXPAND, 5);
   BoxSizer7 = new wxBoxSizer(wxHORIZONTAL);
   BoxSizer4 = new wxBoxSizer(wxVERTICAL);
   wxString __wxRadioBoxChoices_1[3] =
@@ -210,6 +226,7 @@ Set_channel::Set_channel(wxWindow* parent,wxWindowID id,const wxPoint& pos,const
   BoxSizer1->SetSizeHints(this);
 
   Connect(ID_CHECKBOX1, wxEVT_COMMAND_CHECKBOX_CLICKED, (wxObjectEventFunction)&Set_channel::OnCheckEnableCH);
+  Connect(ID_FILEPICKERCTRL1, wxEVT_COMMAND_FILEPICKER_CHANGED, (wxObjectEventFunction)&Set_channel::OnFilePickerCtrl1FileChanged);
   Connect(wxID_OK, wxEVT_COMMAND_BUTTON_CLICKED, (wxObjectEventFunction)&Set_channel::OnButton1Click);
   //*)
 }
@@ -229,13 +246,6 @@ void Set_channel::OnRadioBox1Select(wxCommandEvent& event)
 
 void Set_channel::OnRadioBox1Select1(wxCommandEvent& event)
 {
-}
-
-void Set_channel::OnClose(wxCloseEvent& event)
-{
-
-
-
 }
 
 
@@ -264,4 +274,17 @@ void Set_channel::OnCheckEnableCH(wxCommandEvent& event)
   else if (settings.lastCh==3)
     settings.ch3.enable=CheckBox1->GetValue();
 
+}
+
+void Set_channel::OnFilePickerCtrl1FileChanged(wxFileDirPickerEvent& event)
+{
+
+  wxTextCtrl* tc=FilePickerCtrl1->GetTextCtrl();
+  settings.chx.filemsg=tc->GetValue();
+}
+
+void Set_channel::Set_controls()
+{
+  wxTextCtrl* tc=FilePickerCtrl1->GetTextCtrl();
+  tc->SetValue(settings.chx.filemsg);
 }

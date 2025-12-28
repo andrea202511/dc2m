@@ -14,8 +14,9 @@
 class dc2mFrame;
 
 struct channel_set {
-  wxString name;
   bool enable;
+  wxString name;
+  bool run;
   int32_t ipp1;
   int32_t ipp2;
   int32_t ipp3;
@@ -25,6 +26,7 @@ struct channel_set {
   int32_t startrx;
   int32_t lengthtx;
   int32_t lengthrx;
+  wxString filemsg;
   int32_t trefresh;
   int32_t byteord;
   int32_t charord;
@@ -45,10 +47,13 @@ class C_Settings
 
     void Chx2Chn(int n);
     void Chn2Chx(int n);
+    void Chn2Chw(int n);
 
     wxString chat_server;
     wxString station_name;
     wxString station_loc;
+
+    channel_set chw;
 
     channel_set chx;
     channel_set ch1;

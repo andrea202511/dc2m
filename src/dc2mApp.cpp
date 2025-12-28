@@ -9,6 +9,17 @@
 
 #include "dc2mApp.h"
 
+
+///TODO
+// disabilitare/abilitare campi impostazione canale
+// livello debug + normalizzare messaggi debug
+// map_unorder
+// lista chat e catalogazione
+// installazione windows/linux
+// manuale online
+// implementare readme.md
+
+
 //(*AppHeaders
 #include "dc2mMain.h"
 #include <wx/image.h>
