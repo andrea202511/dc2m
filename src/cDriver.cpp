@@ -337,9 +337,11 @@ int32_t cDriver::ProcessMessage(wxString msg, int chat_id)
     if (msg[1]=='1') {
       st=wxGetApp().ModbusCh1->GetStatus();
       if (st==0)
-        response="Channel #1 is disabled";
+        response="Sorry, channel #1 is disabled";
       else if (st==1)
-        response="Channel #1 is offline";
+        response="Sorry, channel #1 device is offline";
+      else if (st<0)
+        response=wxString::Format(wxT("Sorry, channel #1 is in error state [%i]"), st);
       else {
         if (wxGetApp().ModbusCh1->from_dc(msg,chat_id)==true)
           msg[1]=0;
@@ -348,9 +350,11 @@ int32_t cDriver::ProcessMessage(wxString msg, int chat_id)
     else if (msg[1]=='2') {
       st=wxGetApp().ModbusCh2->GetStatus();
       if (st==0)
-        response="Channel #2 is disabled";
+        response="Sorry, channel #2 is disabled";
       else if (st==1)
-        response="Channel #2 is offline";
+        response="Sorry, channel #2 device is offline";
+      else if (st<0)
+        response=wxString::Format(wxT("Sorry, channel #2 is in error state [%i]"), st);
       else {
         if (wxGetApp().ModbusCh2->from_dc(msg,chat_id)==true)
           msg[1]=0;
@@ -359,9 +363,11 @@ int32_t cDriver::ProcessMessage(wxString msg, int chat_id)
     else if (msg[1]=='3') {
       st=wxGetApp().ModbusCh2->GetStatus();
       if (st==0)
-        response="Channel #3 is disabled";
+        response="Sorry, channel #3 is disabled";
       else if (st==1)
-        response="Channel #3 is offline";
+        response="Sorry, channel #3 device is offline";
+      else if (st<0)
+        response=wxString::Format(wxT("Sorry, channel #3 is in error state [%i]"), st);
       else {
         if (wxGetApp().ModbusCh3->from_dc(msg,chat_id)==true)
           msg[1]=0;

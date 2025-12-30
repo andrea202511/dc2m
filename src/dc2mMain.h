@@ -39,6 +39,7 @@ class dc2mFrame: public wxFrame
         dc2mFrame(wxWindow* parent,wxWindowID id = -1);
         virtual ~dc2mFrame();
         void DisplayStatus(uint16_t field,int32_t status);
+        void AddToLog(uint16_t mode,wxString msg);
  //       C_Chat* deltac;
 
     private:

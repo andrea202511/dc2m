@@ -27,6 +27,10 @@
 
 IMPLEMENT_APP(dc2mApp);
 
+void dc2mApp::ToLog(uint16_t modo,wxString str)
+{
+  Frame->AddToLog(modo,str);
+}
 
 bool dc2mApp::OnInit()
 {
@@ -44,14 +48,44 @@ bool dc2mApp::OnInit()
     p_status_ch2=-99;
     p_status_ch3=-99;
 
-    Deltac=new cDriver(Frame->GetEventHandler());
-    Deltac->init();
+    st1_enabled=settings.station_enable;
+    ch1_enabled=settings.ch1.enable;
+    ch2_enabled=settings.ch2.enable;
+    ch3_enabled=settings.ch3.enable;
 
-    ModbusCh1=new mDriver(1);
-    ModbusCh2=new mDriver(2);;
-    ModbusCh3=new mDriver(3);;
+    Frame->AddToLog(0,"Starting dc2m...\n");
 
+    // #1
+    if(ch1_enabled) {
+      ModbusCh1=new mDriver(1);
+      ModbusCh1->Init();
+    }
+    else
+      Frame->AddToLog(0,"Channel #1 handling: skipped\n");
 
+    //#2
+    if(ch2_enabled) {
+      ModbusCh2=new mDriver(2);
+      ModbusCh2->Init();
+    }
+    else
+      Frame->AddToLog(0,"Channel #2 handling: skipped\n");
+
+    //#3
+    if(ch3_enabled) {
+      ModbusCh3=new mDriver(3);
+      ModbusCh3->Init();
+   }
+    else
+      Frame->AddToLog(0,"Channel #3 handling: skipped\n");
+
+    //$1
+    if (st1_enabled) {
+      Deltac=new cDriver(Frame->GetEventHandler());
+      Deltac->init();
+    }
+    else
+      Frame->AddToLog(2,"Station $1 handling: skipped\n");
 
     return wxsOK;
 
@@ -60,26 +94,40 @@ bool dc2mApp::OnInit()
 void dc2mApp::Refresh(void)
 {
   int32_t sc;
-
-  sc=ModbusCh1->Refresh();
+  if (ch1_enabled)
+    sc=ModbusCh1->Refresh();
+  else
+    sc=5;
   if (sc!=p_status_ch1) {
     p_status_ch1=sc;
     Frame->DisplayStatus(1,sc);
   }
 
-  sc=ModbusCh2->Refresh();
+  if (ch2_enabled)
+    sc=ModbusCh2->Refresh();
+  else
+    sc=5;
   if (sc!=p_status_ch2) {
     p_status_ch2=sc;
     Frame->DisplayStatus(2,sc);
   }
 
-
-  sc=ModbusCh3->Refresh();
+   if (ch3_enabled)
+    sc=ModbusCh3->Refresh();
+  else
+    sc=5;
   if (sc!=p_status_ch3) {
     p_status_ch3=sc;
     Frame->DisplayStatus(3,sc);
   }
 
-  sc=Deltac->Refresh();
+  if (st1_enabled)
+    sc=Deltac->Refresh();
+  else
+    sc=5;
+  if (sc!=p_status_st1) {
+    p_status_st1=sc;
+    Frame->DisplayStatus(0,sc);
+  }
 
 }

@@ -116,6 +116,7 @@ class Set_channel: public wxDialog
     void OnButton1Click(wxCommandEvent& event);
     void OnCheckEnableCH(wxCommandEvent& event);
     void OnFilePickerCtrl1FileChanged(wxFileDirPickerEvent& event);
+    void OnCheckRunCH(wxCommandEvent& event);
     //*)
 
     DECLARE_EVENT_TABLE()

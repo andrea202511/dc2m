@@ -10,6 +10,8 @@
 			<object class="sizeritem">
 				<object class="wxCheckBox" name="ID_CHECKBOX2" variable="CheckBox2" member="yes">
 					<label> Channel enable (takes effect after restart)</label>
+					<validator>wxGenericValidator(&amp;settings.chx.enable)</validator>
+					<handler function="OnCheckEnableCH" entry="EVT_CHECKBOX" />
 				</object>
 				<flag>wxALL|wxALIGN_LEFT</flag>
 				<border>5</border>
@@ -47,7 +49,7 @@
 				<object class="wxCheckBox" name="ID_CHECKBOX1" variable="CheckBox1" member="yes">
 					<label> Running</label>
 					<validator>wxGenericValidator(&amp;settings.chx.run)</validator>
-					<handler function="OnCheckEnableCH" entry="EVT_CHECKBOX" />
+					<handler function="OnCheckRunCH" entry="EVT_CHECKBOX" />
 				</object>
 				<flag>wxALL|wxALIGN_LEFT|wxSHAPED</flag>
 				<border>5</border>

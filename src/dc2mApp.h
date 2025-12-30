@@ -19,19 +19,26 @@ class dc2mApp : public wxApp
   public:
     virtual bool OnInit();
     void Refresh();
+    void ToLog(uint16_t mode,wxString msg);
 
     cDriver* Deltac;
     mDriver* ModbusCh1;
     mDriver* ModbusCh2;
     mDriver* ModbusCh3;
 
+
   private:
+    int32_t p_status_st1;
     int32_t p_status_ch1;
     int32_t p_status_ch2;
     int32_t p_status_ch3;
 
-    dc2mFrame* Frame;
+    bool st1_enabled=false;
+    bool ch1_enabled=false;
+    bool ch2_enabled=false;
+    bool ch3_enabled=false;
 
+    dc2mFrame* Frame;
 };
 
 #endif // DC2MAPP_H

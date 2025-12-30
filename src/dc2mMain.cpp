@@ -81,9 +81,9 @@ dc2mFrame::dc2mFrame(wxWindow* parent,wxWindowID id)
     Create(parent, id, _("dc2m"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, _T("id"));
     SetClientSize(wxSize(790,357));
     {
-      wxIcon FrameIcon;
-      FrameIcon.CopyFromBitmap(wxBitmap(wxImage(_T("dc2mLogo.ico"))));
-      SetIcon(FrameIcon);
+        wxIcon FrameIcon;
+        FrameIcon.CopyFromBitmap(wxBitmap(wxImage(_T("dc2mLogo.ico"))));
+        SetIcon(FrameIcon);
     }
     BoxSizer1 = new wxBoxSizer(wxHORIZONTAL);
     LogText = new wxTextCtrl(this, ID_TEXTCTRL1, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE|wxVSCROLL|wxHSCROLL|wxALWAYS_SHOW_SB, wxDefaultValidator, _T("ID_TEXTCTRL1"));
@@ -169,8 +169,9 @@ void dc2mFrame::DoMyEvent(C_ChatEvent &event)
     int32_t pr=wxGetApp().Deltac->ProcessMessage(str1,type-30000);
 
   if ((type<=THFAILURE) || (settings.LogLevel>=0)) { //type)) {
-    LogText->SetDefaultStyle(wxTextAttr(*wxBLACK));
-    LogText->AppendText(str1);
+    AddToLog(0,str1);
+//    LogText->SetDefaultStyle(wxTextAttr(*wxBLACK));
+//    LogText->AppendText(str1);
   }
 
  //    ThreadError=1, ThreadFailure, ThreadMessage,  ThreadDebug, ThreadVerbose,
@@ -228,13 +229,18 @@ void dc2mFrame::OnMenuItemChannel3(wxCommandEvent& event)
 
 void dc2mFrame::OnTimer1Trigger(wxTimerEvent& event)
 {
-
   wxGetApp().Refresh();
-
 }
 
 void dc2mFrame::DisplayStatus(uint16_t field,int32_t status)
 {
+  if (field==0) {
+    if (status==1)
+      StatusBar1->SetStatusText(wxString::Format(wxT("$1 Ready")),field);
+    else
+      StatusBar1->SetStatusText(wxString::Format(wxT("$1")),field);
+  }
+  else {
     if (status<0)
       StatusBar1->SetStatusText(wxString::Format(wxT("#%i Error %i "), field,status),field);
     else if (status==0)
@@ -244,7 +250,22 @@ void dc2mFrame::DisplayStatus(uint16_t field,int32_t status)
     else if (status==2)
       StatusBar1->SetStatusText(wxString::Format(wxT("#%i On line "), field),field);
     else
-      StatusBar1->SetStatusText(wxString::Format(wxT("#%i - - - "), field),field);
+      StatusBar1->SetStatusText(wxString::Format(wxT("#%i"), field),field);
+  }
+}
+
+
+void dc2mFrame::AddToLog(uint16_t mode,wxString msg)
+{
+  if(mode==0)
+    LogText->SetDefaultStyle(wxTextAttr(*wxBLACK));
+  else if (mode==1)
+    LogText->SetDefaultStyle(wxTextAttr(*wxBLUE));
+  else
+    LogText->SetDefaultStyle(wxTextAttr(*wxRED));
+
+  LogText->AppendText(msg);
+
 }
 
 void dc2mFrame::OnMenuItem4Selected(wxCommandEvent& event)

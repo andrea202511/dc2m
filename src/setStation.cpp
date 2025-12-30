@@ -6,6 +6,8 @@
 //*)
 
 //(*IdInit(Set_station)
+const wxWindowID Set_station::ID_CHECKBOX1 = wxNewId();
+const wxWindowID Set_station::ID_STATICLINE2 = wxNewId();
 const wxWindowID Set_station::ID_STATICTEXT1 = wxNewId();
 const wxWindowID Set_station::ID_TEXTCTRL1 = wxNewId();
 const wxWindowID Set_station::ID_STATICTEXT2 = wxNewId();
@@ -31,6 +33,11 @@ Set_station::Set_station(wxWindow* parent,wxWindowID id)
     Create(parent, id, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE, _T("id"));
     SetExtraStyle( GetExtraStyle() | wxWS_EX_VALIDATE_RECURSIVELY );
     BoxSizer1 = new wxBoxSizer(wxVERTICAL);
+    CheckBox1 = new wxCheckBox(this, ID_CHECKBOX1, _("Station enable (takes effect after restart)"), wxDefaultPosition, wxDefaultSize, 0, wxGenericValidator(&settings.station_enable), _T("ID_CHECKBOX1"));
+    CheckBox1->SetValue(false);
+    BoxSizer1->Add(CheckBox1, 0, wxALL|wxALIGN_LEFT, 5);
+    StaticLine2 = new wxStaticLine(this, ID_STATICLINE2, wxDefaultPosition, wxSize(10,-1), wxLI_HORIZONTAL, _T("ID_STATICLINE2"));
+    BoxSizer1->Add(StaticLine2, 0, wxALL|wxEXPAND, 5);
     BoxSizer2 = new wxBoxSizer(wxHORIZONTAL);
     StaticText1 = new wxStaticText(this, ID_STATICTEXT1, _("Station name"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT1"));
     BoxSizer2->Add(StaticText1, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);

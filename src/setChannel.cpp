@@ -1,4 +1,5 @@
 #include "setChannel.h"
+#include <wx/msgdlg.h>
 
 //(*InternalHeaders(Set_channel)
 #include <wx/intl.h>
@@ -97,7 +98,7 @@ Set_channel::Set_channel(wxWindow* parent,wxWindowID id,const wxPoint& pos,const
   Move(wxDefaultPosition);
   SetExtraStyle( GetExtraStyle() | wxWS_EX_VALIDATE_RECURSIVELY );
   BoxSizer1 = new wxBoxSizer(wxVERTICAL);
-  CheckBox2 = new wxCheckBox(this, ID_CHECKBOX2, _(" Channel enable (takes effect after restart)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOX2"));
+  CheckBox2 = new wxCheckBox(this, ID_CHECKBOX2, _(" Channel enable (takes effect after restart)"), wxDefaultPosition, wxDefaultSize, 0, wxGenericValidator(&settings.chx.enable), _T("ID_CHECKBOX2"));
   CheckBox2->SetValue(false);
   BoxSizer1->Add(CheckBox2, 0, wxALL|wxALIGN_LEFT, 5);
   StaticLine5 = new wxStaticLine(this, ID_STATICLINE5, wxDefaultPosition, wxSize(10,-1), wxLI_HORIZONTAL, _T("ID_STATICLINE5"));
@@ -225,7 +226,8 @@ Set_channel::Set_channel(wxWindow* parent,wxWindowID id,const wxPoint& pos,const
   SetSizer(BoxSizer1);
   BoxSizer1->SetSizeHints(this);
 
-  Connect(ID_CHECKBOX1, wxEVT_COMMAND_CHECKBOX_CLICKED, (wxObjectEventFunction)&Set_channel::OnCheckEnableCH);
+  Connect(ID_CHECKBOX2, wxEVT_COMMAND_CHECKBOX_CLICKED, (wxObjectEventFunction)&Set_channel::OnCheckEnableCH);
+  Connect(ID_CHECKBOX1, wxEVT_COMMAND_CHECKBOX_CLICKED, (wxObjectEventFunction)&Set_channel::OnCheckRunCH);
   Connect(ID_FILEPICKERCTRL1, wxEVT_COMMAND_FILEPICKER_CHANGED, (wxObjectEventFunction)&Set_channel::OnFilePickerCtrl1FileChanged);
   Connect(wxID_OK, wxEVT_COMMAND_BUTTON_CLICKED, (wxObjectEventFunction)&Set_channel::OnButton1Click);
   //*)
@@ -261,30 +263,61 @@ void Set_channel::OnButton1Click(wxCommandEvent& event)
       SetReturnCode(wxID_OK);
       this->Show(false);
     }
-
+  }
+  else {
+    wxMessageDialog *dial = new wxMessageDialog(NULL,
+    wxT("Invalid data"), wxT("Error"), wxOK | wxICON_ERROR);
+    dial->ShowModal();
   }
 }
 
 void Set_channel::OnCheckEnableCH(wxCommandEvent& event)
 {
+  settings.chx.enable=CheckBox2->GetValue();
   if (settings.lastCh==1)
-    settings.ch1.enable=CheckBox1->GetValue();
+    settings.ch1.enable=CheckBox2->GetValue();
   else if (settings.lastCh==2)
-    settings.ch2.enable=CheckBox1->GetValue();
+    settings.ch2.enable=CheckBox2->GetValue();
   else if (settings.lastCh==3)
-    settings.ch3.enable=CheckBox1->GetValue();
-
+    settings.ch3.enable=CheckBox2->GetValue();
+  Set_controls();
 }
 
 void Set_channel::OnFilePickerCtrl1FileChanged(wxFileDirPickerEvent& event)
 {
-
   wxTextCtrl* tc=FilePickerCtrl1->GetTextCtrl();
   settings.chx.filemsg=tc->GetValue();
 }
 
 void Set_channel::Set_controls()
 {
+  bool b=settings.chx.enable;
   wxTextCtrl* tc=FilePickerCtrl1->GetTextCtrl();
   tc->SetValue(settings.chx.filemsg);
+  tc->Enable(b);
+  CheckBox1->Enable(b);
+  RadioBox1->Enable(b);
+  RadioBox2->Enable(b);
+  RadioBox3->Enable(b);
+  TextCtrl10->Enable(b);
+  TextCtrl1->Enable(b);
+  TextCtrl2->Enable(b);
+  TextCtrl3->Enable(b);
+  TextCtrl4->Enable(b);
+  TextCtrl5->Enable(b);
+  TextCtrl6->Enable(b);
+  TextCtrl7->Enable(b);
+  TextCtrl8->Enable(b);
+  TextCtrl9->Enable(b);
+}
+
+void Set_channel::OnCheckRunCH(wxCommandEvent& event)
+{
+  settings.chx.run=CheckBox1->GetValue();
+  if (settings.lastCh==1)
+    settings.ch1.run=CheckBox1->GetValue();
+  else if (settings.lastCh==2)
+    settings.ch2.run=CheckBox1->GetValue();
+  else if (settings.lastCh==3)
+    settings.ch3.run=CheckBox1->GetValue();
 }

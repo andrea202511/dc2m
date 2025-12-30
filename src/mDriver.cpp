@@ -13,16 +13,23 @@ mDriver::mDriver(int32_t ch)
 {
   channel=ch;
   error=0;
-  init=false;
-//w  comm=NULL;
   comm = new modbus();
-
 }
 
 mDriver::~mDriver()
 {
 
 }
+
+void mDriver::Init()
+{
+  if (comm!=NULL)
+    wxGetApp().ToLog(0,wxString::Format("Channel #%i handling: Ok\n",channel));
+  else
+    wxGetApp().ToLog(2,wxString::Format("Channel #%i handling: FAIL\n",channel));
+}
+
+
 
 
 void mDriver::Connect()
@@ -32,33 +39,39 @@ void mDriver::Connect()
 
     //check setting
     if(cs.ipp1<1 || cs.ipp2<0  || cs.ipp3<0 || cs.ipp4<1)
-      error=-11;
+      error=CHERR_INVALID_IPADDRESS;
 
     if (cs.ipp1>254 || cs.ipp2>254  || cs.ipp3>254 || cs.ipp4>254)
-      error=-11;
+      error=CHERR_INVALID_IPADDRESS;
 
     if (cs.port<1)
-      error=-12;
+      error=CHERR_INVALID_PORTNUMBER;
 
-    if (cs.lengthtx<5 || cs.lengthrx<5)
-     error=-13;
+    if (cs.lengthrx<5)
+     error=CHERR_RXLENGHT_TOOSMALL;
+
+    if (cs.lengthrx>255)
+     error=CHERR_RXLENGHT_TOOLARGE;
+
+    if (cs.lengthtx<5)
+     error=CHERR_TXLENGHT_TOOSMALL;
+
+    if (cs.lengthtx>255)
+     error=CHERR_TXLENGHT_TOOLARGE;
 
     if(error==0) {
-      if (comm!=NULL) {
+      if (connected)
         comm->modbus_close();
-//w        delete comm;
-      }
+
       wxString ip;
       ip=wxString::Format(wxT("%d.%d.%d.%d"), cs.ipp1, cs.ipp2, cs.ipp3, cs.ipp4);
       comm->set_data((std::string)ip,(uint16_t)cs.port,500);
 
-//w      comm = new modbus((std::string)ip,(uint16_t)cs.port,500);
-      bool b=comm->modbus_connect();
-      if (b==true)
+      if (comm->modbus_connect())
         connected=true;
       else {
         connected=false;
-        error=-1;
+        error=CHERR_CONNECT_ERROR;
       }
     }
 
@@ -76,10 +89,7 @@ void mDriver::Disconnect()
 {
   if (comm!=NULL) {
     comm->modbus_close();
-//w    delete comm;
-//w    comm=NULL;
     connected=false;
-    init=false;
   }
 }
 
@@ -90,7 +100,7 @@ void mDriver::WriteRegisters(uint16_t reg,uint16_t num, uint16_t *val)
   {
     err=comm->modbus_write_registers(reg,num,val);
     if (err!=0)
-      error=-20;
+      error=CHERR_WRITE_ERROR;
   }
 }
 
@@ -101,8 +111,7 @@ void mDriver::ReadRegisters(uint16_t reg,uint16_t num, uint16_t* val)
   {
     err=comm->modbus_read_holding_registers(reg,num,val);
     if (err!=0)
-      error=-21;
-
+      error=CHERR_READ_ERROR;
   }
 }
 
@@ -253,26 +262,31 @@ bool mDriver::from_dc(wxString msg,int chat_id)
 }
 
 int mDriver::GetStatus() {
-  if (connected)
-    return 2;
-  return 0;
-  //da completare con off e offline
-
+  if (error!=0) return error;
+  else if (!en || !run) return 0;
+  else if (connected) return 2;
+  else return 1;
 }
 
 int32_t mDriver::Refresh()
 {
   uint16_t zero=0;
-  bool en=false;
-  if (channel==1)
+
+  if (channel==1) {
     en=settings.ch1.enable;
-  else if (channel==2)
+    run=settings.ch1.run;
+  }
+  else if (channel==2) {
     en=settings.ch2.enable;
-  else if (channel==3)
+    run=settings.ch2.run;
+  }
+  else if (channel==3) {
     en=settings.ch3.enable;
+    run=settings.ch3.run;
+  }
 
   //reset error
-  if (en==0)
+  if (!en || !run)
     error=0;
 
   //auto restart
@@ -286,10 +300,10 @@ int32_t mDriver::Refresh()
     }
   }
 
-  if ((error==0) && en && !connected)
+  if ((error==0) && en && run && !connected)
     Connect();
 
-  if ((!(error==0) || !en) && connected)
+  if ((!(error==0) || !en || !run) && connected)
     Disconnect();
 
   //get message from modbus
@@ -297,7 +311,7 @@ int32_t mDriver::Refresh()
     if (((cs.trefresh==0) && (tick>2)) || ((cs.trefresh==0) && (tick>4)) || (tick>6)) {
       tick=0;
       ReadRegisters(cs.starttx,2,&buffer_tx[0]);
-      //if there is samething...
+      //if there is something...
       if (buffer_tx[1]!=0) {
         ReadRegisters(cs.starttx,cs.lengthtx,&buffer_tx[0]);
       }
@@ -314,13 +328,11 @@ int32_t mDriver::Refresh()
     }
   }
   else {
-    if (init)
-      buffer_tx[1]=0;
+    buffer_tx[1]=0;
   }
 
-
   if (error!=0) return error;
-  else if (!init) return 0;
+  else if (!en || !run) return 0;
   else if (connected) return 2;
   else return 1;
 }

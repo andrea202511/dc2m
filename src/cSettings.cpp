@@ -13,6 +13,7 @@ C_Settings::C_Settings()
 void C_Settings::LoadValue() {
   dconfig=new wxConfig("dc2m","AndreaF");
 
+  dconfig->Read(wxT("/StationEnabled"),&station_enable);
   dconfig->Read(wxT("/StationName"),&station_name);
   dconfig->Read(wxT("/StationLoc"),&station_loc);
 
@@ -79,6 +80,7 @@ C_Settings::~C_Settings()
 
 void C_Settings::SaveValue() {
 
+  dconfig->Write(wxT("/StationEnabled"),station_enable);
   dconfig->Write(wxT("/StationName"),station_name);
   dconfig->Write(wxT("/StationLoc"),station_loc);
 

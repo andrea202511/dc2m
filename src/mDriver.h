@@ -9,9 +9,20 @@
 
 extern C_Settings settings;
 
-enum {STATE_OFF=0, STATE_OFFLINE, STATE_ONLINE};
+//Channel errors
+#define CHERR_CONNECT_ERROR -1
+#define CHERR_WRITE_ERROR -2
+#define CHERR_READ_ERROR -3
+#define CHERR_INVALID_PORTNUMBER -11
+#define CHERR_INVALID_IPADDRESS -12
+#define CHERR_RXLENGHT_TOOLARGE -13
+#define CHERR_RXLENGHT_TOOSMALL -14
+#define CHERR_TXLENGHT_TOOLARGE -15
+#define CHERR_TXLENGHT_TOOSMALL -16
 
-enum {NO_ERROR1=0, CONNECT_ERROR1=-1, READ_ERROR1=-2, WRITE_ERROR1=-3 };
+//enum {STATE_OFF=0, STATE_OFFLINE, STATE_ONLINE};
+
+//enum {NO_ERROR1=0, CONNECT_ERROR1=-1, READ_ERROR1=-2, WRITE_ERROR1=-3 };
 //enum {NO__ERROR=0, CONNECT_ERROR, READ_ERROR, WRITE_ERROR};
 
 class mDriver
@@ -19,6 +30,7 @@ class mDriver
     public:
         mDriver(int32_t ch);
         virtual ~mDriver();
+        void Init();
 
         void Connect(void);
         void Disconnect(void);
@@ -49,6 +61,8 @@ class mDriver
         channel_set cs;
         int32_t error=0;
         bool connected=false;
+        bool en=false;
+        bool run=false;
         int32_t restart=0;
 
         int32_t tick;

@@ -8,6 +8,7 @@ extern C_Settings settings;
 
 //(*Headers(Set_station)
 #include <wx/button.h>
+#include <wx/checkbox.h>
 #include <wx/dialog.h>
 #include <wx/sizer.h>
 #include <wx/statline.h>
@@ -26,7 +27,9 @@ class Set_station: public wxDialog
         wxButton* Button1;
         wxButton* Button2;
         wxButton* Button3;
+        wxCheckBox* CheckBox1;
         wxStaticLine* StaticLine1;
+        wxStaticLine* StaticLine2;
         wxStaticText* StaticText1;
         wxStaticText* StaticText2;
         wxTextCtrl* TextCtrl1;
@@ -36,6 +39,8 @@ class Set_station: public wxDialog
     protected:
 
         //(*Identifiers(Set_station)
+        static const wxWindowID ID_CHECKBOX1;
+        static const wxWindowID ID_STATICLINE2;
         static const wxWindowID ID_STATICTEXT1;
         static const wxWindowID ID_TEXTCTRL1;
         static const wxWindowID ID_STATICTEXT2;

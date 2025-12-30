@@ -50,6 +50,7 @@ class C_Settings
     void Chn2Chw(int n);
 
     wxString chat_server;
+    bool station_enable;
     wxString station_name;
     wxString station_loc;
 
