@@ -1,6 +1,7 @@
 #include "cDriver.h"
 #include "dc2mApp.h"
 #include <wx/tokenzr.h>
+#include <wx/datetime.h>
 
 DECLARE_APP(dc2mApp)
 
@@ -55,7 +56,7 @@ void C_ChatEventThread::SendThreadMessage(wxString str,int type)
 
 void *C_ChatEventThread::Entry()
 {
-  SendThreadMessage(_("Entrata"),THDEBUG);
+  SendThreadMessage(_("DC thread starting"),THDEBUG);
     dc_event_emitter_t* emitter;
     emitter=pfn_dc_get_event_emitter(th_context);
     dc_event_t* event;
@@ -90,13 +91,13 @@ void *C_ChatEventThread::Entry()
           SendThreadMessage(msg,THERROR);
         }
         else if(datai==1000) {
-          msg="[CONFIGURE]:configuration sucesfull, starting io";
-          SendThreadMessage(msg,THVERBOSE);
+          msg="[CONFIGURE]:configuration successful, starting io";
+          SendThreadMessage(msg,THDEBUG);
           pfn_dc_start_io(th_context);
         }
         else {
           msg="[CONFIGURE]:configuration in progress";
-          SendThreadMessage(msg,THVERBOSE);
+          SendThreadMessage(msg,THDEBUG);
         }
       }
       else if (event_id==DC_EVENT_CONNECTIVITY_CHANGED) {
@@ -109,11 +110,11 @@ void *C_ChatEventThread::Entry()
           msg="[id 2100]:getting new message";
           SendThreadMessage(msg,THVERBOSE);
         }
-        else if (datai>=3000) {
-          msg="[id 2100]:connecting";
+        else if (datai>=2000) {
+          msg="[id 2100]:connecting...";
           SendThreadMessage(msg,THVERBOSE);
         }
-        else if (datai>=3000) {
+        else if (datai>=1000) {
           msg="[id 2100]:not connected";
           SendThreadMessage(msg,THVERBOSE);
         }
@@ -127,9 +128,9 @@ void *C_ChatEventThread::Entry()
 
       //  wxGetApp().deltac->solo_per_test=chat_id;
         uint32_t message_id=pfn_dc_event_get_data2_int(event);
-        msg.Printf("[incoming message] %d %d",chat_id,message_id);
-        SendThreadMessage(msg,THVERBOSE);
-        //handle_message(th_context,chat_id,message_id);
+        msg.Printf("[Rx message] ID:%d (%d)",message_id,chat_id);
+        SendThreadMessage(msg,THDEBUG);
+
         dc_chat_t *chat=pfn_dc_get_chat(th_context,chat_id);
         if(pfn_dc_chat_get_type(chat)==DC_CHAT_TYPE_SINGLE) {
           dc_msg_t* msgcc=pfn_dc_get_msg(th_context,message_id);
@@ -138,8 +139,7 @@ void *C_ChatEventThread::Entry()
             msg=text;
             SendThreadMessage(msg,THRECEIVEMESSAGEBASE+chat_id);
             pfn_dc_markseen_msgs(th_context,&message_id,1);
-            //dc_marks
-        //    dc_send_text_msg(th_context,chat_id,text);
+
             pfn_dc_str_unref(text);
             pfn_dc_msg_unref(msgcc);
           }
@@ -149,12 +149,9 @@ void *C_ChatEventThread::Entry()
         msg.Printf("[unandled event] %d" ,event_id);
         SendThreadMessage(msg,THVERBOSE);
       }
-
-        // use the event as needed, e.g. dc_event_get_id() returns the type.
-        // once you're done, unref the event to avoid memory leakage:
-        pfn_dc_event_unref(event);
+      pfn_dc_event_unref(event);
     }
- //   dc_event_emitter_unref(emitter);
+    //pfn_dc_event_emitter_unref(emitter);
     return NULL;
 
 }
@@ -186,10 +183,6 @@ cDriver::cDriver(wxEvtHandler *evhan)
  pfn_dc_start_io = (dc_start_io_type) deltachatlib.GetSymbol("dc_start_io");
  pfn_dc_stop_io = (dc_stop_io_type) deltachatlib.GetSymbol("dc_stop_io");
 
-
-// forse non va bene nel costruttore... boh!
-
-
 }
 
 cDriver::~cDriver()
@@ -200,50 +193,29 @@ cDriver::~cDriver()
 
 void cDriver::init(void)
 {
-//  settings.ToLog(1,"Init\n");
 
   wxThreadError eth;
   dc_context_t* context = pfn_dc_context_new(NULL, "dc2m.db", NULL);
   chat_event_thread=new C_ChatEventThread(EHc,context);
   eth=chat_event_thread->Create();
-  if (eth == wxTHREAD_NO_ERROR)
-  {
- //settings.ToLog(1,"Thread run\n");
+  if (eth == wxTHREAD_NO_ERROR) {
     chat_event_thread->Run();
 
-    if(!pfn_dc_is_configured(context))
-    {
-stop_context(context);
-//      dc_set_config(context, "addr", "epwxog2fw@nine.testrun.org");
-//      dc_set_config(context, "mail_user", "epwxog2fw@nine.testrun.org");
-//      dc_set_config(context, "mailtx_receipe_pw", "2G<wyZ\\I<N\"b");
-
-  //    dc_set_config(context, "addr", "zzzxog2fw@nine.testrun.org");
-  //    dc_set_config(context, "mail_user", "zzzxog2fw@nine.testrun.org");
-  //    dc_set_config(context, "mail_pw", "2G9ufZ\\I<N\"b");
-
+    if(!pfn_dc_is_configured(context)) {
+      stop_context(context);
       pfn_dc_set_config_from_qr(context, "dcaccount:https://nine.testrun.org/new");
 
- //  dc_set_config(context, "displayname", "abcdefghi");
-//  dc_set_config(context, "is_chatmail", "1");
+      pfn_dc_set_config(context, "displayname", settings.station_name);
+      pfn_dc_set_config(context, "is_chatmail", "1");
+      pfn_dc_set_config(context, "delete_device_after", "15");
       pfn_dc_set_config(context, "bot","1");
- //??     dc_set_config(context,"fetch_existing_msgs","0");
-pfn_dc_set_config(context, "fetch_existing_msgs", "0");
-    pfn_dc_set_config(context, "verified_one_on_one_chats", "1");
-
       pfn_dc_configure(context);
     }
-    else
-    {
+    else {
       pfn_dc_start_io(context);
-
     }
-///pfn_dc_start_io(context);
-ccontext=context;
+  ccontext=context;
   }
-
- // Thread2->Entry(context);
-
 }
 
 void cDriver::stop_context(dc_context_t* context)
@@ -255,19 +227,17 @@ void cDriver::stop_context(dc_context_t* context)
 
 wxString cDriver::generate_qrcode(void)
 {
-char* aaa=pfn_dc_get_securejoin_qr(ccontext,0);
-char* bbb=pfn_dc_create_qr_svg(aaa);
-wxString qc=bbb;
-return qc;
-
-
+  char* aaa=pfn_dc_get_securejoin_qr(ccontext,0);
+  char* bbb=pfn_dc_create_qr_svg(aaa);
+  wxString qc=bbb;
+  return qc;
 }
 
 //check if anything to send
 int32_t cDriver::Refresh()
 {
   if (tx_code==0)
-     return 0;
+    return 0;
   if (tx_code==1) {
     pfn_dc_send_text_msg(ccontext,tx_receipe,tx_message);
   }
@@ -280,6 +250,7 @@ int32_t cDriver::ProcessMessage(wxString msg, int chat_id)
 {
   int32_t err=0;
   wxString response="";
+  wxDateTime now = wxDateTime::Now();
 
   for(int i=0;i<10;i++)
     msg_par[i]=0;
@@ -300,22 +271,22 @@ int32_t cDriver::ProcessMessage(wxString msg, int chat_id)
          token.ToInt(&msg_par[ii]);
          ii++;
          if (ii>9) {
-            response="Too much parameters in station request";
+          response="Too much parameters in station request";
            break;
          }
       }
       switch(msg_par[1]) {
         case 0:
-          response="1:Station name\n2:List Channel\n3:Date & time\n4:Status channel\n5:Channels detail";
+          response="1:Station name\n2:List Channel\n3:Date & time\n4";
           break;
         case 1:
-          response="Station name: "+settings.station_name;
+          response="Station name: "+settings.station_name+"\nLocation: "+settings.station_loc;
           break;
         case 2:
-          response="2\n3\n4\n5";
+          response="CH1: "+settings.ch1.name+"\nCH2: "+settings.ch2.name+"\nCH3: "+settings.ch3.name+"\n";
           break;
         case 3:
-          response="20\n30\n40\n50\n60\n70\n80\n90\n100";
+          response=now.FormatISODate()+"  "+now.FormatISOTime()+"\n";
           break;
 
         default:
@@ -324,8 +295,10 @@ int32_t cDriver::ProcessMessage(wxString msg, int chat_id)
       }
     }
     //send response to $ code if there is one
-    if(response!="")
+    if(response!="") {
       pfn_dc_send_text_msg(ccontext,chat_id,response.mb_str());
+      wxGetApp().ToLog(0,wxString::Format(wxT("[Tx message] by $1 (%i)\n"),chat_id));
+    }
     return 0;
   }
 
@@ -379,11 +352,9 @@ int32_t cDriver::ProcessMessage(wxString msg, int chat_id)
     //send response to # code if there is one
     if(response!="") {
       pfn_dc_send_text_msg(ccontext,chat_id,response.mb_str());
+      wxGetApp().ToLog(0,wxString::Format(wxT("[Tx message] by $1 (%i)\n"),chat_id));
       return 0;
     }
-
-    //if I'm here something can sent to channel
-
   }
 
 return err;

@@ -171,9 +171,6 @@ dc_create_qr_svg_type pfn_dc_create_qr_svg;
 dc_send_text_msg_type pfn_dc_send_text_msg;
 
 
-
-
-
 };
 
 

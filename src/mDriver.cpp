@@ -3,6 +3,89 @@
 #include <wx/tokenzr.h>
 
 //std::unorder_map
+/*
+#include <wx/string.h>       // Header per wxString
+#include <unordered_map>      // Header per std::unordered_map
+#include <iostream>
+
+int main() {
+    // Definizione della mappa: chiave int, valore wxString
+    std::unordered_map<int, wxString> mappaVoti;
+
+    // 1. Inserimento di elementi
+    mappaVoti[1] = "Ottimo";
+    mappaVoti.insert({2, wxString("Buono")});
+    mappaVoti.emplace(3, "Sufficiente");
+
+    // 2. Accesso tramite chiave
+    int id = 1;
+    if (mappaVoti.find(id) != mappaVoti.end()) {
+        // Nota: per stampare su console standard bisogna convertire wxString
+        std::cout << "Il valore per " << id << " e': "
+                  << mappaVoti[id].ToStdString() << std::endl;
+    }
+
+    // 3. Iterazione sulla mappa (C++17)
+    std::cout << "\nContenuto della mappa:" << std::endl;
+    for (const auto& [codice, descrizione] : mappaVoti) {
+        std::cout << "Codice: " << codice
+                  << " - Descrizione: " << descrizione.ToStdString() << std::endl;
+    }
+
+    return 0;
+}
+
+
+
+più efficiente per file di dimensioni moderate.
+cpp
+
+#include <wx/textfile.h>
+#include <wx/tokenzr.h> // Per separare chiave e valore
+#include <unordered_map>
+#include <iostream>
+
+int main() {
+    std::unordered_map<int, wxString> mappaVoti;
+    wxTextFile file(wxT("dati.txt"));
+
+    if (file.Open()) {
+        // Itera su ogni riga del file
+        for (wxString riga = file.GetFirstLine(); !file.Eof(); riga = file.GetNextLine()) {
+            if (riga.IsEmpty()) continue;
+
+            // Utilizziamo wxStringTokenizer per separare l'ID dal testo
+            // Il primo spazio funge da delimitatore
+            wxStringTokenizer tokenizer(riga, wxT(" "));
+
+            if (tokenizer.HasMoreTokens()) {
+                wxString idStr = tokenizer.GetNextToken();
+                long id;
+
+                // Converte la prima parte in intero e preleva il resto come valore
+                if (idStr.ToLong(&id)) {
+                    // Restituisce tutto il testo rimanente nella riga
+                    wxString valore = tokenizer.GetString();
+                    mappaVoti[(int)id] = valore.Trim(false); // Rimuove spazi iniziali
+                }
+            }
+        }
+        file.Close();
+    } else {
+        std::cerr << "Errore: impossibile aprire il file con wxTextFile." << std::endl;
+    }
+
+    // Verifica output
+    for (const auto& [id, testo] : mappaVoti) {
+        std::cout << "ID: " << id << " -> " << testo.ToStdString() << std::endl;
+    }
+
+    return 0;
+}
+
+
+*/
+
 
 DECLARE_APP(dc2mApp)
 
@@ -23,21 +106,59 @@ mDriver::~mDriver()
 
 void mDriver::Init()
 {
-  if (comm!=NULL)
-    wxGetApp().ToLog(0,wxString::Format("Channel #%i handling: Ok\n",channel));
+  settings.Chn2Chw(channel);
+  cs=settings.chw;
+  CheckPar();
+
+  if (comm!=NULL) {
+    if (error==0) {
+      wxGetApp().ToLog(0,wxString::Format("Channel #%i handling: Ok\n",channel));
+      LoadMessages();
+    }
+    else
+      wxGetApp().ToLog(2,wxString::Format("Channel #%i handling: FAIL (wrong parameters)\n",channel));
+  }
   else
     wxGetApp().ToLog(2,wxString::Format("Channel #%i handling: FAIL\n",channel));
 }
 
-
-
-
-void mDriver::Connect()
+void mDriver::LoadMessages()
 {
-    settings.Chn2Chw(channel);
-    cs=settings.chw;
+  if (cs.filemsg=="") {
+    wxGetApp().ToLog(0,wxString::Format("Channel #%i loading messages file: skipped\n",channel));
+    return;
+  }
+  //apro il file
+  wxTextFile filemsg(cs.filemsg);
 
-    //check setting
+  if (filemsg.Open()) {
+    int32_t cnt=0;
+    for (wxString riga = filemsg.GetFirstLine(); !filemsg.Eof(); riga = filemsg.GetNextLine()) {
+      if (riga.IsEmpty()) continue;
+        wxStringTokenizer tokenizer(riga, wxT(";"));
+        if (tokenizer.HasMoreTokens()) {
+          //estraggo il numero
+          wxString str_nr=tokenizer.GetNextToken();
+          int nr;
+          if (str_nr.ToInt(&nr)) {
+            //estraggo il resto
+            wxString msg = tokenizer.GetString();
+            messages_map[(int16_t)nr] = msg.Trim(false);
+            cnt++;
+          }
+        }
+      }
+      filemsg.Close();
+      wxGetApp().ToLog(0,wxString::Format("Channel #%i loading messages file: %i messages found \n",channel,cnt));
+    }
+    else {
+        wxGetApp().ToLog(2,wxString::Format("Channel #%i loading messages file: FAIL (file not found) \n",channel));
+    }
+}
+
+void mDriver::CheckPar()
+{
+     //check setting
     if(cs.ipp1<1 || cs.ipp2<0  || cs.ipp3<0 || cs.ipp4<1)
       error=CHERR_INVALID_IPADDRESS;
 
@@ -58,6 +179,14 @@ void mDriver::Connect()
 
     if (cs.lengthtx>255)
      error=CHERR_TXLENGHT_TOOLARGE;
+
+}
+
+void mDriver::Connect()
+{
+    settings.Chn2Chw(channel);
+    cs=settings.chw;
+
 
     if(error==0) {
       if (connected)

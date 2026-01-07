@@ -24,6 +24,7 @@
 #include "cDriver.h"
 #include "setChannel.h"
 #include "setStation.h"
+#include "advancedStation.h"
 #include "cSettings.h"
 #include "qrCode.h"
 #include "mDriver.h"

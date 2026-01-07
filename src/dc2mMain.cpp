@@ -168,10 +168,11 @@ void dc2mFrame::DoMyEvent(C_ChatEvent &event)
   if (type>=30000)
     int32_t pr=wxGetApp().Deltac->ProcessMessage(str1,type-30000);
 
-  if ((type<=THFAILURE) || (settings.LogLevel>=0)) { //type)) {
+  if ((type==THERROR) || (type==THERROR)) {
+    AddToLog(2,str1);
+  }
+  if ((type==THDEBUG) || ((type==THVERBOSE) && (settings.StLogLevel>0))) {
     AddToLog(0,str1);
-//    LogText->SetDefaultStyle(wxTextAttr(*wxBLACK));
-//    LogText->AppendText(str1);
   }
 
  //    ThreadError=1, ThreadFailure, ThreadMessage,  ThreadDebug, ThreadVerbose,
@@ -179,10 +180,10 @@ void dc2mFrame::DoMyEvent(C_ChatEvent &event)
 }
 
 
-
 void dc2mFrame::OnMenuQrcodeShow(wxCommandEvent& event)
 {
-
+  if (!settings.station_enable)
+    return;
   wxString qc;
   qc=wxGetApp().Deltac->generate_qrcode();
   wxSize sz;
@@ -264,7 +265,7 @@ void dc2mFrame::AddToLog(uint16_t mode,wxString msg)
   else
     LogText->SetDefaultStyle(wxTextAttr(*wxRED));
 
-  LogText->AppendText(msg);
+  LogText->AppendText(wxDateTime::Now().FormatTime()+" "+msg);
 
 }
 

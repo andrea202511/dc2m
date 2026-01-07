@@ -13,13 +13,6 @@
 				<border>5</border>
 			</object>
 			<object class="sizeritem">
-				<object class="wxStaticLine" name="ID_STATICLINE2" variable="StaticLine2" member="yes">
-					<size>10,-1</size>
-				</object>
-				<flag>wxALL|wxEXPAND</flag>
-				<border>5</border>
-			</object>
-			<object class="sizeritem">
 				<object class="wxBoxSizer" variable="BoxSizer2" member="no">
 					<object class="sizeritem">
 						<object class="wxStaticText" name="ID_STATICTEXT1" variable="StaticText1" member="yes">
@@ -39,7 +32,6 @@
 					</object>
 				</object>
 				<flag>wxALL|wxEXPAND</flag>
-				<option>1</option>
 			</object>
 			<object class="sizeritem">
 				<object class="wxBoxSizer" variable="BoxSizer3" member="no">
@@ -64,6 +56,95 @@
 			</object>
 			<object class="sizeritem">
 				<object class="wxStaticLine" name="ID_STATICLINE1" variable="StaticLine1" member="yes">
+					<size>100,-1</size>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+			</object>
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer5" member="no">
+					<orient>wxVERTICAL</orient>
+					<object class="sizeritem">
+						<object class="wxStaticText" name="ID_STATICTEXT4" variable="StaticText4" member="yes">
+							<label>Log area output</label>
+						</object>
+						<flag>wxALL|wxALIGN_LEFT</flag>
+						<border>5</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxBoxSizer" variable="BoxSizer6" member="no">
+							<object class="sizeritem">
+								<object class="wxRadioBox" name="ID_RADIOBOX1" variable="RadioBox1" member="yes">
+									<label>Station</label>
+									<content>
+										<item>Default</item>
+										<item>Verbose</item>
+										<item>Only for debug</item>
+									</content>
+									<default>-1</default>
+									<validator>wxGenericValidator(&amp;settings.StLogLevel)</validator>
+									<style>wxRA_SPECIFY_COLS</style>
+								</object>
+								<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+								<border>5</border>
+								<option>1</option>
+							</object>
+							<object class="sizeritem">
+								<object class="wxRadioBox" name="ID_RADIOBOX2" variable="RadioBox2" member="yes">
+									<label>Channels</label>
+									<content>
+										<item>Default</item>
+										<item>Verbose</item>
+										<item>Only for debug</item>
+									</content>
+									<default>-1</default>
+									<validator>wxGenericValidator(&amp;settings.ChLogLevel)</validator>
+									<style>wxRA_SPECIFY_COLS</style>
+								</object>
+								<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+								<border>5</border>
+								<option>1</option>
+							</object>
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<option>1</option>
+			</object>
+			<object class="sizeritem">
+				<object class="wxStaticLine" name="ID_STATICLINE2" variable="StaticLine2" member="yes">
+					<size>100,-1</size>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+			</object>
+			<object class="sizeritem">
+				<object class="wxRadioBox" name="ID_RADIOBOX3" variable="RadioBox3" member="yes">
+					<label>Language</label>
+					<content>
+						<item>en</item>
+						<item>it</item>
+					</content>
+					<default>-1</default>
+					<validator>wxGenericValidator(&amp;settings.Language)</validator>
+					<style>wxRA_SPECIFY_COLS</style>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+			</object>
+			<object class="sizeritem">
+				<object class="wxButton" name="ID_BUTTON2" variable="Button4" member="yes">
+					<label> Advanced options </label>
+					<handler function="OnButton4Click" entry="EVT_BUTTON" />
+				</object>
+				<flag>wxALL|wxALIGN_LEFT</flag>
+				<border>5</border>
+			</object>
+			<object class="sizeritem">
+				<object class="wxStaticLine" name="ID_STATICLINE3" variable="StaticLine3" member="yes">
 					<size>100,-1</size>
 				</object>
 				<flag>wxALL|wxEXPAND</flag>
@@ -97,9 +178,8 @@
 						<option>1</option>
 					</object>
 				</object>
-				<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+				<flag>wxALL|wxALIGN_LEFT</flag>
 				<border>5</border>
-				<option>1</option>
 			</object>
 		</object>
 	</object>

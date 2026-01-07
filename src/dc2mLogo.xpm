@@ -1,5 +1,5 @@
 /* XPM */
-static const char *dc2mLogo64_xpm[] = {
+static const char  __attribute__((unused)) *dc2mLogo64_xpm[] = {
 /* columns rows colors chars-per-pixel */
 "64 64 184 2 ",
 "   c #003710",
@@ -254,7 +254,7 @@ static const char *dc2mLogo64_xpm[] = {
 };
 
 
-static const char *dc2mLogo48_xpm[] = {
+static const char __attribute__((unused)) *dc2mLogo48_xpm[] = {
 "48 48 144 2 ",
 "   c #2E1409",
 ".  c #0F330A",
@@ -452,7 +452,7 @@ static const char *dc2mLogo48_xpm[] = {
 };
 
 
-static const char *dc2mLogo32_xpm[] = {
+static const char  __attribute__((unused)) *dc2mLogo32_xpm[] = {
 "32 32 82 1 ",
 "  c #080804",
 ". c #0F2D09",

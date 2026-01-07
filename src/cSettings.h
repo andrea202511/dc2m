@@ -38,7 +38,9 @@ class C_Settings
     C_Settings();
     virtual ~C_Settings();
 
-    int LogLevel;
+    int StLogLevel;
+    int ChLogLevel;
+    int Language;
 
    // bool reinit;
     void LoadValue();

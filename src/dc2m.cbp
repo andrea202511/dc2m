@@ -45,6 +45,8 @@
 		</Linker>
 		<Unit filename="about.cpp" />
 		<Unit filename="about.h" />
+		<Unit filename="advancedStation.cpp" />
+		<Unit filename="advancedStation.h" />
 		<Unit filename="cDriver.cpp" />
 		<Unit filename="cDriver.h" />
 		<Unit filename="cSettings.cpp" />
@@ -64,17 +66,27 @@
 		<Unit filename="setStation.h" />
 		<Unit filename="version.h" />
 		<Unit filename="wxsmith/About.wxs" />
+		<Unit filename="wxsmith/Advanced_station.wxs" />
 		<Unit filename="wxsmith/dc2mframe.wxs" />
 		<Unit filename="wxsmith/qrCode.wxs" />
 		<Unit filename="wxsmith/setChannel.wxs" />
 		<Unit filename="wxsmith/setStation.wxs" />
 		<Extensions>
 			<AutoVersioning>
-				<Scheme minor_max="1000" build_max="99" rev_max="99" rev_rand_max="99" build_times_to_increment_minor="10000" />
-				<Settings autoincrement="0" date_declarations="0" use_define="0" update_manifest="1" do_auto_increment="1" ask_to_increment="0" language="C++" svn="0" svn_directory="" header_path="version.h" />
+				<Scheme minor_max="1000" build_max="99" rev_max="0" rev_rand_max="1" build_times_to_increment_minor="10000" />
+				<Settings autoincrement="0" date_declarations="0" use_define="0" update_manifest="1" do_auto_increment="0" ask_to_increment="0" language="C++" svn="0" svn_directory="" header_path="version.h" />
 				<Changes_Log show_changes_editor="0" app_title="released version %M.%m.%b" changeslog_path="ChangesLog.txt" />
 				<Code header_guard="VERSION_H" namespace="AutoVersion" prefix="" />
 			</AutoVersioning>
+			<DoxyBlocks>
+				<comment_style block="0" line="0" />
+				<doxyfile_project />
+				<doxyfile_build />
+				<doxyfile_warnings />
+				<doxyfile_output />
+				<doxyfile_dot />
+				<general />
+			</DoxyBlocks>
 			<lib_finder disable_auto="1" />
 			<wxsmith version="1">
 				<gui name="wxWidgets" src="dc2mApp.cpp" main="dc2mFrame" init_handlers="necessary" language="CPP" />
@@ -84,6 +96,7 @@
 					<wxDialog wxs="wxsmith/qrCode.wxs" src="qrCode.cpp" hdr="qrCode.h" fwddecl="0" i18n="1" name="QrcodeDialog" language="CPP" />
 					<wxDialog wxs="wxsmith/setStation.wxs" src="setStation.cpp" hdr="setStation.h" fwddecl="0" i18n="1" name="Set_station" language="CPP" />
 					<wxDialog wxs="wxsmith/About.wxs" src="about.cpp" hdr="about.h" fwddecl="0" i18n="1" name="About" language="CPP" />
+					<wxDialog wxs="wxsmith/Advanced_station.wxs" src="advancedStation.cpp" hdr="advancedStation.h" fwddecl="0" i18n="1" name="Advanced_station" language="CPP" />
 				</resources>
 			</wxsmith>
 		</Extensions>

@@ -2,6 +2,7 @@
 #define MDRIVER_H
 
 #include <wx/string.h>
+#include <unordered_map>      // Header per std::unordered_map
 
 #include "cDriver.h"
 #include "modbus.h"
@@ -30,7 +31,8 @@ class mDriver
     public:
         mDriver(int32_t ch);
         virtual ~mDriver();
-        void Init();
+        void Init(void);
+        void CheckPar(void);
 
         void Connect(void);
         void Disconnect(void);
@@ -52,6 +54,7 @@ class mDriver
         bool init;
      //   bool rx_free(){return buffer_rx[0]==0;}
         bool from_dc(wxString msg, int chat_id);
+        void LoadMessages();
 
     protected:
 
@@ -74,6 +77,7 @@ class mDriver
         uint16_t buffer_rx[513];  //from device to dc2m
 
         int32_t msg_par[10];
+        std::unordered_map<uint16_t, wxString> messages_map;
 
 };
 
