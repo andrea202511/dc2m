@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Anthemion HelpBlocks">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<OBJECT type="text/site properties">
+    <param name="Font" value="MS Sans Serif,8,0">
+</OBJECT>
+<UL>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Contents">
+             <PARAM NAME="Local" VALUE="doc-0003.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Benvenuti in dc2m">
+             <PARAM NAME="Local" VALUE="doc-0006.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Introduzione">
+             <PARAM NAME="Local" VALUE="doc-0007.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Installazione">
+             <PARAM NAME="Local" VALUE="doc-0013.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Licenza">
+             <PARAM NAME="Local" VALUE="doc-0014.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Credits">
+             <PARAM NAME="Local" VALUE="doc-0017.htm">
+         </OBJECT>
+</UL>
+</BODY></HTML>

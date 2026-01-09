@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="HelpBlocks">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<OBJECT type="text/site properties">
+</OBJECT>
+<UL>
+  <LI><OBJECT type="text/sitemap">
+      <param name="Name" value="Contents">
+      <param name="Local" value="doc-0003.htm">
+      </OBJECT>
+  <LI><OBJECT type="text/sitemap">
+      <param name="Name" value="Benvenuti in dc2m">
+      <param name="Local" value="doc-0006.htm">
+      </OBJECT>
+  <UL>
+    <LI><OBJECT type="text/sitemap">
+        <param name="Name" value="Introduzione">
+        <param name="Local" value="doc-0007.htm">
+        </OBJECT>
+    <LI><OBJECT type="text/sitemap">
+        <param name="Name" value="Installazione">
+        <param name="Local" value="doc-0013.htm">
+        </OBJECT>
+    <LI><OBJECT type="text/sitemap">
+        <param name="Name" value="Licenza">
+        <param name="Local" value="doc-0014.htm">
+        </OBJECT>
+    <LI><OBJECT type="text/sitemap">
+        <param name="Name" value="Credits">
+        <param name="Local" value="doc-0017.htm">
+        </OBJECT>
+  </UL>
+  <LI><OBJECT type="text/sitemap">
+      <param name="Name" value="Funzionamento interno">
+      <param name="Local" value="doc-0023.htm">
+      </OBJECT>
+  <UL>
+    <LI><OBJECT type="text/sitemap">
+        <param name="Name" value="Note su protocollo modbus">
+        <param name="Local" value="doc-0024.htm">
+        </OBJECT>
+    <LI><OBJECT type="text/sitemap">
+        <param name="Name" value="Messaggi in ingresso">
+        <param name="Local" value="doc-0025.htm">
+        </OBJECT>
+    <LI><OBJECT type="text/sitemap">
+        <param name="Name" value="Messaggi in uscita">
+        <param name="Local" value="doc-0027.htm">
+        </OBJECT>
+  </UL>
+  <LI><OBJECT type="text/sitemap">
+      <param name="Name" value="Finestre di dialogo">
+      <param name="Local" value="doc-0018.htm">
+      </OBJECT>
+  <UL>
+    <LI><OBJECT type="text/sitemap">
+        <param name="Name" value="Finestra principale">
+        <param name="Local" value="doc-0019.htm">
+        </OBJECT>
+  </UL>
+  <LI><OBJECT type="text/sitemap">
+      <param name="Name" value="Comandi stazione">
+      <param name="Local" value="doc-0030.htm">
+      </OBJECT>
+  <UL>
+    <LI><OBJECT type="text/sitemap">
+        <param name="Name" value="Comandi stazione">
+        <param name="Local" value="doc-0031.htm">
+        </OBJECT>
+  </UL>
+</UL>
+</BODY></HTML>

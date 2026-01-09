@@ -1,0 +1,57 @@
+
+<HTML><HEAD><TITLE>DC2M</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+<H2>DC2M Introduzione</H2><B>Dc2m</B> (Delta Chat to Machine) consente la comunicazione tra dispositivi industriali (PLC, PAC, CNC, ecc.) e l'IT allo scopo di fornire assistenza remota, raccogliere dati e ricevere notifiche di allarme direttamente su tablet, PC o smartphone.<BR>
+In altre parole, <B>Dc2m</B> funge da ponte tra i due mondi.<BR> 
+Da un lato, comunica con i dispositivi industriali tramite il protocollo Modbus TCP e dall'altro si interfaccia con i client Delta Chat disponibili per piattaforme PC o dispositivi mobili Android e iOS.<P>
+
+<H3>Scenario 1: Chat semplice</H3><BR>
+L'operatore pu&#242; chattare direttamente, ad esempio con un servizio help desk remoto, agendo direttamente sulla hmi industriale del plc/cnc.
+<IMG SRC="human2human.png" BORDER="0">
+<P>
+<H3>Scenario 2: Raccolta dati</H3><BR>
+Si pu&#242; interagire direttamente con il plc/cnc da remoto allo scopo di raccogliere dati di produzione e statistiche.
+<IMG SRC="device2human.png" BORDER="0">
+<P>
+<H3>Scenario 3: Notifica di allarmi/eventi</H3><BR>
+In occasione di eventi di allarme, il plc/cnc pu&#242; prendere l'iniziativa e pu&#242; contattare direttamente il servizio di manutenzione.
+<IMG SRC="event2human.png" BORDER="0">
+<P>
+<H2>DELTA CHAT</H2>
+Per chi non lo conoscesse, Delta Chat &#232; un servizio di messaggistica istantanea decentralizzato basato su e-mail.<BR>
+Dal punto di vista dell'utente, pu&#242; apparire simile ai pi&#249; popolari WhatsApp, Telegram e Signal, ma presenta alcune caratteristiche uniche che lo rendono un'eccellente alternativa.
+<UL>
+<LI>L'intero progetto Delta chat &#232; open source e una vasta community &#232; pronta a fornire supporto nello sviluppo di nuovi strumenti.
+<LI>Non richiede un numero di telefono per la registrazione.
+<LI>Usando i protocolli standard IMAP/SMTP semplifica l'accesso ad internet in reti con firewall e NAT. 
+<LI>Si tratta di un prodotto stabile e "serio" senza troppi fronzoli :)
+</UL>
+<P>
+<H2>Descrizione del sistema</H2>
+<B>Dc2m</B> deve essere installato su un PC chiamato *Stazione* (ST1) con accesso a Internet. Lo stesso PC deve accedere alla rete ethernet dei dispositivi industriali, chiamati *Canali* (CH1, CH2, CH3), a cui si connetter&#224; tramite il protocollo Modbus TCP.<BR>
+In questa versione ogni stazione dispone di tre canali modbus per la connessione ai dispositivi industriali.<BR>
+La prima volta che viene eseguito, <B>Dc2m</B> si preoccuper&#224; di interrogare il server deltachat per ottenere un proprio identificativo univono (un indirizzo di posta). Per accoppiare un device IT (smartphone, tablet, pc) ad una specifica *stazione*, <B>Dc2m</B> pu&#242; visualizzare un qrcode. Inquadrando il qrcode con la app deltachat installata sul device IT, viene creata una chat verso la *stazione* in oggetto, un client deltachat pu&#242; cos&#236; interagire con molte *stazioni* contemporaneamente, ogni *stazione* sar&#224; una chat.
+<P>
+Connettendoci a una *stazione* con, ad esempio, uno smartphone, possiamo interagire sia con la *stazione* che con uno dei *canali* da essa gestiti. Questa distinzione viene effettuata utilizzando un prefisso specifico che deve essere digitato ad inizio messaggio. Il prefisso $ per la *stazione* e # per il *canale*. I prefissi devono essere seguiti dal numero della *stazione* o del *canale* (per la stazione, &#232; sempre 1).<BR>
+Esempio:<BR>
+$1 ... Messaggio diretto alla *stazione*<BR>
+#2 ... Messaggio diretto al *canale* numero 2<P>
+Dopo aver specificato il destinatario, possiamo allegare uno o pi&#249; codici di comando, separati dal carattere :, oppure possiamo inviare un messaggio di testo, separandolo dal destinatario con uno spazio.<BR>
+Esempio:<BR>
+$1:5 invia il comando 5 alla stazione<BR>
+#1:5632 invia il comando 5632 al canale 1<BR>
+#2:45:230:1 invia il comando 45 al canale 2, associandolo a due valori numerici, 230 e 1, che verranno interpretati dal dispositivo.<BR>
+#1 HELLO BOYS Invia il messaggio di testo al canale 1.<BR>
+$1 HELLO GIRLS Invia il messaggio di testo alla stazione.<P>
+Ci&#242; che &#232; inviato alla *stazione* non raggiunge i *canali* e ci&#242; che &#232; inviato ai *canali* transita attraverso la *stazione* senza altre elaborazioni.<BR>
+In realt&#224; Possono esserci delle eccezioni, ad esempio, se scrivo:<BR>
+#3 HELLO!<BR>
+potrei ricevere una risposta del tipo:<P>
+"Spiacenti, il canale n. 3 &#232; offline."<BR>
+Anche se la richiesta &#232; destinata a un canale, la stazione verifica se &#232; raggiungibile prima di inoltrare il messaggio al dispositivo. In caso contrario, avvisa l'utente con un messaggio.<P>
+
+     
+
+
+</BODY>
+</HTML>

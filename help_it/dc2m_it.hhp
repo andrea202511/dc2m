@@ -1,0 +1,35 @@
+[OPTIONS]
+Compatibility=1.1
+Full-text search=Yes
+Contents file=dc2m_it.hhc
+Compiled file=dc2m_it.chm
+Default Window=Help
+Default topic=doc-0003.htm
+Charset=utf-8
+Index file=dc2m_it.hhk
+Title=dc2m_it
+
+[WINDOWS]
+Help=,"dc2m_it.hhc","dc2m_it.hhk","doc-0003.htm",,,,,,0x2420,,0x380e,,,,,0,,,
+
+[FILES]
+doc-0003.htm
+doc-0006.htm
+doc-0007.htm
+doc-0013.htm
+doc-0014.htm
+doc-0017.htm
+doc-0023.htm
+doc-0024.htm
+doc-0025.htm
+doc-0027.htm
+doc-0018.htm
+doc-0019.htm
+doc-0030.htm
+doc-0031.htm
+
+[ALIAS]
+#include "dc2m_it_alias.h"
+
+[MAP]
+#include "dc2m_it_ids.h"
