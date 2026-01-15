@@ -43,6 +43,10 @@
         <param name="Local" value="doc-0024.htm">
         </OBJECT>
     <LI><OBJECT type="text/sitemap">
+        <param name="Name" value="Note su Deltachat">
+        <param name="Local" value="doc-0037.htm">
+        </OBJECT>
+    <LI><OBJECT type="text/sitemap">
         <param name="Name" value="Messaggi in ingresso">
         <param name="Local" value="doc-0025.htm">
         </OBJECT>
@@ -60,6 +64,14 @@
         <param name="Name" value="Finestra principale">
         <param name="Local" value="doc-0019.htm">
         </OBJECT>
+    <LI><OBJECT type="text/sitemap">
+        <param name="Name" value="Setup stazione">
+        <param name="Local" value="doc-0038.htm">
+        </OBJECT>
+    <LI><OBJECT type="text/sitemap">
+        <param name="Name" value="Setup canale">
+        <param name="Local" value="doc-0039.htm">
+        </OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap">
       <param name="Name" value="Comandi stazione">
@@ -68,7 +80,7 @@
   <UL>
     <LI><OBJECT type="text/sitemap">
         <param name="Name" value="Comandi stazione">
-        <param name="Local" value="doc-0031.htm">
+        <param name="Local" value="doc-0040.htm">
         </OBJECT>
   </UL>
 </UL>

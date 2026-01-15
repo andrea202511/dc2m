@@ -5,15 +5,15 @@ In altre parole, <B>Dc2m</B> funge da ponte tra i due mondi.<BR>
 Da un lato, comunica con i dispositivi industriali tramite il protocollo Modbus TCP e dall'altro si interfaccia con i client Delta Chat disponibili per piattaforme PC o dispositivi mobili Android e iOS.<P>
 
 <H3>Scenario 1: Chat semplice</H3><BR>
-L'operatore può chattare direttamente, ad esempio con un servizio help desk remoto, agendo direttamente sulla hmi industriale del plc/cnc.
+L'operatore può chattare direttamente, ad esempio con un servizio help desk remoto, agendo direttamente sulla hmi industriale del plc/cnc.<P>
 <IMG SRC="human2human.png" BORDER="0">
 <P>
 <H3>Scenario 2: Raccolta dati</H3><BR>
-Si può interagire direttamente con il plc/cnc da remoto allo scopo di raccogliere dati di produzione e statistiche.
+Si può interagire direttamente con il plc/cnc da remoto allo scopo di raccogliere dati di produzione e statistiche.<P>
 <IMG SRC="device2human.png" BORDER="0">
 <P>
 <H3>Scenario 3: Notifica di allarmi/eventi</H3><BR>
-In occasione di eventi di allarme, il plc/cnc può prendere l'iniziativa e può contattare direttamente il servizio di manutenzione.
+In occasione di eventi di allarme, il plc/cnc può prendere l'iniziativa e può contattare direttamente il servizio di manutenzione.<P>
 <IMG SRC="event2human.png" BORDER="0">
 <P>
 <H2>DELTA CHAT</H2>

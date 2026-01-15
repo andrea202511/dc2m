@@ -21,12 +21,15 @@ doc-0014.htm
 doc-0017.htm
 doc-0023.htm
 doc-0024.htm
+doc-0037.htm
 doc-0025.htm
 doc-0027.htm
 doc-0018.htm
 doc-0019.htm
+doc-0038.htm
+doc-0039.htm
 doc-0030.htm
-doc-0031.htm
+doc-0040.htm
 
 [ALIAS]
 #include "dc2m_it_alias.h"

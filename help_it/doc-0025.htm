@@ -1,1 +1,43 @@
 
+<HTML><HEAD><TITLE>DC2M</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+<H2>Messaggi in ingresso</H2>
+<H3>Messaggio testuale</H3>
+Vediamo cosa accade quando un utente invia un messaggio al plc/cnc. Supponiamo che il plc/cnc sia collegato al canale 1 della stazione e che sia in grado di elaborare 2 caratteri ogni registro (8+8 bit)<BR> 
+L'utente digita sul proprio smartphone "#1 hello" ed invia.<BR>
+Dc2m riceve il messaggio (ad esempio nella chat nr.11) verifica che il device collegato al canale 1 sia online e tramite un unico comando modbus 10h (Write holding registers) scrive nei registri della area di ingresso questi valori in esadecimale:<BR>
+000b ID chat (11)<BR>
+0001 comando (1, cio&#232; segue messaggio testuale)<BR>
+6865 codici ascii caratteri 'h' e 'e'<BR>
+6c6c codici ascii caratteri 'l' e 'l'<BR>
+6f00 codice ascii carattere 'o' seguito dal terminatore di stringa 00h<BR>A questo punto il plc/cnc pu&#242; visualizzare sulla propria hmi il messaggio "hello"<P>
+
+<IMG SRC="msg_ingresso1.bmp" BORDER="0"><P>
+
+<B>Attenzione!</B> appena il plc/cnc ha acquisito il messaggio deve scrivere 0 (zero) nel secondo registro, quello del codice comando. Questo segnala a dc2m che il messaggio &#232; stato elaborato e riabilita la scrittura da parte di dc2m.<P>
+Se il secondo registro non vale zero dc2m <B>NON</B> scriver&#224; alcun registro.
+
+<H3>Messaggio comando</H3>
+Oltre a messaggi testuali destinati ad esempio all'operatore della macchina, &#232; possibile fare altro.<BR>
+Ipotizziamo che questa volta l'utente scriva "#1:26:1000"<BR>
+Dc2m riceve il messaggio (ad esempio nella chat nr.11) verifica che il device collegato al canale 1 sia online e tramite un unico comando modbus 10h (Write holding registers) scrive nei regitri della area di ingresso questi valori in esadecimale<BR>
+000b numero chat (11)<BR>
+001a comando 26<BR>
+03e8 valore 1000<P>
+
+<IMG SRC="msg_ingresso2.bmp" BORDER="0"><P>
+
+Quale sia il reale significato del comando 26 con parametro 1000 non &#232; competenza di dc2m. Ad esempio potrebbe significare "inviami il valore del contatore CNT1000", oppure "Imposta a 1000 il parametro macchina P26" ecc. <P>
+Nota: Qualunque sia il significato attribuito al comando 26, &#232; consigliato che il plc/cnc ritorni sempre una risposta testuale al mittente cos&#236; da fornire un feedback efficace.<P>
+Ad esempio potrebbe rispondere con:<BR>
+"Il valore contatore CNT1000 &#232;: 34"<P>
+oppure<BR>
+"Parametro P26=1000"<P>
+o ancora<BR>
+"Comando 26 non riconosciuto"<P>
+
+<B>Attenzione!</B> appena il plc/cnc ha acquisito il messaggio deve scrivere 0 (zero) nel secondo registro, quello del codice comando. Questo segnala a dc2m che il messaggio &#232; stato elaborato e riabilita la scrittura da parte di dc2m.<P>
+Se il secondo registro non vale zero dc2m <B>NON</B> scriver&#224; alcun registro.
+
+</BODY>
+</HTML>

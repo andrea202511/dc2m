@@ -1,0 +1,35 @@
+<HTML><HEAD><TITLE>DC2M</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+<H2>Messaggi in uscita</H2>
+<H3>Messaggio al volo</H3>
+Quando un device vuole inviare un messaggio ad un device IT, come prima cosa deve verificare che il secondo registro della area registri di uscita (comando) sia zero. Questo significa che dc2m ha elaborato ed inviato il messaggio precedente e che è pronto a elaborarne un altro.
+A questo punto scrive i codici ascii del messaggio da inviare a partire dal terzo registro, l'ID della chat nel primo registro e il codice comando 1 nel secondo.<BR>
+<U>Nota:</U> è consigliato scrivere il codice del comando per ultimo perchè dc2m accede ai registri in polling e appena trova un codice comando diverso da 0 legge immediatamente tutti i registri della area di uscita.<P>
+Un esempio. Se l'utente scrive sulla HMI del plc/cn "hi!" seguito dal comando di invio abbiamo:<P>
+000b ID chat (11)<BR>
+0001 comando (1, cioè segue messaggio testuale)<BR>
+6869 codici ascii caratteri 'h' e 'i'<BR>
+2100 codice ascii carattere '!' seguito dal terminatore di stringa 00h<P>
+
+<IMG SRC="msg_uscita1.bmp" BORDER="0"><P>
+
+<B>Nota ID chat</B> 
+Nel caso di messaggio di risposta ad una precedente interrogazione, l'ID è quello dell chat del mittente nel messaggio di ingresso, quindi quando il plc elabora un messaggio in ingresso che prevede una risposta, deve come prima cosa memorizzare l'ID della chat di provenienza per poter inoltrare correttamente la risposta.<P>
+Ci sono anche alcuni ID chat <I>speciali</I>. Quando un nuovo utente invia un messaggio alla stazione viene assegnato alla categoria <I>ospite</I>. Con dei comandi di stazione l'utente può successivamente dichiararsi appartenente ad un gruppo specifico. Sono possibili 9 gruppi numerati da 1001 a 1009<BR>
+Ad esempio nel mio plc potrei prevedere questi gruppi:<BR>
+0=ospite (default)<BR>
+1001=Manutenzione<BR>
+1002=Amministrazione<BR>
+1003=Qualità<BR>
+etc.<BR>
+In questo modo se il plc vuole ad esempio segnalare un problema, può inviare un messaggio al gruppo <I>Manutenzione</I> usando in numero 1001 come ID di chat. Tutti gli utenti che si sono dichiarati "manutentori" riceveranno una copia del messaggio.
+
+<H3>Messaggio da lista</H3>
+Comporre al volo un messaggio che si ripete sempre uguale può essere tediante per il programmatore del plc. Dc2m consente di utilzzare un file contenente i messaggi prememorizzati identificati da un valore numerico.<BR>
+In questo modo il plc può dire alla stazione "invia il messaggio numero 122" usando come comando il codice 2 e mettendo il valore 122 nel terzo registro<P>
+
+<IMG SRC="msg_uscita2.bmp" BORDER="0"><P>
+
+
+</BODY>
+</HTML>

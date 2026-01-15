@@ -1,1 +1,19 @@
 
+<HTML><HEAD><TITLE>DC2M</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+<H2>Protocollo Modbus TCP</H2>
+Dc2m utilizza il protocollo modbus TCP per dialogare con il device industriale (plc/cnc). 
+Sono implementi unicamente i comandi modbus 03h (Read holding registers) e 10h (Write holding registers). Dc2m &#232; "master", nel caso di messaggi provenienti dall'IT diretti al device industriale, Dc2m si occupa di scrivere i registri modbus del device, mentre nel caso di messaggi generati dal device diretti all'IT, il device si limita a presentare il messaggio sui propri registri modbus che Dc2m legge periodicamente (polling).<BR>
+Sebbene i device industriali abbiano normalmente una unica tabella di registri modbus, Dc2m permette di definire 2 zone distinte, una dedicata ai messaggi in "entrata" al device e uno per i messaggi in uscita. Queste zone posso essere contigue o no, ma &#232; importante che non si sovrappongano. Ogni zona &#232; composta da un certo numero di registri sequenziali (min 5 max 100).<BR>
+Solo i primi due registri di ogni zona hanno un significato stabilito<BR>
+<OL><LI>Primo registro: ID chat, cio&#232; mittente per i messaggi in ingresso e destinatario per quelli in uscita<LI>Secondo registro: Codice comando. I primi 9 comandi (da 1 a 9) sono riservati e definiti da Dc2m, tutti gli altri (da 10 a 32758) sono liberamente utilizzabili dall'utente, 0 significa "nessun comando".<BR>
+Questi i comandi riservati:<BR>
+1. significa che dal terzo registro in avanti &#232; presente un essaggio testuale.<BR>
+2. solo per messaggi in uscita, indica che sul terzo registro &#232; presente il numero del messaggio da inviare (prelevato da apposito file messaggi)</OL>
+<P>
+<H2>Gestione caratteri</H2>
+Il protocollo modbus "base" non prevede un meccanismo dedicato per la trasmissione di caratteri ascii, la soluzione comunemente utilizzata &#232; quello di convertire i caratteri nei corrispondenti valori ascii e copiare questi nei registri modbus. Inoltre, essendo il registro modbus da 16 bit ed il valore ascii da 8 bit, &#232; pratica comune sistemare due caratteri per ogni registro cos&#236; da poter trasferire messaggi pi&#249; lunghi a parit&#224; di registri modbus occupati.<BR>
+Dc2m gestisce varie combinazioni, vedi finestra di dialogo Setup canali.<BR>
+Il messaggio testuale deve terminare con il codice ascii 00h.
+</BODY>
+</HTML>
