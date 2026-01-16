@@ -10,6 +10,7 @@
 #include "dc2mMain.h"
 #include <wx/msgdlg.h>
 #include <wx/dc.h>
+#include <wx/help.h>
 #include "dc2mApp.h"
 DECLARE_APP(dc2mApp)
 //(*InternalHeaders(dc2mFrame)
@@ -23,6 +24,8 @@ DECLARE_APP(dc2mApp)
 //#include "cSettings.h"
 //extern C_Settings settings;
 //extern C_Buffer buffer;
+
+extern wxHelpController* m_helpController;
 
 //helper functions
 enum wxbuildinfoformat {
@@ -58,6 +61,7 @@ const wxWindowID dc2mFrame::ID_MENUITEM3 = wxNewId();
 const wxWindowID dc2mFrame::ID_MENUITEM4 = wxNewId();
 const wxWindowID dc2mFrame::ID_MENUITEM5 = wxNewId();
 const wxWindowID dc2mFrame::idMenuQuit = wxNewId();
+const wxWindowID dc2mFrame::idMenuHelp = wxNewId();
 const wxWindowID dc2mFrame::idMenuAbout = wxNewId();
 const wxWindowID dc2mFrame::ID_STATUSBAR1 = wxNewId();
 const wxWindowID dc2mFrame::ID_TIMER1 = wxNewId();
@@ -81,9 +85,9 @@ dc2mFrame::dc2mFrame(wxWindow* parent,wxWindowID id)
     Create(parent, id, _("dc2m"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, _T("id"));
     SetClientSize(wxSize(790,357));
     {
-        wxIcon FrameIcon;
-        FrameIcon.CopyFromBitmap(wxBitmap(wxImage(_T("dc2mLogo.ico"))));
-        SetIcon(FrameIcon);
+      wxIcon FrameIcon;
+      FrameIcon.CopyFromBitmap(wxBitmap(wxImage(_T("dc2mLogo.ico"))));
+      SetIcon(FrameIcon);
     }
     BoxSizer1 = new wxBoxSizer(wxHORIZONTAL);
     LogText = new wxTextCtrl(this, ID_TEXTCTRL1, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE|wxVSCROLL|wxHSCROLL|wxALWAYS_SHOW_SB, wxDefaultValidator, _T("ID_TEXTCTRL1"));
@@ -107,7 +111,9 @@ dc2mFrame::dc2mFrame(wxWindow* parent,wxWindowID id)
     Menu1->Append(MenuItem1);
     MenuBar1->Append(Menu1, _("dc2m"));
     Menu2 = new wxMenu();
-    MenuItem2 = new wxMenuItem(Menu2, idMenuAbout, _("About\tF1"), _("Show info about this application"), wxITEM_NORMAL);
+    MenuItem8 = new wxMenuItem(Menu2, idMenuHelp, _("Help contents"), _("User manual"), wxITEM_NORMAL);
+    Menu2->Append(MenuItem8);
+    MenuItem2 = new wxMenuItem(Menu2, idMenuAbout, _("About"), _("Show info about this application"), wxITEM_NORMAL);
     Menu2->Append(MenuItem2);
     MenuBar1->Append(Menu2, _("Help"));
     SetMenuBar(MenuBar1);
@@ -127,6 +133,7 @@ dc2mFrame::dc2mFrame(wxWindow* parent,wxWindowID id)
     Connect(ID_MENUITEM4, wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&dc2mFrame::OnMenuItemChannel2);
     Connect(ID_MENUITEM5, wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&dc2mFrame::OnMenuItemChannel3);
     Connect(idMenuQuit, wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&dc2mFrame::OnQuit);
+    Connect(idMenuHelp, wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&dc2mFrame::OnHelp);
     Connect(idMenuAbout, wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&dc2mFrame::OnAbout);
     Connect(ID_TIMER1, wxEVT_TIMER, (wxObjectEventFunction)&dc2mFrame::OnTimer1Trigger);
     //*)
@@ -272,4 +279,9 @@ void dc2mFrame::AddToLog(uint16_t mode,wxString msg)
 void dc2mFrame::OnMenuItem4Selected(wxCommandEvent& event)
 {
   StationSettingDialog->ShowModal();
+}
+
+void dc2mFrame::OnHelp(wxCommandEvent& event)
+{
+  m_helpController->DisplayContents();
 }

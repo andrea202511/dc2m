@@ -301,7 +301,7 @@ bool mDriver::to_dc()
       }
     }
   }
-  wxGetApp().Deltac->tx_preset(data_code,data_recipient,msg);
+  wxGetApp().Deltac->tx_preset(data_recipient,data_code,msg);
 
   return true;
 
@@ -439,7 +439,7 @@ int32_t mDriver::Refresh()
   if (connected) {
     if (((cs.trefresh==0) && (tick>2)) || ((cs.trefresh==0) && (tick>4)) || (tick>6)) {
       tick=0;
-      ReadRegisters(cs.starttx,2,&buffer_tx[0]);
+      ReadRegisters(cs.starttx,3,&buffer_tx[0]); //Id chat, command, parameter
       //if there is something...
       if (buffer_tx[1]!=0) {
         ReadRegisters(cs.starttx,cs.lengthtx,&buffer_tx[0]);

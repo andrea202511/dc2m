@@ -227,7 +227,7 @@ void cDriver::stop_context(dc_context_t* context)
 
 wxString cDriver::generate_qrcode(void)
 {
-  char* aaa=pfn_dc_get_securejoin_qr(ccontext,0);
+  char* aaa=pfn_dc_get_securejoin_qr(ccontext,0); //TODO aaa è la stringa per connettersi
   char* bbb=pfn_dc_create_qr_svg(aaa);
   wxString qc=bbb;
   return qc;

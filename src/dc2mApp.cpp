@@ -8,7 +8,7 @@
  **************************************************************/
 
 #include "dc2mApp.h"
-
+wxHelpController* m_helpController;
 
 ///TODO
 // disabilitare/abilitare campi impostazione canale
@@ -34,6 +34,36 @@ void dc2mApp::ToLog(uint16_t modo,wxString str)
 
 bool dc2mApp::OnInit()
 {
+  bool bb;
+  m_locale=new wxLocale();
+
+  if (settings.Language==1)
+    bb=m_locale->Init(wxLANGUAGE_ITALIAN);
+  else
+    bb=m_locale->Init(wxLANGUAGE_ENGLISH);
+
+    m_locale->AddCatalogLookupPathPrefix("/usr/share/locale");
+    m_locale->AddCatalogLookupPathPrefix(".");
+
+    if (bb)
+      bb=m_locale->AddCatalog(wxT("dc2m"));
+
+
+    //Help
+    wxFileSystem::AddHandler(new wxZipFSHandler);
+    m_helpController= new wxHelpController;
+#if defined(__WXMSW__)
+    if (settings.Language==1)
+      m_helpController->Initialize("./it/dc2m");
+    else
+      m_helpController->Initialize("./en/dc2m");
+#else
+    if (settings.Language==1)
+      m_helpController->Initialize("/home/andrea/projects/dc2m/src/it/dc2m_it"); //  /usr/share/dc2m/help/dc2m_it");
+    else
+      m_helpController->Initialize("/usr/share/dc2m/help/dc2m_en");
+#endif // defined
+
     //(*AppInitialize
     bool wxsOK = true;
     wxInitAllImageHandlers();

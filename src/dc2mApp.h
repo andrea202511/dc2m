@@ -11,6 +11,9 @@
 #define DC2MAPP_H
 
 #include <wx/app.h>
+#define wxUSE_WXHTML_HELP 1
+#include <wx/help.h>
+#include <wx/fs_zip.h>
 #include "mDriver.h"
 #include "cDriver.h"
 
@@ -28,6 +31,7 @@ class dc2mApp : public wxApp
 
 
   private:
+    wxLocale* m_locale;
     int32_t p_status_st1;
     int32_t p_status_ch1;
     int32_t p_status_ch2;
