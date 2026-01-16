@@ -1,6 +1,7 @@
 #include "mDriver.h"
 #include "dc2mApp.h"
 #include <wx/tokenzr.h>
+#include <wx/textfile.h>
 
 //std::unorder_map
 /*

@@ -5,7 +5,8 @@ Contents file=dc2m_it.hhc
 Compiled file=dc2m_it.chm
 Default Window=Help
 Default topic=doc-0003.htm
-Charset=utf-8
+Language=0x809 English (United Kingdom)
+Default Font=MS Sans Serif,8,0
 Index file=dc2m_it.hhk
 Title=dc2m_it
 

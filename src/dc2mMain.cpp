@@ -145,7 +145,7 @@ dc2mFrame::dc2mFrame(wxWindow* parent,wxWindowID id)
     QRDialog=new QrcodeDialog(this);
     AboutDialog=new About(this);
 
-    settings.LoadValue();
+    //settings.LoadValue();
 
     StatusBar1->SetStatusText(_("$1 "),0);
 

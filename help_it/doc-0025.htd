@@ -1,5 +1,6 @@
 <HTML><HEAD><TITLE>DC2M</TITLE></HEAD>
 <BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#400040" ALINK="#FF0000" TOPMARGIN="5" LEFTMARGIN="5">
+<FONT COLOR="" SIZE="" FACE="Arial, Lucida Sans">
 <H2>Messaggi in ingresso</H2>
 <H3>Messaggio testuale</H3>
 Vediamo cosa accade quando un utente invia un messaggio al plc/cnc. Supponiamo che il plc/cnc sia collegato al canale 1 della stazione e che sia in grado di elaborare 2 caratteri ogni registro (8+8 bit)<BR> 
@@ -37,6 +38,6 @@ o ancora<BR>
 
 <B>Attenzione!</B> appena il plc/cnc ha acquisito il messaggio deve scrivere 0 (zero) nel secondo registro, quello del codice comando. Questo segnala a dc2m che il messaggio è stato elaborato e riabilita la scrittura da parte di dc2m.<P>
 Se il secondo registro non vale zero dc2m <B>NON</B> scriverà alcun registro.
-
+</FONT>
 </BODY>
 </HTML>

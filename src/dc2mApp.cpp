@@ -10,16 +10,6 @@
 #include "dc2mApp.h"
 wxHelpController* m_helpController;
 
-///TODO
-// disabilitare/abilitare campi impostazione canale
-// livello debug + normalizzare messaggi debug
-// map_unorder
-// lista chat e catalogazione
-// installazione windows/linux
-// manuale online
-// implementare readme.md
-
-
 //(*AppHeaders
 #include "dc2mMain.h"
 #include <wx/image.h>
@@ -36,52 +26,53 @@ bool dc2mApp::OnInit()
 {
   bool bb;
   m_locale=new wxLocale();
+  settings.LoadValue();
 
   if (settings.Language==1)
     bb=m_locale->Init(wxLANGUAGE_ITALIAN);
   else
     bb=m_locale->Init(wxLANGUAGE_ENGLISH);
 
-    m_locale->AddCatalogLookupPathPrefix("/usr/share/locale");
-    m_locale->AddCatalogLookupPathPrefix(".");
+  m_locale->AddCatalogLookupPathPrefix("/usr/share/locale");
+  m_locale->AddCatalogLookupPathPrefix(".");
 
-    if (bb)
-      bb=m_locale->AddCatalog(wxT("dc2m"));
+  if (bb)
+    bb=m_locale->AddCatalog(wxT("dc2m"));
 
 
-    //Help
-    wxFileSystem::AddHandler(new wxZipFSHandler);
-    m_helpController= new wxHelpController;
+  //Help
+  wxFileSystem::AddHandler(new wxZipFSHandler);
+  m_helpController= new wxHelpController;
 #if defined(__WXMSW__)
-    if (settings.Language==1)
-      m_helpController->Initialize("./it/dc2m");
-    else
-      m_helpController->Initialize("./en/dc2m");
+  if (settings.Language==1)
+    m_helpController->Initialize("./it/dc2m");
+  else
+    m_helpController->Initialize("./en/dc2m");
 #else
-    if (settings.Language==1)
-      m_helpController->Initialize("/home/andrea/projects/dc2m/src/it/dc2m_it"); //  /usr/share/dc2m/help/dc2m_it");
-    else
-      m_helpController->Initialize("/usr/share/dc2m/help/dc2m_en");
+  if (settings.Language==1)
+    m_helpController->Initialize("/home/andrea/projects/dc2m/src/it/dc2m_it"); //  /usr/share/dc2m/help/dc2m_it");
+  else
+    m_helpController->Initialize("/usr/share/dc2m/help/dc2m_en");
 #endif // defined
 
-    //(*AppInitialize
-    bool wxsOK = true;
-    wxInitAllImageHandlers();
-    if ( wxsOK )
-    {
-      Frame = new dc2mFrame(0);
-      Frame->Show();
-      SetTopWindow(Frame);
-    }
-    //*)
-    p_status_ch1=-99;
-    p_status_ch2=-99;
-    p_status_ch3=-99;
+  //(*AppInitialize
+  bool wxsOK = true;
+  wxInitAllImageHandlers();
+  if ( wxsOK )
+  {
+    Frame = new dc2mFrame(0);
+    Frame->Show();
+    SetTopWindow(Frame);
+  }
+  //*)
+  p_status_ch1=-99;
+  p_status_ch2=-99;
+  p_status_ch3=-99;
 
-    st1_enabled=settings.station_enable;
-    ch1_enabled=settings.ch1.enable;
-    ch2_enabled=settings.ch2.enable;
-    ch3_enabled=settings.ch3.enable;
+  st1_enabled=settings.station_enable;
+  ch1_enabled=settings.ch1.enable;
+  ch2_enabled=settings.ch2.enable;
+  ch3_enabled=settings.ch3.enable;
 
     Frame->AddToLog(0,"Starting dc2m...\n");
 

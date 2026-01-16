@@ -96,6 +96,8 @@
 		</Linker>
 		<Unit filename="about.cpp" />
 		<Unit filename="about.h" />
+		<Unit filename="advancedStation.cpp" />
+		<Unit filename="advancedStation.h" />
 		<Unit filename="cDriver.cpp" />
 		<Unit filename="cDriver.h" />
 		<Unit filename="cSettings.cpp" />
@@ -119,6 +121,7 @@
 		<Unit filename="setStation.h" />
 		<Unit filename="version.h" />
 		<Unit filename="wxsmith/About.wxs" />
+		<Unit filename="wxsmith/Advanced_station.wxs" />
 		<Unit filename="wxsmith/dc2mframe.wxs" />
 		<Unit filename="wxsmith/qrCode.wxs" />
 		<Unit filename="wxsmith/setChannel.wxs" />
