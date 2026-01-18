@@ -2,6 +2,8 @@
 #include "dc2mApp.h"
 #include <wx/tokenzr.h>
 #include <wx/datetime.h>
+#include <wx/stdpaths.h>
+#include <wx/filename.h>
 
 DECLARE_APP(dc2mApp)
 
@@ -193,9 +195,13 @@ cDriver::~cDriver()
 
 void cDriver::init(void)
 {
+  //Database name and path
+  wxStandardPaths& stdPaths = wxStandardPaths::Get();
+  database_name=stdPaths.GetUserLocalDataDir();
+  database_name+="\\dc2m.db";
 
   wxThreadError eth;
-  dc_context_t* context = pfn_dc_context_new(NULL, "dc2m.db", NULL);
+  dc_context_t* context = pfn_dc_context_new(NULL, database_name.c_str(), NULL); //"dc2m.db", NULL);
   chat_event_thread=new C_ChatEventThread(EHc,context);
   eth=chat_event_thread->Create();
   if (eth == wxTHREAD_NO_ERROR) {

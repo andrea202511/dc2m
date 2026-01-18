@@ -85,6 +85,7 @@ private:
     wxEvtHandler* EH;
     dc_context_t* th_context;
 
+
 dc_get_event_emitter_type pfn_dc_get_event_emitter;
 dc_get_next_event_type pfn_dc_get_next_event;
 dc_event_get_id_type pfn_dc_event_get_id;
@@ -116,7 +117,7 @@ class cDriver
     virtual ~cDriver();
 
     void init(void);
-
+    wxString database_name;
     dc_context_t* ccontext;
     C_ChatEventThread* chat_event_thread;
     void stop_context(dc_context_t* context);
