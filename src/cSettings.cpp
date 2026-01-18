@@ -11,7 +11,7 @@ C_Settings::C_Settings()
 }
 
 void C_Settings::LoadValue() {
-  dconfig=new wxConfig("dc2m","AndreaF");
+  dconfig=new wxConfig("dc2m","Andrea202511");
 
   dconfig->Read(wxT("/language"),&Language);
   dconfig->Read(wxT("/ST1/enabled"),&station_enable);

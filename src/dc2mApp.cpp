@@ -44,16 +44,16 @@ bool dc2mApp::OnInit()
   wxFileSystem::AddHandler(new wxZipFSHandler);
   m_helpController= new wxHelpController;
 #if defined(__WXMSW__)
-  if (settings.Language==1)
+//t  if (settings.Language==1)
     m_helpController->Initialize("./it/dc2m");
-  else
-    m_helpController->Initialize("./en/dc2m");
+//t  else
+//t    m_helpController->Initialize("./en/dc2m");
 #else
-  if (settings.Language==1)
-    m_helpController->Initialize("/home/andrea/projects/dc2m/src/it/dc2m_it"); //  /usr/share/dc2m/help/dc2m_it");
+   if (settings.Language==1)
+    m_helpController->Initialize("/usr/share/dc2m/help_it/dc2m");
   else
-    m_helpController->Initialize("/usr/share/dc2m/help/dc2m_en");
-#endif // defined
+    m_helpController->Initialize("/usr/share/dc2m/help_en/dc2m");
+#endif
 
   //(*AppInitialize
   bool wxsOK = true;
