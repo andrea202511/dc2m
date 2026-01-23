@@ -313,6 +313,8 @@ bool mDriver::from_dc(wxString msg,int chat_id)
 {
   uint16_t ch1,ch2;
 
+  ReadRegisters(cs.startrx,2,&buffer_rx[0]); //refresh rx
+
   //if rx busy return and retry
   if (buffer_rx[1]!=0)
     return false;
@@ -361,30 +363,39 @@ bool mDriver::from_dc(wxString msg,int chat_id)
     }
 
     int a=2;
-    for (int i=2; i<(cs.lengthrx-2); i+=2) {
+    for (unsigned int i=3; i<msg.length(); i++) {
       ch1=msg[i];
-      ch2=msg[i+1];
+      i++;
+      ch2=msg[i];
 
+      if (ch1<32)
+        ch1=0;
+      if (ch2<32)
+        ch2=0;
 
       if (cs.charord==0) {
         buffer_rx[a]=ch1;
         a++;
+        if (a>cs.lengthrx) break;
         buffer_rx[a]=ch2;
         a++;
+        if (a>cs.lengthrx) break;
       }
       else if (cs.charord==1) {
         buffer_rx[a]=ch1*256+ch2;
         a++;
+        if (a>cs.lengthrx) break;
       }
       else if (cs.charord==2) {
         buffer_rx[a]=ch2*256+ch1;
         a++;
+        if (a>cs.lengthrx) break;
       }
 
     }
 
   }
-  WriteRegisters(cs.startrx,20,buffer_rx); //cs.lengthrx ?
+  WriteRegisters(cs.startrx,cs.lengthrx,buffer_rx); //cs.lengthrx ?
   buffer_rx[1]=0;
 
   return true;
@@ -453,7 +464,7 @@ int32_t mDriver::Refresh()
   //pull message to deltachat driver
   if (connected && init && buffer_tx[0]!=0 && error==0) {
     if (to_dc()==1) {
-      WriteRegisters(cs.starttx,1,&zero); //reset message over modbus
+      WriteRegisters((cs.starttx+1),1,&zero); //reset message over modbus
       buffer_tx[1]=0;
     }
   }

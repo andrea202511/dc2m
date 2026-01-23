@@ -47,6 +47,9 @@
 				</ResourceCompiler>
 				<Linker>
 					<Add option="-s" />
+					<Add option="-static-libstdc++" />
+					<Add option="-static-libgcc" />
+					<Add option="-static" />
 					<Add library="libwxmsw33u_webview.a" />
 					<Add library="libwxmsw33u_core.a" />
 					<Add library="libwxbase33u.a" />
@@ -74,6 +77,9 @@
 			<Add directory="C:/wx/3.3.1/include" />
 		</ResourceCompiler>
 		<Linker>
+			<Add option="-static-libstdc++" />
+			<Add option="-static-libgcc" />
+			<Add option="-static" />
 			<Add option="-mthreads" />
 			<Add library="libkernel32.a" />
 			<Add library="libuser32.a" />
