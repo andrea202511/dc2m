@@ -34,6 +34,16 @@ However, **Dc2m** is and intends to remain a simple bridge. I don't care what pa
 Let's get back to the text messages...
 All these characters must pass through the Modbus connection. To do this, Dc2m only writes and reads holding registers (Modbus codes 03 and 16). The characters can be packed 2 by 2 in each register (recommended solution) or they can occupy the entire register. Each channel can be configured independently for this and other details such as little endian/big endian settings, etc.
 
+# Installation
+Binary setup files can find to https://sourceforge.net/projects/dc2m/files
+
+Linux. Deb packages are avaiable. Download them and install with your package manager preferred
+from prompt can use dpgk
+
+sudo dpkg -i dc2m_1_.... .deb
+
+Also installer for windows is available. Download the setup_xxx.exe and run it.
+
 # Addressing
 By connecting to a station remotely via a delta chat client, we can interact with both the *station* and one of the *channels* it manages. This distinction is made using the prefix $ for the *station* and # for the *channel*. The prefixes must be followed by the *station* or *channel* number (for the station, it is always 1).
 
