@@ -4,6 +4,7 @@
 		<title>dc2m</title>
 		<icon>dc2mLogo.ico</icon>
 		<size>790,357</size>
+		<handler function="OnClose" entry="EVT_CLOSE" />
 		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
 			<object class="sizeritem">
 				<object class="wxTextCtrl" name="ID_TEXTCTRL1" variable="LogText" member="yes">

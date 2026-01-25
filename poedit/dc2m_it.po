@@ -1,0 +1,280 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2026-01-24 18:54+0100\n"
+"PO-Revision-Date: 2026-01-24 18:55+0100\n"
+"Last-Translator: andreaf <andrea202511@gmail.com>\n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.2.2\n"
+"X-Poedit-Basepath: ../src\n"
+"X-Poedit-KeywordsList: _\n"
+"X-Poedit-SearchPath-0: about.cpp\n"
+"X-Poedit-SearchPath-1: advancedStation.cpp\n"
+"X-Poedit-SearchPath-2: cDriver.cpp\n"
+"X-Poedit-SearchPath-3: cSettings.cpp\n"
+"X-Poedit-SearchPath-4: dc2mApp.cpp\n"
+"X-Poedit-SearchPath-5: dc2mMain.cpp\n"
+"X-Poedit-SearchPath-6: mDriver.cpp\n"
+"X-Poedit-SearchPath-7: qrCode.cpp\n"
+"X-Poedit-SearchPath-8: setChannel.cpp\n"
+"X-Poedit-SearchPath-9: setStation.cpp\n"
+
+#: about.cpp:35 dc2mMain.cpp:116
+msgid "About"
+msgstr ""
+
+#: about.cpp:44
+msgid "DC2M"
+msgstr ""
+
+#: about.cpp:62
+msgid ""
+"Author: andrea202511 (Andrea Fabbri)\n"
+"\n"
+"This program is licensed under the terms\n"
+"of the GNU General Public License version 3\n"
+"http://www.gnu.org/licenses/gpl-3.0.html\n"
+msgstr ""
+
+#: about.cpp:65
+msgid "Close"
+msgstr ""
+
+#: advancedStation.cpp:37
+msgid ""
+"Please, don't change these options \n"
+"if you don't know what you're doing!"
+msgstr ""
+
+#: advancedStation.cpp:41
+msgid "Refresh station parameters"
+msgstr ""
+
+#: advancedStation.cpp:44
+msgid "Acquiring new chatmail address"
+msgstr ""
+
+#: advancedStation.cpp:47
+msgid "Deleting all chats"
+msgstr ""
+
+#: advancedStation.cpp:50 advancedStation.cpp:53 advancedStation.cpp:56
+msgid "Label"
+msgstr ""
+
+#: advancedStation.cpp:62 dc2mMain.cpp:118 setChannel.cpp:219 setStation.cpp:97
+msgid "Help"
+msgstr ""
+
+#: advancedStation.cpp:64 setChannel.cpp:221 setStation.cpp:99
+msgid "Cancel"
+msgstr ""
+
+#: advancedStation.cpp:66
+msgid "Enter"
+msgstr ""
+
+#: cDriver.cpp:61
+msgid "DC thread starting"
+msgstr ""
+
+#: dc2mMain.cpp:85 dc2mMain.cpp:112
+msgid "dc2m"
+msgstr ""
+
+#: dc2mMain.cpp:98
+msgid "Station setting"
+msgstr ""
+
+#: dc2mMain.cpp:100
+msgid "QRCode"
+msgstr ""
+
+#: dc2mMain.cpp:100
+msgid "Show QRCode to join"
+msgstr ""
+
+#: dc2mMain.cpp:103
+msgid "Channel #1 setting"
+msgstr ""
+
+#: dc2mMain.cpp:105
+msgid "Channel #2 setting"
+msgstr ""
+
+#: dc2mMain.cpp:107
+msgid "Channel #3 setting"
+msgstr ""
+
+#: dc2mMain.cpp:110
+msgid "Quit\tAlt-F4"
+msgstr ""
+
+#: dc2mMain.cpp:110
+msgid "Quit the application"
+msgstr ""
+
+#: dc2mMain.cpp:114
+msgid "Help contents"
+msgstr ""
+
+#: dc2mMain.cpp:114
+msgid "User manual"
+msgstr ""
+
+#: dc2mMain.cpp:116
+msgid "Show info about this application"
+msgstr ""
+
+#: dc2mMain.cpp:152
+msgid "$1 "
+msgstr ""
+
+#: setChannel.cpp:96
+msgid "CHANNEL SETTING"
+msgstr ""
+
+#: setChannel.cpp:101
+msgid "  Station enable (takes effect after restart)"
+msgstr ""
+
+#: setChannel.cpp:107 setStation.cpp:48
+msgid "Alias"
+msgstr ""
+
+#: setChannel.cpp:112
+msgid "Modbus communication"
+msgstr ""
+
+#: setChannel.cpp:118
+msgid "IP address"
+msgstr ""
+
+#: setChannel.cpp:136
+msgid "Port"
+msgstr ""
+
+#: setChannel.cpp:143
+msgid "Modbus register"
+msgstr ""
+
+#: setChannel.cpp:147
+msgid "Output area (plc->dc)"
+msgstr ""
+
+#: setChannel.cpp:150 setChannel.cpp:168
+msgid "First register"
+msgstr ""
+
+#: setChannel.cpp:156 setChannel.cpp:174
+msgid "Registers number"
+msgstr ""
+
+#: setChannel.cpp:165
+msgid "Input area (dc->plc)"
+msgstr ""
+
+#: setChannel.cpp:184
+msgid "File messages"
+msgstr ""
+
+#: setChannel.cpp:193
+msgid "slow"
+msgstr ""
+
+#: setChannel.cpp:194
+msgid "medium"
+msgstr ""
+
+#: setChannel.cpp:195
+msgid "fast"
+msgstr ""
+
+#: setChannel.cpp:197
+msgid "Refresh"
+msgstr ""
+
+#: setChannel.cpp:203
+msgid "Big endian"
+msgstr ""
+
+#: setChannel.cpp:204
+msgid "Little endian"
+msgstr ""
+
+#: setChannel.cpp:206
+msgid "Byte order"
+msgstr ""
+
+#: setChannel.cpp:211
+msgid "-A -B -C -D -E -0 ..."
+msgstr ""
+
+#: setChannel.cpp:212
+msgid "AB CD E0 ..."
+msgstr ""
+
+#: setChannel.cpp:213
+msgid "BA DC 0E ..."
+msgstr ""
+
+#: setChannel.cpp:215
+msgid "Caratter order"
+msgstr ""
+
+#: setChannel.cpp:223 setStation.cpp:101
+msgid "Ok"
+msgstr ""
+
+#: setStation.cpp:44
+msgid "Station enable (takes effect after restart)"
+msgstr ""
+
+#: setStation.cpp:54
+msgid "Posizion"
+msgstr ""
+
+#: setStation.cpp:62
+msgid "Log area"
+msgstr ""
+
+#: setStation.cpp:67 setStation.cpp:75
+msgid "Default"
+msgstr ""
+
+#: setStation.cpp:68 setStation.cpp:76
+msgid "Verbose"
+msgstr ""
+
+#: setStation.cpp:69 setStation.cpp:77
+msgid "Only for debug"
+msgstr ""
+
+#: setStation.cpp:71
+msgid "Station"
+msgstr ""
+
+#: setStation.cpp:79
+msgid "Channels"
+msgstr ""
+
+#: setStation.cpp:87
+msgid "en"
+msgstr ""
+
+#: setStation.cpp:88
+msgid "it"
+msgstr ""
+
+#: setStation.cpp:90
+msgid "Language"
+msgstr ""
+
+#: setStation.cpp:92
+msgid " Advanced options "
+msgstr ""

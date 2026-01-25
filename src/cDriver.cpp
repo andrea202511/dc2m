@@ -245,7 +245,19 @@ int32_t cDriver::Refresh()
   if (tx_code==0)
     return 0;
   if (tx_code==1) {
-    pfn_dc_send_text_msg(ccontext,tx_receipe,tx_message);
+    if (tx_receipe<1001 || tx_receipe>1008) {
+      pfn_dc_send_text_msg(ccontext,tx_receipe,tx_message);
+      wxGetApp().ToLog(0,wxString::Format(wxT("[Tx message] by #%i (%i)\n"),tx_channel,tx_receipe));
+    }
+    else {
+      int gr=0x0001<<(tx_receipe-1001);
+      for(int i=0; i<8; i++) {
+        if ((settings.chat_gr[i] & gr)!=0){
+          pfn_dc_send_text_msg(ccontext,settings.chat_id[i],tx_message);
+          wxGetApp().ToLog(0,wxString::Format(wxT("[Tx message group %i] by #%i (%i)\n"),tx_receipe,tx_channel,settings.chat_id[i]));
+        }
+      }
+    }
   }
   tx_code=0;
   return 1;
@@ -281,9 +293,10 @@ int32_t cDriver::ProcessMessage(wxString msg, int chat_id)
            break;
          }
       }
+      int gr=0, gs=1000;
       switch(msg_par[1]) {
         case 0:
-          response="1:Station name\n2:List Channel\n3:Date & time\n4";
+          response="1:Station name\n2:Channels list\n3:Date & time\n4:Info chat\n5:Chats list\n10:Subscrive group\n11:Leave group";
           break;
         case 1:
           response="Station name: "+settings.station_name+"\nLocation: "+settings.station_loc;
@@ -294,6 +307,85 @@ int32_t cDriver::ProcessMessage(wxString msg, int chat_id)
         case 3:
           response=now.FormatISODate()+"  "+now.FormatISOTime()+"\n";
           break;
+        case 4:
+          for(int i=0; i<8; i++) {
+            if (settings.chat_id[i]==chat_id) gr=settings.chat_gr[i];
+          }
+          if (gr==0)
+            response=wxString::Format(wxT("Chat ID: %i\nGroups: no groups (Guest mode)\n"),chat_id);
+          else {
+            response=wxString::Format(wxT("Chat ID: %i\nGroups: "),chat_id);
+            for (int i=1; i<256; i=i*2) {
+              gs++;
+              if ((gr & i)>0) {
+                response+=wxString::Format(wxT("%i  "),gs);
+              }
+            }
+
+          }
+          break;
+
+        case 5:
+          response="";
+          for(int i=0; i<8; i++) {
+            if (settings.chat_id[i]!=0) {
+              gs=1000;
+              response+=wxString::Format(wxT("Chat ID: %i  Groups: "),settings.chat_id[i]);
+              gr=settings.chat_gr[i];
+              for (int u=1; u<256; u=u*2) {
+                gs++;
+                if ((gr & u)>0) {
+                  response+=wxString::Format(wxT("%i  "),gs);
+                }
+              }
+              response+="\n";
+            }
+          }
+          if (response=="")
+            response="Nothing";
+        break;
+
+        case 10:
+        case 11:
+          //test validita' numero gruppo
+          if (msg_par[2]<1001 || msg_par[2]>1008) {
+            response="Wrong group number (1001..1008)";
+            break;
+          }
+          //check if is a new chat
+          gs=-1;
+          for(int i=0; i<8; i++) {
+            if (settings.chat_id[i]==chat_id) {
+              gs=i;
+            }
+          }
+          //if new find free mem
+          if (gs==-1) {
+            for(int i=0; i<8; i++) {
+              if (settings.chat_id[i]==0) {
+                gs=i;
+              }
+            }
+          }
+          if(gs>=0) {
+            settings.chat_id[gs]=chat_id;
+            gr=0x0001<<(msg_par[2]-1001);
+            if (msg_par[1]==10) {
+              settings.chat_gr[gs]|=gr;
+            }
+            else {
+              settings.chat_gr[gs]&=~gr;
+              if (settings.chat_gr[gs]==0)
+                settings.chat_id[gs]=0;
+            }
+            response="Done";
+          }
+          else {
+            response="Sorry, it is not possible to add in other user";
+          }
+        break;
+
+
 
         default:
           response=wxString::Format(wxT("Code not managed (%i)"), msg_par[1]);

@@ -84,6 +84,11 @@ dc2mFrame::dc2mFrame(wxWindow* parent,wxWindowID id)
 
     Create(parent, id, _("dc2m"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, _T("id"));
     SetClientSize(wxSize(790,357));
+    {
+      wxIcon FrameIcon;
+      FrameIcon.CopyFromBitmap(wxBitmap(wxImage(_T("dc2mLogo.ico"))));
+      SetIcon(FrameIcon);
+    }
     BoxSizer1 = new wxBoxSizer(wxHORIZONTAL);
     LogText = new wxTextCtrl(this, ID_TEXTCTRL1, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE|wxVSCROLL|wxHSCROLL|wxALWAYS_SHOW_SB, wxDefaultValidator, _T("ID_TEXTCTRL1"));
     BoxSizer1->Add(LogText, 1, wxALL|wxEXPAND, 5);
@@ -131,6 +136,7 @@ dc2mFrame::dc2mFrame(wxWindow* parent,wxWindowID id)
     Connect(idMenuHelp, wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&dc2mFrame::OnHelp);
     Connect(idMenuAbout, wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&dc2mFrame::OnAbout);
     Connect(ID_TIMER1, wxEVT_TIMER, (wxObjectEventFunction)&dc2mFrame::OnTimer1Trigger);
+    Connect(wxID_ANY, wxEVT_CLOSE_WINDOW, (wxObjectEventFunction)&dc2mFrame::OnClose);
     //*)
     SetIcon(wxIcon(dc2mLogo32_xpm));
 
@@ -280,4 +286,10 @@ void dc2mFrame::OnMenuItem4Selected(wxCommandEvent& event)
 void dc2mFrame::OnHelp(wxCommandEvent& event)
 {
   m_helpController->DisplayContents();
+}
+
+void dc2mFrame::OnClose(wxCloseEvent& event)
+{
+  settings.SaveValue();
+  Destroy();
 }

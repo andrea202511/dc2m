@@ -32,6 +32,7 @@ struct channel_set {
   int32_t charord;
 };
 
+
 class C_Settings
 {
   public:
@@ -62,6 +63,9 @@ class C_Settings
     channel_set ch1;
     channel_set ch2;
     channel_set ch3;
+    int32_t chat_id[8];
+    int32_t chat_gr[8];
+
 
   protected:
     wxConfig* dconfig;

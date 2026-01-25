@@ -45,13 +45,13 @@ Set_station::Set_station(wxWindow* parent,wxWindowID id)
     CheckBox1->SetValue(false);
     BoxSizer1->Add(CheckBox1, 0, wxALL|wxALIGN_LEFT, 5);
     BoxSizer2 = new wxBoxSizer(wxHORIZONTAL);
-    StaticText1 = new wxStaticText(this, ID_STATICTEXT1, _("Station name"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT1"));
+    StaticText1 = new wxStaticText(this, ID_STATICTEXT1, _("Alias"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT1"));
     BoxSizer2->Add(StaticText1, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     TextCtrl1 = new wxTextCtrl(this, ID_TEXTCTRL1, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, wxGenericValidator(&settings.station_name), _T("ID_TEXTCTRL1"));
     BoxSizer2->Add(TextCtrl1, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     BoxSizer1->Add(BoxSizer2, 0, wxALL|wxEXPAND, 0);
     BoxSizer3 = new wxBoxSizer(wxHORIZONTAL);
-    StaticText2 = new wxStaticText(this, ID_STATICTEXT2, _("Location:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT2"));
+    StaticText2 = new wxStaticText(this, ID_STATICTEXT2, _("Posizion"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT2"));
     BoxSizer3->Add(StaticText2, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     TextCtrl2 = new wxTextCtrl(this, ID_TEXTCTRL2, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, wxGenericValidator(&settings.station_loc), _T("ID_TEXTCTRL2"));
     BoxSizer3->Add(TextCtrl2, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
@@ -59,7 +59,7 @@ Set_station::Set_station(wxWindow* parent,wxWindowID id)
     StaticLine1 = new wxStaticLine(this, ID_STATICLINE1, wxDefaultPosition, wxSize(100,-1), wxLI_HORIZONTAL, _T("ID_STATICLINE1"));
     BoxSizer1->Add(StaticLine1, 0, wxALL|wxEXPAND, 5);
     BoxSizer5 = new wxBoxSizer(wxVERTICAL);
-    StaticText4 = new wxStaticText(this, ID_STATICTEXT4, _("Log area output"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT4"));
+    StaticText4 = new wxStaticText(this, ID_STATICTEXT4, _("Log area"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT4"));
     BoxSizer5->Add(StaticText4, 0, wxALL|wxALIGN_LEFT, 5);
     BoxSizer6 = new wxBoxSizer(wxHORIZONTAL);
     wxString __wxRadioBoxChoices_1[3] =
@@ -98,7 +98,7 @@ Set_station::Set_station(wxWindow* parent,wxWindowID id)
     BoxSizer4->Add(Button1, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     Button2 = new wxButton(this, ID_CANCEL, _("Cancel"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CANCEL"));
     BoxSizer4->Add(Button2, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-    Button3 = new wxButton(this, wxID_OK, _("Enter"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_OK"));
+    Button3 = new wxButton(this, wxID_OK, _("Ok"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_OK"));
     BoxSizer4->Add(Button3, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     BoxSizer1->Add(BoxSizer4, 0, wxALL|wxALIGN_LEFT, 5);
     SetSizer(BoxSizer1);

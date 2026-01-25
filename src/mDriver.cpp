@@ -253,8 +253,8 @@ bool mDriver::to_dc()
   char str_c[] = { ' ', '\0' };
 
   //if dc busy return and retry
-  if (wxGetApp().Deltac->tx_free()==false)
-    return false;
+//  if (wxGetApp().Deltac->tx_free()==false)
+//    return false;
 
 
   //manage receip
@@ -302,7 +302,7 @@ bool mDriver::to_dc()
       }
     }
   }
-  wxGetApp().Deltac->tx_preset(data_recipient,data_code,msg);
+  wxGetApp().Deltac->tx_preset(channel,data_recipient,data_code,msg);
 
   return true;
 
@@ -462,7 +462,7 @@ int32_t mDriver::Refresh()
   }
 
   //pull message to deltachat driver
-  if (connected && init && buffer_tx[0]!=0 && error==0) {
+  if (connected && init && buffer_tx[1]!=0 && error==0) {
     if (to_dc()==1) {
       WriteRegisters((cs.starttx+1),1,&zero); //reset message over modbus
       buffer_tx[1]=0;

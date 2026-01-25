@@ -127,7 +127,7 @@ class cDriver
 
     int32_t Refresh();
     bool tx_free() {return (tx_code==0); };
-    void tx_preset(uint16_t rec,uint16_t cod,wxString msg) {tx_receipe=rec; tx_code=cod; tx_message=msg; };
+    void tx_preset(int32_t ch,uint16_t rec,uint16_t cod,wxString msg) {tx_channel=ch; tx_receipe=rec; tx_code=cod; tx_message=msg; };
 
 
   protected:
@@ -137,6 +137,7 @@ class cDriver
     wxEvtHandler* EHc;
 
     wxString tx_message;
+    int32_t tx_channel;
     uint16_t tx_receipe;
     uint16_t tx_code;
     int32_t msg_par[10];

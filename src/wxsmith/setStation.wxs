@@ -16,7 +16,7 @@
 				<object class="wxBoxSizer" variable="BoxSizer2" member="no">
 					<object class="sizeritem">
 						<object class="wxStaticText" name="ID_STATICTEXT1" variable="StaticText1" member="yes">
-							<label>Station name</label>
+							<label>Alias</label>
 						</object>
 						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 						<border>5</border>
@@ -37,7 +37,7 @@
 				<object class="wxBoxSizer" variable="BoxSizer3" member="no">
 					<object class="sizeritem">
 						<object class="wxStaticText" name="ID_STATICTEXT2" variable="StaticText2" member="yes">
-							<label>Location:</label>
+							<label>Posizion</label>
 						</object>
 						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 						<border>5</border>
@@ -66,7 +66,7 @@
 					<orient>wxVERTICAL</orient>
 					<object class="sizeritem">
 						<object class="wxStaticText" name="ID_STATICTEXT4" variable="StaticText4" member="yes">
-							<label>Log area output</label>
+							<label>Log area</label>
 						</object>
 						<flag>wxALL|wxALIGN_LEFT</flag>
 						<border>5</border>
@@ -170,7 +170,7 @@
 					</object>
 					<object class="sizeritem">
 						<object class="wxButton" name="wxID_OK" variable="Button3" member="yes">
-							<label>Enter</label>
+							<label>Ok</label>
 							<handler function="OnButton3Click" entry="EVT_BUTTON" />
 						</object>
 						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>

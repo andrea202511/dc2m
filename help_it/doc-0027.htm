@@ -17,7 +17,7 @@ Un esempio. Se l'utente scrive sulla HMI del plc/cn "hi!" seguito dal comando di
 
 <B>Nota ID chat</B> 
 Nel caso di messaggio di risposta ad una precedente interrogazione, l'ID &#232; quello dell chat del mittente nel messaggio di ingresso, quindi quando il plc elabora un messaggio in ingresso che prevede una risposta, deve come prima cosa memorizzare l'ID della chat di provenienza per poter inoltrare correttamente la risposta.<P>
-Ci sono anche alcuni ID chat <I>speciali</I>. Quando un nuovo utente invia un messaggio alla stazione viene assegnato alla categoria <I>ospite</I>. Con dei comandi di stazione l'utente pu&#242; successivamente dichiararsi appartenente ad un gruppo specifico. Sono possibili 9 gruppi numerati da 1001 a 1009<BR>
+Ci sono anche alcuni ID chat <I>speciali</I>. Quando un nuovo utente invia un messaggio alla stazione viene assegnato alla categoria <I>ospite</I>. Con dei comandi di stazione l'utente pu&#242; successivamente dichiararsi appartenente ad un gruppo specifico. Sono possibili 8 gruppi numerati da 1001 a 1008<BR>
 Ad esempio nel mio plc potrei prevedere questi gruppi:<BR>
 0=ospite (default)<BR>
 1001=Manutenzione<BR>

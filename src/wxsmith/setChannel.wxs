@@ -9,7 +9,7 @@
 			<orient>wxVERTICAL</orient>
 			<object class="sizeritem">
 				<object class="wxCheckBox" name="ID_CHECKBOX2" variable="CheckBox2" member="yes">
-					<label> Channel enable (takes effect after restart)</label>
+					<label>  Station enable (takes effect after restart)</label>
 					<validator>wxGenericValidator(&amp;settings.chx.enable)</validator>
 					<handler function="OnCheckEnableCH" entry="EVT_CHECKBOX" />
 				</object>
@@ -47,7 +47,7 @@
 			</object>
 			<object class="sizeritem">
 				<object class="wxCheckBox" name="ID_CHECKBOX1" variable="CheckBox1" member="yes">
-					<label> Running</label>
+					<label>Modbus communication</label>
 					<validator>wxGenericValidator(&amp;settings.chx.run)</validator>
 					<handler function="OnCheckRunCH" entry="EVT_CHECKBOX" />
 				</object>
@@ -65,7 +65,7 @@
 				<object class="wxBoxSizer" variable="BoxSizer3" member="no">
 					<object class="sizeritem">
 						<object class="wxStaticText" name="ID_STATICTEXT2" variable="StaticText2" member="yes">
-							<label>IP Address</label>
+							<label>IP address</label>
 						</object>
 						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 						<border>5</border>
@@ -140,7 +140,7 @@
 				<object class="wxBoxSizer" variable="BoxSizer15" member="no">
 					<object class="sizeritem">
 						<object class="wxStaticText" name="ID_STATICTEXT14" variable="StaticText14" member="yes">
-							<label>Port:</label>
+							<label>Port</label>
 						</object>
 						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 						<border>5</border>
@@ -179,7 +179,7 @@
 							<orient>wxVERTICAL</orient>
 							<object class="sizeritem">
 								<object class="wxStaticText" name="ID_STATICTEXT6" variable="StaticText6" member="yes">
-									<label>plc-&gt;dc</label>
+									<label>Output area (plc-&gt;dc)</label>
 								</object>
 								<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL|wxSHAPED</flag>
 								<border>5</border>
@@ -188,7 +188,7 @@
 								<object class="wxBoxSizer" variable="BoxSizer11" member="no">
 									<object class="sizeritem">
 										<object class="wxStaticText" name="ID_STATICTEXT7" variable="StaticText7" member="yes">
-											<label>First reg.</label>
+											<label>First register</label>
 										</object>
 										<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 										<border>5</border>
@@ -212,7 +212,7 @@
 								<object class="wxBoxSizer" variable="BoxSizer14" member="no">
 									<object class="sizeritem">
 										<object class="wxStaticText" name="ID_STATICTEXT8" variable="StaticText8" member="yes">
-											<label>Nr.regs</label>
+											<label>Registers number</label>
 										</object>
 										<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 										<border>5</border>
@@ -250,7 +250,7 @@
 							<orient>wxVERTICAL</orient>
 							<object class="sizeritem">
 								<object class="wxStaticText" name="ID_STATICTEXT5" variable="StaticText5" member="yes">
-									<label>dc-&gt;plc</label>
+									<label>Input area (dc-&gt;plc)</label>
 								</object>
 								<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL|wxSHAPED</flag>
 								<border>5</border>
@@ -259,7 +259,7 @@
 								<object class="wxBoxSizer" variable="BoxSizer12" member="no">
 									<object class="sizeritem">
 										<object class="wxStaticText" name="ID_STATICTEXT9" variable="StaticText9" member="yes">
-											<label>First reg.</label>
+											<label>First register</label>
 										</object>
 										<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 										<border>5</border>
@@ -283,7 +283,7 @@
 								<object class="wxBoxSizer" variable="BoxSizer13" member="no">
 									<object class="sizeritem">
 										<object class="wxStaticText" name="ID_STATICTEXT10" variable="StaticText10" member="yes">
-											<label>Nr.regs</label>
+											<label>Registers number</label>
 										</object>
 										<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 										<border>5</border>
@@ -323,7 +323,7 @@
 				<object class="wxBoxSizer" variable="BoxSizer16" member="no">
 					<object class="sizeritem">
 						<object class="wxStaticText" name="ID_STATICTEXT3" variable="StaticText3" member="yes">
-							<label>Messages list</label>
+							<label>File messages</label>
 						</object>
 						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 						<border>5</border>
@@ -351,7 +351,7 @@
 							<orient>wxVERTICAL</orient>
 							<object class="sizeritem">
 								<object class="wxRadioBox" name="ID_RADIOBOX1" variable="RadioBox1" member="yes">
-									<label>Pollig rate</label>
+									<label>Refresh</label>
 									<content>
 										<item>slow</item>
 										<item>medium</item>
@@ -393,7 +393,7 @@
 					</object>
 					<object class="sizeritem">
 						<object class="wxRadioBox" name="ID_RADIOBOX3" variable="RadioBox3" member="yes">
-							<label>Character order</label>
+							<label>Caratter order</label>
 							<content>
 								<item>-A -B -C -D -E -0 ...</item>
 								<item>AB CD E0 ...</item>
@@ -433,7 +433,7 @@
 					</object>
 					<object class="sizeritem">
 						<object class="wxButton" name="wxID_OK" variable="Button1" member="yes">
-							<label>Enter</label>
+							<label>Ok</label>
 							<validator> wxDefaultValidator</validator>
 							<handler function="OnButton1Click" entry="EVT_BUTTON" />
 						</object>

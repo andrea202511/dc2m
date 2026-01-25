@@ -72,14 +72,29 @@ void C_Settings::LoadValue() {
 	dconfig->Read(wxT("/CH3/trefresh"),&ch3.trefresh);
 	dconfig->Read(wxT("/CH3/byteord"),&ch3.byteord);
 	dconfig->Read(wxT("/CH3/charord"),&ch3.charord);
+	dconfig->Read(wxT("/CHAT/id0"),&chat_id[0]);
+	dconfig->Read(wxT("/CHAT/id1"),&chat_id[1]);
+	dconfig->Read(wxT("/CHAT/id2"),&chat_id[2]);
+	dconfig->Read(wxT("/CHAT/id3"),&chat_id[3]);
+	dconfig->Read(wxT("/CHAT/id4"),&chat_id[4]);
+	dconfig->Read(wxT("/CHAT/id5"),&chat_id[5]);
+	dconfig->Read(wxT("/CHAT/id6"),&chat_id[6]);
+	dconfig->Read(wxT("/CHAT/id7"),&chat_id[7]);
+	dconfig->Read(wxT("/CHAT/gr0"),&chat_gr[0]);
+	dconfig->Read(wxT("/CHAT/gr1"),&chat_gr[1]);
+	dconfig->Read(wxT("/CHAT/gr2"),&chat_gr[2]);
+	dconfig->Read(wxT("/CHAT/gr3"),&chat_gr[3]);
+	dconfig->Read(wxT("/CHAT/gr4"),&chat_gr[4]);
+	dconfig->Read(wxT("/CHAT/gr5"),&chat_gr[5]);
+	dconfig->Read(wxT("/CHAT/gr6"),&chat_gr[6]);
+	dconfig->Read(wxT("/CHAT/gr7"),&chat_gr[7]);
 
   MainTextArea=NULL;
 }
 
 C_Settings::~C_Settings()
 {
-
-
+//  SaveValue();
 }
 
 void C_Settings::SaveValue() {
@@ -141,6 +156,24 @@ void C_Settings::SaveValue() {
 	dconfig->Write(wxT("/CH3/trefresh"),ch3.trefresh);
 	dconfig->Write(wxT("/CH3/byteord"),ch3.byteord);
 	dconfig->Write(wxT("/CH3/charord"),ch3.charord);
+
+	dconfig->Write(wxT("/CHAT/id0"),chat_id[0]);
+	dconfig->Write(wxT("/CHAT/id1"),chat_id[1]);
+	dconfig->Write(wxT("/CHAT/id2"),chat_id[2]);
+	dconfig->Write(wxT("/CHAT/id3"),chat_id[3]);
+	dconfig->Write(wxT("/CHAT/id4"),chat_id[4]);
+	dconfig->Write(wxT("/CHAT/id5"),chat_id[5]);
+	dconfig->Write(wxT("/CHAT/id6"),chat_id[6]);
+	dconfig->Write(wxT("/CHAT/id7"),chat_id[7]);
+	dconfig->Write(wxT("/CHAT/gr0"),chat_gr[0]);
+	dconfig->Write(wxT("/CHAT/gr1"),chat_gr[1]);
+	dconfig->Write(wxT("/CHAT/gr2"),chat_gr[2]);
+	dconfig->Write(wxT("/CHAT/gr3"),chat_gr[3]);
+	dconfig->Write(wxT("/CHAT/gr4"),chat_gr[4]);
+	dconfig->Write(wxT("/CHAT/gr5"),chat_gr[5]);
+	dconfig->Write(wxT("/CHAT/gr6"),chat_gr[6]);
+	dconfig->Write(wxT("/CHAT/gr7"),chat_gr[7]);
+
 	dconfig->Flush();
 
 }

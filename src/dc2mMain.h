@@ -55,6 +55,7 @@ class dc2mFrame: public wxFrame
         void OnTimer1Trigger(wxTimerEvent& event);
         void OnMenuItem4Selected(wxCommandEvent& event);
         void OnHelp(wxCommandEvent& event);
+        void OnClose(wxCloseEvent& event);
         //*)
 
         //(*Identifiers(dc2mFrame)
