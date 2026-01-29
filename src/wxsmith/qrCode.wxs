@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <wxsmith>
 	<object class="wxDialog" name="QrcodeDialog">
-		<size>300,300</size>
-		<minsize>300,300</minsize>
-		<maxsize>300,300</maxsize>
+		<size>210,210</size>
+		<minsize>210,210</minsize>
+		<maxsize>210,210</maxsize>
 		<pos_arg>1</pos_arg>
 		<size_arg>1</size_arg>
 		<style>wxDEFAULT_DIALOG_STYLE|wxBORDER_STATIC</style>

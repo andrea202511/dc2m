@@ -23,6 +23,7 @@
 			<object class="sizeritem">
 				<object class="wxCheckBox" name="ID_CHECKBOX1" variable="CheckBox1" member="yes">
 					<label>Refresh station parameters</label>
+					<validator>wxGenericValidator(&amp;settings.station__extra[0])</validator>
 				</object>
 				<flag>wxLEFT|wxALIGN_LEFT</flag>
 				<border>5</border>
@@ -31,6 +32,7 @@
 			<object class="sizeritem">
 				<object class="wxCheckBox" name="ID_CHECKBOX2" variable="CheckBox2" member="yes">
 					<label>Acquiring new chatmail address</label>
+					<validator>wxGenericValidator(&amp;settings.station__extra[1])</validator>
 					<handler function="OnCheckBox2Click" entry="EVT_CHECKBOX" />
 				</object>
 				<flag>wxLEFT|wxALIGN_LEFT</flag>
@@ -40,6 +42,7 @@
 			<object class="sizeritem">
 				<object class="wxCheckBox" name="ID_CHECKBOX3" variable="CheckBox3" member="yes">
 					<label>Deleting all chats</label>
+					<validator>wxGenericValidator(&amp;settings.station__extra[2])</validator>
 				</object>
 				<flag>wxLEFT|wxALIGN_LEFT</flag>
 				<border>5</border>
@@ -47,7 +50,8 @@
 			</object>
 			<object class="sizeritem">
 				<object class="wxCheckBox" name="ID_CHECKBOX4" variable="CheckBox4" member="yes">
-					<label>Label</label>
+					<label>Accepts S/C along with $/#</label>
+					<validator>wxGenericValidator(&amp;settings.station__extra[3])</validator>
 				</object>
 				<flag>wxLEFT|wxALIGN_LEFT</flag>
 				<border>5</border>
@@ -56,6 +60,7 @@
 			<object class="sizeritem">
 				<object class="wxCheckBox" name="ID_CHECKBOX5" variable="CheckBox5" member="yes">
 					<label>Label</label>
+					<validator>wxGenericValidator(&amp;settings.station__extra[4])</validator>
 				</object>
 				<flag>wxLEFT|wxALIGN_LEFT</flag>
 				<border>5</border>
@@ -64,6 +69,7 @@
 			<object class="sizeritem">
 				<object class="wxCheckBox" name="ID_CHECKBOX6" variable="CheckBox6" member="yes">
 					<label>Label</label>
+					<validator>wxGenericValidator(&amp;settings.station__extra[5])</validator>
 				</object>
 				<flag>wxLEFT|wxALIGN_LEFT</flag>
 				<border>5</border>

@@ -6,7 +6,7 @@ C_Settings settings;
 
 C_Settings::C_Settings()
 {
-  //ctor
+  release=wxString::Format("%i.%i.%i",(int)AutoVersion::MAJOR, (int)AutoVersion::MINOR, (int)AutoVersion::BUILD);
 
 }
 
@@ -19,6 +19,12 @@ void C_Settings::LoadValue() {
   dconfig->Read(wxT("/ST1/location"),&station_loc);
   dconfig->Read(wxT("/ST1/StLogLevel"),&StLogLevel);
   dconfig->Read(wxT("/ST1/ChLogLevel"),&ChLogLevel);
+  dconfig->Read(wxT("/ST1/Extra0"),&station_extra[0]);
+  dconfig->Read(wxT("/ST1/Extra1"),&station_extra[1]);
+  dconfig->Read(wxT("/ST1/Extra2"),&station_extra[2]);
+  dconfig->Read(wxT("/ST1/Extra3"),&station_extra[3]);
+  dconfig->Read(wxT("/ST1/Extra4"),&station_extra[4]);
+  dconfig->Read(wxT("/ST1/Extra5"),&station_extra[5]);
 
 
 	dconfig->Read(wxT("/CH1/enabled"),&ch1.enable);
@@ -105,6 +111,13 @@ void C_Settings::SaveValue() {
   dconfig->Write(wxT("/ST1/location"),station_loc);
   dconfig->Write(wxT("/ST1/StLogLevel"),StLogLevel);
   dconfig->Write(wxT("/ST1/ChLogLevel"),ChLogLevel);
+  dconfig->Write(wxT("/ST1/Extra0"),station_extra[0]);
+  dconfig->Write(wxT("/ST1/Extra1"),station_extra[1]);
+  dconfig->Write(wxT("/ST1/Extra2"),station_extra[2]);
+  dconfig->Write(wxT("/ST1/Extra3"),station_extra[3]);
+  dconfig->Write(wxT("/ST1/Extra4"),station_extra[4]);
+  dconfig->Write(wxT("/ST1/Extra5"),station_extra[5]);
+
 
 	dconfig->Write(wxT("/CH1/enabled"),ch1.enable);
 	dconfig->Write(wxT("/CH1/alias"),ch1.name);

@@ -4,6 +4,7 @@
 #include <wx/datetime.h>
 #include <wx/stdpaths.h>
 #include <wx/filename.h>
+#include <wx/clipbrd.h>
 
 DECLARE_APP(dc2mApp)
 
@@ -207,10 +208,10 @@ void cDriver::init(void)
   if (eth == wxTHREAD_NO_ERROR) {
     chat_event_thread->Run();
 
-    if(!pfn_dc_is_configured(context)) {
+    if(!pfn_dc_is_configured(context) || settings.station_extra[0] || settings.station_extra[1]) {
       stop_context(context);
-      pfn_dc_set_config_from_qr(context, "dcaccount:https://nine.testrun.org/new");
-
+      if (!pfn_dc_is_configured(context) || settings.station_extra[1])
+        pfn_dc_set_config_from_qr(context, "dcaccount:https://nine.testrun.org/new");
       pfn_dc_set_config(context, "displayname", settings.station_name);
       pfn_dc_set_config(context, "is_chatmail", "1");
       pfn_dc_set_config(context, "delete_device_after", "15");
@@ -220,6 +221,8 @@ void cDriver::init(void)
     else {
       pfn_dc_start_io(context);
     }
+    settings.station_extra[0]=false;
+    settings.station_extra[1]=false;
   ccontext=context;
   }
 }
@@ -238,6 +241,18 @@ wxString cDriver::generate_qrcode(void)
   wxString qc=bbb;
   return qc;
 }
+
+void cDriver::link_copy(void)
+{
+  char* aaa=pfn_dc_get_securejoin_qr(ccontext,0); //TODO aaa è la stringa per connettersi
+  wxString lc=aaa;
+
+  if (wxTheClipboard->Open()) {
+    wxTheClipboard->SetData(new wxTextDataObject(lc));
+    wxTheClipboard->Close();
+  }
+}
+
 
 //check if anything to send
 int32_t cDriver::Refresh()
@@ -274,7 +289,7 @@ int32_t cDriver::ProcessMessage(wxString msg, int chat_id)
     msg_par[i]=0;
 
   //code recognition for station
-  if (msg[0]=='$') {
+  if (msg[0]=='$' || (msg[0]=='S' && settings.station_extra[3]) ) {
     if (msg[1]!='1')
       response="Wrong station number";
     else {
@@ -296,18 +311,17 @@ int32_t cDriver::ProcessMessage(wxString msg, int chat_id)
       int gr=0, gs=1000;
       switch(msg_par[1]) {
         case 0:
-          response="1:Station name\n2:Channels list\n3:Date & time\n4:Info chat\n5:Chats list\n10:Subscrive group\n11:Leave group";
+          response="1:Station info\n2:Channels info\n3:This chat info\n4:Chats list\n10:Subscrive group\n11:Leave group\n12:Clear groups";
           break;
         case 1:
-          response="Station name: "+settings.station_name+"\nLocation: "+settings.station_loc;
+          response="Station: "+settings.station_name+"\nLocation: "+settings.station_loc+"\nLocal time: "+now.FormatISOTime()+"\nRelease : "+settings.release;
           break;
         case 2:
-          response="CH1: "+settings.ch1.name+"\nCH2: "+settings.ch2.name+"\nCH3: "+settings.ch3.name+"\n";
+          response="CH1: "+settings.ch1.name+"\n  enable: "+wxString::Format(wxT("%b"),settings.ch1.enable);
+          response+="\nCH2: "+settings.ch2.name+"\n  enable: "+wxString::Format(wxT("%b"),settings.ch2.enable);
+          response+="\nCH3: "+settings.ch3.name+"\n  enable: "+wxString::Format(wxT("%b"),settings.ch3.enable);
           break;
         case 3:
-          response=now.FormatISODate()+"  "+now.FormatISOTime()+"\n";
-          break;
-        case 4:
           for(int i=0; i<8; i++) {
             if (settings.chat_id[i]==chat_id) gr=settings.chat_gr[i];
           }
@@ -325,7 +339,7 @@ int32_t cDriver::ProcessMessage(wxString msg, int chat_id)
           }
           break;
 
-        case 5:
+        case 4:
           response="";
           for(int i=0; i<8; i++) {
             if (settings.chat_id[i]!=0) {
@@ -384,8 +398,15 @@ int32_t cDriver::ProcessMessage(wxString msg, int chat_id)
             response="Sorry, it is not possible to add in other user";
           }
         break;
-
-
+        case 12:
+          for(int i=0; i<8; i++) {
+            if (settings.chat_id[i]==chat_id) {
+              settings.chat_id[i]=0;
+              settings.chat_gr[i]=0;
+            }
+          }
+          response="Done";
+        break;
 
         default:
           response=wxString::Format(wxT("Code not managed (%i)"), msg_par[1]);
@@ -404,9 +425,12 @@ int32_t cDriver::ProcessMessage(wxString msg, int chat_id)
 
   int st;
 
-  if (msg[0]=='#') {
+  if (msg[0]=='#' || (msg[0]=='C' && settings.station_extra[3])) {
     if (msg[1]=='1') {
-      st=wxGetApp().ModbusCh1->GetStatus();
+      if (settings.ch1.enable)
+        st=wxGetApp().ModbusCh1->GetStatus();
+      else
+        st=0;
       if (st==0)
         response="Sorry, channel #1 is disabled";
       else if (st==1)
@@ -419,7 +443,10 @@ int32_t cDriver::ProcessMessage(wxString msg, int chat_id)
       }
     }
     else if (msg[1]=='2') {
-      st=wxGetApp().ModbusCh2->GetStatus();
+      if (settings.ch2.enable)
+        st=wxGetApp().ModbusCh2->GetStatus();
+      else
+        st=0;
       if (st==0)
         response="Sorry, channel #2 is disabled";
       else if (st==1)
@@ -432,7 +459,10 @@ int32_t cDriver::ProcessMessage(wxString msg, int chat_id)
       }
     }
     else if (msg[1]=='3') {
-      st=wxGetApp().ModbusCh2->GetStatus();
+      if (settings.ch3.enable)
+        st=wxGetApp().ModbusCh3->GetStatus();
+      else
+        st=0;
       if (st==0)
         response="Sorry, channel #3 is disabled";
       else if (st==1)

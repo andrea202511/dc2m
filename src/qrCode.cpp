@@ -17,10 +17,10 @@ QrcodeDialog::QrcodeDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,con
 {
   //(*Initialize(QrcodeDialog)
   Create(parent, id, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE|wxBORDER_STATIC, _T("id"));
-  SetClientSize(wxSize(300,300));
+  SetClientSize(wxSize(210,210));
   Move(wxDefaultPosition);
-  SetMinSize(wxSize(300,300));
-  SetMaxSize(wxSize(300,300));
+  SetMinSize(wxSize(210,210));
+  SetMaxSize(wxSize(210,210));
 
   Connect(wxEVT_PAINT, (wxObjectEventFunction)&QrcodeDialog::OnPaint);
   //*)

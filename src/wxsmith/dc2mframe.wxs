@@ -2,7 +2,7 @@
 <wxsmith>
 	<object class="wxFrame" name="dc2mFrame">
 		<title>dc2m</title>
-		<icon>dc2mLogo.ico</icon>
+		<icon code="dc2mLogo32_xpm" />
 		<size>790,357</size>
 		<handler function="OnClose" entry="EVT_CLOSE" />
 		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
@@ -26,6 +26,10 @@
 					<label>QRCode</label>
 					<help>Show QRCode to join</help>
 					<handler function="OnMenuQrcodeShow" entry="EVT_MENU" />
+				</object>
+				<object class="wxMenuItem" name="ID_MENUITEM6" variable="MenuItem9" member="yes">
+					<label>Link copy</label>
+					<handler function="OnLinkCopy" entry="EVT_MENU" />
 				</object>
 				<object class="separator" />
 				<object class="wxMenuItem" name="ID_MENUITEM3" variable="MenuItem5" member="yes">

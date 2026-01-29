@@ -123,6 +123,7 @@ class cDriver
     void stop_context(dc_context_t* context);
 
     wxString generate_qrcode();
+    void link_copy();
     int32_t ProcessMessage(wxString msg,int chat_id);  //analize message received and extract data
 
     int32_t Refresh();

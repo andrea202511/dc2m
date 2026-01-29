@@ -1,6 +1,10 @@
 #ifndef ABOUT_H
 #define ABOUT_H
 #include "dc2mLogo.xpm"
+#include "cSettings.h"
+
+extern C_Settings settings;
+
 
 //(*Headers(About)
 #include <wx/button.h>

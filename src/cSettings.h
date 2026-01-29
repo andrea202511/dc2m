@@ -3,6 +3,7 @@
 
 #include <wx/string.h>
 #include <wx/textctrl.h>
+#include "version.h"
 
 
 #include <wx/valtext.h>
@@ -48,6 +49,8 @@ class C_Settings
     void SaveValue();
     int lastCh;
 
+    wxString release;
+
     void Chx2Chn(int n);
     void Chn2Chx(int n);
     void Chn2Chw(int n);
@@ -56,6 +59,7 @@ class C_Settings
     bool station_enable;
     wxString station_name;
     wxString station_loc;
+    bool station_extra[6];
 
     channel_set chw;
 

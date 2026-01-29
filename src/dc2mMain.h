@@ -56,12 +56,14 @@ class dc2mFrame: public wxFrame
         void OnMenuItem4Selected(wxCommandEvent& event);
         void OnHelp(wxCommandEvent& event);
         void OnClose(wxCloseEvent& event);
+        void OnLinkCopy(wxCommandEvent& event);
         //*)
 
         //(*Identifiers(dc2mFrame)
         static const wxWindowID ID_TEXTCTRL1;
         static const wxWindowID ID_MENUITEM2;
         static const wxWindowID ID_MENUITEM1;
+        static const wxWindowID ID_MENUITEM6;
         static const wxWindowID ID_MENUITEM3;
         static const wxWindowID ID_MENUITEM4;
         static const wxWindowID ID_MENUITEM5;
@@ -79,6 +81,7 @@ class dc2mFrame: public wxFrame
         wxMenuItem* MenuItem6;
         wxMenuItem* MenuItem7;
         wxMenuItem* MenuItem8;
+        wxMenuItem* MenuItem9;
         wxStatusBar* StatusBar1;
         wxTextCtrl* LogText;
         wxTimer Timer1;

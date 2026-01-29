@@ -12,6 +12,8 @@
 #include <wx/dc.h>
 #include <wx/help.h>
 #include "dc2mApp.h"
+#include "version.h"
+
 DECLARE_APP(dc2mApp)
 //(*InternalHeaders(dc2mFrame)
 #include <wx/bitmap.h>
@@ -57,6 +59,7 @@ wxString wxbuildinfo(wxbuildinfoformat format)
 const wxWindowID dc2mFrame::ID_TEXTCTRL1 = wxNewId();
 const wxWindowID dc2mFrame::ID_MENUITEM2 = wxNewId();
 const wxWindowID dc2mFrame::ID_MENUITEM1 = wxNewId();
+const wxWindowID dc2mFrame::ID_MENUITEM6 = wxNewId();
 const wxWindowID dc2mFrame::ID_MENUITEM3 = wxNewId();
 const wxWindowID dc2mFrame::ID_MENUITEM4 = wxNewId();
 const wxWindowID dc2mFrame::ID_MENUITEM5 = wxNewId();
@@ -86,7 +89,7 @@ dc2mFrame::dc2mFrame(wxWindow* parent,wxWindowID id)
     SetClientSize(wxSize(790,357));
     {
       wxIcon FrameIcon;
-      FrameIcon.CopyFromBitmap(wxBitmap(wxImage(_T("dc2mLogo.ico"))));
+      FrameIcon.CopyFromBitmap(dc2mLogo32_xpm);
       SetIcon(FrameIcon);
     }
     BoxSizer1 = new wxBoxSizer(wxHORIZONTAL);
@@ -99,6 +102,8 @@ dc2mFrame::dc2mFrame(wxWindow* parent,wxWindowID id)
     Menu1->Append(MenuItem4);
     MenuItem3 = new wxMenuItem(Menu1, ID_MENUITEM1, _("QRCode"), _("Show QRCode to join"), wxITEM_NORMAL);
     Menu1->Append(MenuItem3);
+    MenuItem9 = new wxMenuItem(Menu1, ID_MENUITEM6, _("Link copy"), wxEmptyString, wxITEM_NORMAL);
+    Menu1->Append(MenuItem9);
     Menu1->AppendSeparator();
     MenuItem5 = new wxMenuItem(Menu1, ID_MENUITEM3, _("Channel #1 setting"), wxEmptyString, wxITEM_NORMAL);
     Menu1->Append(MenuItem5);
@@ -129,6 +134,7 @@ dc2mFrame::dc2mFrame(wxWindow* parent,wxWindowID id)
 
     Connect(ID_MENUITEM2, wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&dc2mFrame::OnMenuItem4Selected);
     Connect(ID_MENUITEM1, wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&dc2mFrame::OnMenuQrcodeShow);
+    Connect(ID_MENUITEM6, wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&dc2mFrame::OnLinkCopy);
     Connect(ID_MENUITEM3, wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&dc2mFrame::OnMenuItemChannel1);
     Connect(ID_MENUITEM4, wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&dc2mFrame::OnMenuItemChannel2);
     Connect(ID_MENUITEM5, wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&dc2mFrame::OnMenuItemChannel3);
@@ -171,11 +177,11 @@ void dc2mFrame::OnAbout(wxCommandEvent& event)
 
 void dc2mFrame::DoMyEvent(C_ChatEvent &event)
 {
-  int ID=event.GetId();
+  //int ID=event.GetId();
   wxString str1=event.GetText()+"\n";
   int type=event.GetInt();
   if (type>=30000)
-    int32_t pr=wxGetApp().Deltac->ProcessMessage(str1,type-30000);
+    wxGetApp().Deltac->ProcessMessage(str1,type-30000);
 
   if ((type==THERROR) || (type==THERROR)) {
     AddToLog(2,str1);
@@ -292,4 +298,10 @@ void dc2mFrame::OnClose(wxCloseEvent& event)
 {
   settings.SaveValue();
   Destroy();
+}
+
+void dc2mFrame::OnLinkCopy(wxCommandEvent& event)
+{
+  wxGetApp().Deltac->link_copy();
+
 }

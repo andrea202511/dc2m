@@ -1,6 +1,10 @@
 #ifndef ADVANCED_STATION_H
 #define ADVANCED_STATION_H
 
+#include "cSettings.h"
+extern C_Settings settings;
+
+
 //(*Headers(Advanced_station)
 #include <wx/button.h>
 #include <wx/checkbox.h>

@@ -69,7 +69,7 @@ About::About(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& siz
   Layout();
   //*)
 
-  TextCtrl3->SetValue(AutoVersion::FULLVERSION_STRING);
+  TextCtrl3->SetValue(settings.release);
 
   TextCtrl2->SetValue(AutoVersion::STATUS);
 }
